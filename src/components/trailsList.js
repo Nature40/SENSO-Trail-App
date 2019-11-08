@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export const TrailsList = ({ trails }) => {
+const TrailsList = ({ trails }) => {
   return (
     <section className='page--trails_list'>
       <ul className='trails_list'>
@@ -19,3 +19,5 @@ TrailsList.propTypes = {
     })
   )
 }
+
+export default TrailsList

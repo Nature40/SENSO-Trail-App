@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router'
 import '../styles/app.css'
 import NoMatch from './noMatch.js'
+import TrailsListContainer from '../containers/trailslist.container.js'
 
 function App () {
   return (
@@ -12,6 +13,7 @@ function App () {
       <main>
         <Switch>
           <Route exact path='/' render={() => <div>HALLO WELT</div>} />
+          <Route exact path='/trails' component={TrailsListContainer} />
           <Route component={NoMatch} />
         </Switch>
       </main>
