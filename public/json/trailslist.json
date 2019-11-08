@@ -2,5 +2,9 @@
   {
     "name":"test-trail",
     "uuid": "a741e276-0220-11ea-8d71-362b9e155667"
+  },
+  {
+    "name":"test-trail-2",
+    "uuid": "5dfd9750-0238-11ea-8d71-362b9e155667"
   }
 ]

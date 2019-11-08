@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Routing
 - 404 - Page
 - Trailslist
+- loading Traillist via api call
 
 ## [0.0.0] - Date
 ### Added

@@ -1,5 +1,6 @@
 import {
   LOAD_TRAILS_SUCCESS,
+  LOAD_TRAILS_FAIL,
   LOAD_TRAILS_START
 } from '../constants/trails.constants.js'
 
@@ -14,6 +15,11 @@ function trails (state = initialState, action) {
       return {
         ...state,
         loading: true
+      }
+    case LOAD_TRAILS_FAIL:
+      return {
+        ...state,
+        loading: false
       }
     case LOAD_TRAILS_SUCCESS:
       return {

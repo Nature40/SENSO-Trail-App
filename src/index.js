@@ -8,7 +8,12 @@ import './styles/index.css'
 import App from './components/app.js'
 import * as serviceWorker from './serviceWorker'
 
+// For now only. Needs to be some sort of init action later
+import { loadTrails } from './actions/trails.action.js'
+
 const store = configureStore()
+
+store.dispatch(loadTrails())
 
 ReactDOM.render(
   <Provider store={store}>
