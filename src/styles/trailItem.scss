@@ -1,0 +1,51 @@
+@import './_variables.scss';
+
+.trail_item {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 3px solid $base_color_orange;
+
+  header {
+    background: $base_color_orange;
+    color: #fff;
+
+    h3 {
+      margin: 10px;
+    }
+  }
+
+  &__content {
+    padding: 5px 10px;
+  }
+
+  &__toolbar {
+
+    border-top: 3px solid $base_color_orange;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+
+    button {
+      border: none;
+      border-radius: 0;
+      padding: 8px 13px;
+      color: #fff;
+      background-color: $base_color_green;
+      border: 3px solid $base_color_green;
+      font-size: 1.1em;
+      border-radius: 6px;
+      outline: none;
+      cursor: pointer;
+
+      transition: all .2s ease;
+
+      &:hover {
+        color: $base_color_green;
+        background-color: #fff;
+      }
+    }
+  }
+}

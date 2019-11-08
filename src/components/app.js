@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
-import '../styles/app.css'
+import '../styles/app.scss'
 import NoMatch from './noMatch.js'
 import TrailsListContainer from '../containers/trailslist.container.js'
 

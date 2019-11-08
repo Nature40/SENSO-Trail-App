@@ -36,7 +36,7 @@ describe('trails redux', () => {
       })
     })
 
-    it('should handle LOAD_TRAILS_START', () => {
+    it('should handle LOAD_TRAILS_FAIL', () => {
       const state = {
         loading: true,
         byUuid: {}

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import configureStore, { history } from './createStore.js'
-import './styles/index.css'
+import './styles/index.scss'
 import App from './components/app.js'
 import * as serviceWorker from './serviceWorker'
 

@@ -1,10 +1,12 @@
 [
   {
     "name":"test-trail",
+    "description": "Trail Beschreibung\n lorem ipsum usw.",
     "uuid": "a741e276-0220-11ea-8d71-362b9e155667"
   },
   {
     "name":"test-trail-2",
+    "description": "Trail Beschreibung\n lorem ipsum usw.",
     "uuid": "5dfd9750-0238-11ea-8d71-362b9e155667"
   }
 ]
