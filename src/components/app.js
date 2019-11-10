@@ -13,7 +13,7 @@ function App () {
       </header>
       <main>
         <Switch>
-    <Route exact path='/' render={() => <div>HALLO WELT <Link to="/trails" >GOTO Trails</Link></div>} />
+    <Route exact path='/' render={() => <div className="dummy_front_page"><Link to="/trails" >GOTO Trails</Link></div>} />
           <Route exact path='/trails' component={TrailsListContainer} />
           <Route component={NoMatch} />
         </Switch>

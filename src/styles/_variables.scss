@@ -27,3 +27,25 @@ $font_head: 'Cabin', sans-serif;
 @mixin font_text {
   font-family: 'Raleway', sans-serif;
 }
+
+@mixin green_button {
+  border: none;
+  border-radius: 0;
+  padding: 8px 13px;
+  color: #fff;
+  background-color: $color_green;
+  border: 3px solid $color_green;
+  font-size: 1.1em;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+
+  @include font_headers_med;
+
+  transition: color .2s ease, background-color .2s ease;
+
+  &:hover {
+    color: $color_green;
+    background-color: transparent;
+  }
+}
