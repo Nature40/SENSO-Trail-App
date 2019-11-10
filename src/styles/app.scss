@@ -1,7 +1,10 @@
 @import './_variables.scss';
 
 .App {
-  text-align: center;
+  background: url('../assets/background-test.png');
+  min-height: 100vh;
+  color: $color_grey;
+  @include font_text;
 }
 
 .App-logo {
@@ -9,15 +12,20 @@
 }
 
 .App-header {
-  background-color: $base_color_orange;
+  text-align: center;
+  @include font_headers_med; 
+  background-color: $color_orange;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: $color_white;
+
+  box-shadow: 10px 10px 10px #000;
 }
 
 .App-link {
   color: #09d3ac;
 }
+

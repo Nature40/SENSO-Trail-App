@@ -1,0 +1,38 @@
+@import '_variables.scss';
+
+body, html {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5 {
+  @include font_headers_med;
+}
+
+button {
+  border: none;
+  border-radius: 0;
+  padding: 8px 13px;
+  color: #fff;
+  background-color: $color_green;
+  border: 3px solid $color_green;
+  font-size: 1.1em;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+
+  @include font_headers_med;
+
+  transition: color .2s ease, background-color .2s ease;
+
+  &:hover {
+    color: $color_green;
+    background-color: transparent;
+  }
+}

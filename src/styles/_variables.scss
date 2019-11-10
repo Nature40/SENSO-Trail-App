@@ -1,3 +1,29 @@
 $base_color_orange: #d65108;
 $base_color_green: #34623f;
 $base_color_brown: #34623f;
+
+$color_black_transparent: rgba(10,15,10, .5);
+
+$color_black: #101510;
+$color_grey: #a4a4a4;
+$color_white: #e4e4ee;
+//$color_orange: #FF652F;
+$color_orange: #d65108;
+$color_yellow: #FFe400;
+$color_green: #13a76b;
+
+$font_head: 'Cabin', sans-serif;
+
+@mixin font_headers_reg {
+  font-family: $font_head;
+  font-weight: 400;
+}
+
+@mixin font_headers_med {
+  font-family: $font_head;
+  font-weight: 500;
+}
+
+@mixin font_text {
+  font-family: 'Raleway', sans-serif;
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import ReactMarkdown from 'react-markdown'
 
 import '../styles/trailItem.scss'
 
@@ -7,12 +8,12 @@ function TrailItem ({ uuid, name, description }) {
   return (
     <li className='trail_item'>
       <header>
-        <h3>{name}</h3>
+        <h2>{name}</h2>
       </header>
       <div className='trail_item__content'>
-        <p>{description}</p>
+        <ReactMarkdown source={description} />
       </div>
-      <div className="trail_item__toolbar">
+      <div className='trail_item__toolbar'>
         <button>Trail Starten</button>
       </div>
     </li>

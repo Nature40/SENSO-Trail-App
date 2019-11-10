@@ -1,3 +1,8 @@
 .page--404 svg{
   max-height: 60vh;
 }
+
+.page--404 {
+  text-align: center;
+}
+
