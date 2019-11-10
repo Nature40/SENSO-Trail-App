@@ -1,9 +1,10 @@
-import { ActionsObservable } from 'redux-observable'
+import { ActionsObservable, StateObservable } from 'redux-observable'
 import { toArray } from 'rxjs/operators'
+import { Subject } from 'rxjs'
 
 import * as actions from '../actions/trails.action.js'
 import * as types from '../constants/trails.constants.js'
-import { loadTrailsEpic } from '../epics/trails.epics.js'
+import * as epics from '../epics/trails.epics.js'
 import reducer, { initialState } from '../reducers/trails.reducer.js'
 
 /* eslint-env jest */
@@ -16,12 +17,31 @@ describe('trails redux', () => {
       }
       expect(actions.loadTrails()).toEqual(expectedAction)
     })
+    it('should create an action to start a trail', () => {
+      const expectedAction = {
+        type: types.START_TRAIL_BEGIN
+      }
+      expect(actions.startTrail()).toEqual(expectedAction)
+    })
   })
 
   describe('trails reducer', () => {
     it('should return the initialState', () => {
       expect(reducer(undefined, {})).toEqual(initialState)
     })
+
+    it('should handle LOAD_TRAILS_SUCCESS', () => {
+      const state = {
+      }
+      const action = {
+        type: types.START_TRAIL_SUCCESS,
+        trailId: 'trailid'
+      }
+      expect(reducer(state, action)).toEqual({
+        current_trail: 'trailid'
+      })
+    })
+
     it('should handle LOAD_TRAILS_START', () => {
       const state = {
         loading: false,
@@ -73,6 +93,66 @@ describe('trails redux', () => {
   })
 
   describe('loadTrailsEpic', () => {
+    it('startTrailEpic should dispatch START_TRAIL_SUCCESS when current_trail is undefined', (done) => {
+      const trailId = 'trailid'
+      const action$ = ActionsObservable.of(
+        {
+          type: types.START_TRAIL_BEGIN,
+          trailId
+        }
+      )
+      const state$ = new StateObservable(
+        new Subject(),
+        {
+          trails: {}
+        }
+      )
+      const expectedOutputActions = [
+        {
+          type: types.START_TRAIL_SUCCESS,
+          trailId
+        }
+      ]
+      const res$ = epics.startTrailEpic(action$, state$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
+    it('startTrailEpic should dispatch START_TRAIL_REJECT when current_trail is defined', (done) => {
+      const currentTrailId = 'trailid'
+      const newTrailId = 'trailid2'
+      const action$ = ActionsObservable.of(
+        {
+          type: types.START_TRAIL_BEGIN,
+          trailId: newTrailId
+        }
+      )
+      const state$ = new StateObservable(
+        new Subject(),
+        {
+          trails: {
+            current_trail: currentTrailId
+          }
+        }
+      )
+      const expectedOutputActions = [
+        {
+          type: types.START_TRAIL_REJECT,
+          currentTrail: currentTrailId,
+          newTrail: newTrailId
+        }
+      ]
+      const res$ = epics.startTrailEpic(action$, state$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
     it('loadTrailsEpic should dispatch LOAD_TRAILS_SUCCESS when it loads correct data', (done) => {
       const testTrail = {
         uuid: 'uuid1',
@@ -91,7 +171,7 @@ describe('trails redux', () => {
           }
         }
       ]
-      const res$ = loadTrailsEpic(action$, null, { fetchJSON }).pipe(
+      const res$ = epics.loadTrailsEpic(action$, null, { fetchJSON }).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {
@@ -111,7 +191,7 @@ describe('trails redux', () => {
           type: types.LOAD_TRAILS_FAIL
         }
       ]
-      const res$ = loadTrailsEpic(action$, null, { fetchJSON }).pipe(
+      const res$ = epics.loadTrailsEpic(action$, null, { fetchJSON }).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {

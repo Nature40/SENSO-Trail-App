@@ -35,7 +35,9 @@ export const startTrailEpic = (action$, state$, dep) => action$.pipe(
   map(action => {
     if (state$.value.trails.current_trail !== undefined) {
       return {
-        type: START_TRAIL_REJECT
+        type: START_TRAIL_REJECT,
+        currentTrail: state$.value.trails.current_trail,
+        newTrail: action.trailId
       }
     }
     return {
