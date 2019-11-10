@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import TrailsList from '../components/trailsList.js'
 import { getTrailsList } from '../selectors/trails.selectors.js'
+import { startTrail } from '../actions/trails.action.js'
 
 const mapStateToProps = state => {
   return {
@@ -8,9 +9,9 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = state => {
+const mapDispatchToProps = dispatch => {
   return {
-
+    onStartTrail: (uuid) => dispatch(startTrail(uuid))
   }
 }
 

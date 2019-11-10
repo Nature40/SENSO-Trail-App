@@ -6,10 +6,11 @@ import {
   START_TRAIL_SUCCESS,
   START_TRAIL_REJECT
 } from '../constants/trails.constants.js'
-import { mergeMap, catchError, map } from 'rxjs/operators'
+import { mergeMap, catchError, map, mapTo } from 'rxjs/operators'
 import { of } from 'rxjs'
-import { ofType } from 'redux-observable'
+import { ofType, combineEpics } from 'redux-observable'
 import { normalizeTrails } from '../utils/transforms/trails.transforms.js'
+import { push } from 'connected-react-router'
 
 export const loadTrailsEpic = (action$, state$, { fetchJSON }) => action$.pipe(
   ofType(LOAD_TRAILS_START),
@@ -49,4 +50,22 @@ export const startTrailEpic = (action$, state$, dep) => action$.pipe(
       type: LOAD_TRAILS_FAIL,
     })
   }) */
+)
+
+export const startTrailSuccessEpic = (action$, state$, dep) => action$.pipe(
+  ofType(START_TRAIL_SUCCESS),
+  mapTo(push('/mytrail'))
+  /* ,
+   catchError((e) => {
+    console.error(e)
+    return of({
+      type: LOAD_TRAILS_FAIL,
+    })
+  }) */
+)
+
+export default combineEpics(
+  startTrailEpic,
+  loadTrailsEpic,
+  startTrailSuccessEpic
 )

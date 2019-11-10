@@ -4,7 +4,12 @@ import ReactMarkdown from 'react-markdown'
 
 import '../styles/trailItem.scss'
 
-function TrailItem ({ uuid, name, description }) {
+function TrailItem ({
+  uuid,
+  name,
+  description,
+  onStartTrail
+}) {
   return (
     <li className='trail_item'>
       <header>
@@ -14,7 +19,7 @@ function TrailItem ({ uuid, name, description }) {
         <ReactMarkdown source={description} />
       </div>
       <div className='trail_item__toolbar'>
-        <button>Trail Starten</button>
+        <button onClick={(e) => onStartTrail(uuid)}>Trail Starten</button>
       </div>
     </li>
   )
@@ -23,7 +28,8 @@ function TrailItem ({ uuid, name, description }) {
 TrailItem.propTypes = {
   uuid: PropTypes.string,
   name: PropTypes.string,
-  description: PropTypes.string
+  description: PropTypes.string,
+  onStartTrail: PropTypes.func
 }
 
 export default TrailItem

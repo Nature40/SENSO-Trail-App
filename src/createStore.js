@@ -14,8 +14,8 @@ export default function configureStore (preloadedState = initialState) {
   const epicMiddleware = configureEpicMiddleware()
 
   const middlewares = [
-    routerMiddleware(history),
-    epicMiddleware
+    epicMiddleware,
+    routerMiddleware(history)
   ]
 
   const store = createStore(

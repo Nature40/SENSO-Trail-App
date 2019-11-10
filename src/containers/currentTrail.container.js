@@ -12,9 +12,9 @@ function mapDispatchToProps (dispatch) {
   return {}
 }
 
-const TrailViewContainer = connect(
+const CurrentTrail = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TrailView)
 
-export default TrailViewContainer
+export default CurrentTrail

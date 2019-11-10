@@ -5,11 +5,18 @@ import TrailItem from './trailItem.js'
 
 import '../styles/trailList.css'
 
-const TrailsList = ({ trails }) => {
+const TrailsList = ({ trails, onStartTrail }) => {
   return (
     <section className='page--trails_list'>
       <ul className='trails_list'>
-        {trails.map((trail) => <TrailItem key={trail.uuid} {...trail} />)}
+        {trails.map(
+          (trail) =>
+            <TrailItem
+              key={trail.uuid}
+              onStartTrail={onStartTrail}
+              {...trail}
+            />
+        )}
       </ul>
     </section>
   )
@@ -22,7 +29,8 @@ TrailsList.propTypes = {
       description: PropTypes.string,
       uuid: PropTypes.string
     })
-  )
+  ),
+  onStartTrail: PropTypes.func
 }
 
 export default TrailsList
