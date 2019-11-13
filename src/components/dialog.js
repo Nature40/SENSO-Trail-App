@@ -7,6 +7,7 @@ export default function Dialog ({ title, open, tools, children }) {
   let dialogClasses = 'dialog'
   if (!open) {
     dialogClasses += ' dialog--closed'
+    return <div className={dialogClasses} />
   }
   return (
     <div className={dialogClasses}>
