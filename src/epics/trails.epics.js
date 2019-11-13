@@ -23,7 +23,6 @@ export const loadTrailsEpic = (action$, state$, { fetchJSON }) => action$.pipe(
     }
   }),
   catchError((e) => {
-    console.error(e)
     return of({
       type: LOAD_TRAILS_FAIL
     })
@@ -36,8 +35,7 @@ export const startTrailEpic = (action$, state$, dep) => action$.pipe(
     if (state$.value.trails.current_trail !== undefined) {
       return {
         type: START_TRAIL_REJECT,
-        currentTrail: state$.value.trails.current_trail,
-        newTrail: action.trailId
+        trailId: action.trailId
       }
     }
     return {

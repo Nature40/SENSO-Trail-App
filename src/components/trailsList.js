@@ -6,15 +6,22 @@ import Dialog from './dialog.js'
 
 import '../styles/trailList.css'
 
-const TrailsList = ({ trails, onStartTrail }) => {
+const TrailsList = ({
+  trails,
+  error,
+  onStartTrail,
+  onStartTrailAccept,
+  onStartTrailCancel
+}) => {
   const dialogToolbar = [
-    (<button key='c'>Cancel</button>),
-    (<button key='o'>OK</button>)
+    (<button key='c' onClick={onStartTrailCancel}>Abbrechen</button>),
+    (<button key='o' onClick={() => onStartTrailAccept(error.selected_trail)}>Neuen Trail Starten</button>)
   ]
   return (
     <section className='page--trails_list'>
-      <Dialog title='test' open tools={dialogToolbar}>
-        <p>Hallo Welt</p>
+      <Dialog title='Achtung' open={error !== undefined} tools={dialogToolbar}>
+        <p>Es wurde bereits ein Trail gestartet.</p>
+        <p>Willst du wirklich einen neuen Trail starten</p>
       </Dialog>
       <ul className='trails_list'>
         {trails.map(
@@ -38,7 +45,10 @@ TrailsList.propTypes = {
       uuid: PropTypes.string
     })
   ),
-  onStartTrail: PropTypes.func
+  error: PropTypes.object,
+  onStartTrail: PropTypes.func,
+  onStartTrailAccept: PropTypes.func,
+  onStartTrailCancel: PropTypes.func
 }
 
 export default TrailsList

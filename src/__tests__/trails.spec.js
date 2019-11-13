@@ -19,9 +19,23 @@ describe('trails redux', () => {
     })
     it('should create an action to start a trail', () => {
       const expectedAction = {
-        type: types.START_TRAIL_BEGIN
+        type: types.START_TRAIL_BEGIN,
+        trailId: 'id'
       }
-      expect(actions.startTrail()).toEqual(expectedAction)
+      expect(actions.startTrail('id')).toEqual(expectedAction)
+    })
+    it('should create an action to cancel a trailstart', () => {
+      const expectedAction = {
+        type: types.START_TRAIL_CANCEL
+      }
+      expect(actions.cancelStartTrail()).toEqual(expectedAction)
+    })
+    it('should create an trail start success action to accept a trailstart', () => {
+      const expectedAction = {
+        type: types.START_TRAIL_SUCCESS,
+        trailId: 'id'
+      }
+      expect(actions.acceptStartTrail('id')).toEqual(expectedAction)
     })
   })
 
@@ -30,15 +44,48 @@ describe('trails redux', () => {
       expect(reducer(undefined, {})).toEqual(initialState)
     })
 
-    it('should handle LOAD_TRAILS_SUCCESS', () => {
+    it('should handle START_TRAIL_CANCEL', () => {
       const state = {
+        current_trail: 'trailid',
+        error: {}
+      }
+      const action = {
+        type: types.START_TRAIL_CANCEL
+      }
+      expect(reducer(state, action)).toEqual({
+        current_trail: 'trailid',
+        error: undefined
+      })
+    })
+
+    it('should handle START_TRAIL_REJECT', () => {
+      const state = {
+        current_trail: 'trailid',
+        error: undefined
+      }
+      const action = {
+        type: types.START_TRAIL_REJECT,
+        trailId: 'trailid2'
+      }
+      expect(reducer(state, action)).toEqual({
+        current_trail: 'trailid',
+        error: {
+          selected_trail: 'trailid2'
+        }
+      })
+    })
+
+    it('should handle START_TRAIL_SUCCESS', () => {
+      const state = {
+        error: {}
       }
       const action = {
         type: types.START_TRAIL_SUCCESS,
         trailId: 'trailid'
       }
       expect(reducer(state, action)).toEqual({
-        current_trail: 'trailid'
+        current_trail: 'trailid',
+        error: undefined
       })
     })
 
@@ -92,7 +139,7 @@ describe('trails redux', () => {
     })
   })
 
-  describe('loadTrailsEpic', () => {
+  describe('epics', () => {
     it('startTrailEpic should dispatch START_TRAIL_SUCCESS when current_trail is undefined', (done) => {
       const trailId = 'trailid'
       const action$ = ActionsObservable.of(
@@ -141,8 +188,7 @@ describe('trails redux', () => {
       const expectedOutputActions = [
         {
           type: types.START_TRAIL_REJECT,
-          currentTrail: currentTrailId,
-          newTrail: newTrailId
+          trailId: newTrailId
         }
       ]
       const res$ = epics.startTrailEpic(action$, state$).pipe(
