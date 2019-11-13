@@ -13,16 +13,34 @@ const TrailsList = ({
   onStartTrailAccept,
   onStartTrailCancel
 }) => {
-  const dialogToolbar = [
-    (<button key='c' onClick={onStartTrailCancel}>Abbrechen</button>),
-    (<button key='o' onClick={() => onStartTrailAccept(error.selected_trail)}>Neuen Trail Starten</button>)
-  ]
-  return (
-    <section className='page--trails_list'>
+  let errorDialog = ''
+  if (error !== undefined) {
+    const dialogToolbar = [
+      (
+        <button
+          key='c'
+          onClick={onStartTrailCancel}
+        >
+          Abbrechen
+        </button>),
+      (
+        <button
+          key='o'
+          onClick={() => onStartTrailAccept(error.selectedTrail.uuid)}
+        >
+        Trail {error.selectedTrail.name} Starten
+        </button>)
+    ]
+    errorDialog = (
       <Dialog title='Achtung' open={error !== undefined} tools={dialogToolbar}>
-        <p>Es wurde bereits ein Trail gestartet.</p>
+        <p>Der Trail {error.currentTrail.name} läuft bereits</p>
         <p>Willst du wirklich einen neuen Trail starten</p>
       </Dialog>
+    )
+  }
+  return (
+    <section className='page--trails_list'>
+      {errorDialog}
       <ul className='trails_list'>
         {trails.map(
           (trail) =>

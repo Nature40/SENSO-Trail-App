@@ -6,7 +6,10 @@ import { startTrail, cancelStartTrail, acceptStartTrail } from '../actions/trail
 const mapStateToProps = state => {
   return {
     trails: getTrailsList(state),
-    error: state.trails.error
+    error: (state.trails.error !== undefined ? {
+      currentTrail: state.trails.byUuid[state.trails.current_trail],
+      selectedTrail: state.trails.byUuid[state.trails.error.selected_trail]
+    } : undefined)
   }
 }
 
