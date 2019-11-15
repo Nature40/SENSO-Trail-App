@@ -9,7 +9,7 @@ import {
 import { mergeMap, catchError, map, mapTo } from 'rxjs/operators'
 import { of } from 'rxjs'
 import { ofType, combineEpics } from 'redux-observable'
-import { normalizeTrails } from '../utils/transforms/trails.transforms.js'
+import { normalizeEntityArray } from '../utils/transforms/entityArray.transforms.js'
 import { push } from 'connected-react-router'
 
 export const loadTrailsEpic = (action$, state$, { fetchJSON }) => action$.pipe(
@@ -19,7 +19,7 @@ export const loadTrailsEpic = (action$, state$, { fetchJSON }) => action$.pipe(
     const result = await fetchJSON(url)
     return {
       type: LOAD_TRAILS_SUCCESS,
-      transformedTrails: normalizeTrails(result)
+      transformedTrails: normalizeEntityArray(result)
     }
   }),
   catchError((e) => {

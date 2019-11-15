@@ -7,8 +7,10 @@ import '../styles/trailItem.scss'
 function TrailItem ({
   uuid,
   name,
+  stations,
   description,
-  onStartTrail
+  onStartTrail,
+  onLoadStations
 }) {
   return (
     <li className='trail_item'>
@@ -20,6 +22,7 @@ function TrailItem ({
       </div>
       <div className='trail_item__toolbar'>
         <button onClick={(e) => onStartTrail(uuid)}>Trail Starten</button>
+        <button onClick={(e) => onLoadStations(stations)}>Stationen herunterladen</button>
       </div>
     </li>
   )
