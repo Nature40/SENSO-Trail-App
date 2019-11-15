@@ -1,5 +1,5 @@
 Dies ist eine ganz tolle Station.
-###Schwerpunkt
+### Schwerpunkt
 Hier geht es um intelligentes Birnbaumholz
-###Tipps
+### Tipps
 Ganz toller Tipp - *aber nicht weitersagen*
