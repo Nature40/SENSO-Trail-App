@@ -1,11 +1,13 @@
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import trailsEpics from './trails.epics.js'
+import stationEpics from './station.epics.js'
 
 /* DEPENDENCIES */
 import { fetchJSON } from '../utils/api.js'
 
 const rootEpic = combineEpics(
-  trailsEpics
+  trailsEpics,
+  stationEpics
 )
 
 export const configureEpicMiddleware = () => createEpicMiddleware({
