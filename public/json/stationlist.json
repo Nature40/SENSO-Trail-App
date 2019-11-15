@@ -1,0 +1,15 @@
+[
+  {
+    "uuid":"2b5ad3f2-077f-11ea-8d71-362b9e15",
+    "name": "station-1",
+    "description": "Dies ist eine ganz tolle Station.\n### Schwerpunkt\nHier geht es um intelligentes Birnbaumholz\n### Tipps\nGanz toller Tipp - *aber nicht weitersagen*"
+  },{
+    "uuid":"3825b778-077f-11ea-8d71-362b9e155667",
+    "name": "station-2",
+    "description": "Dies ist eine ganz tolle Station.\n### Schwerpunkt\nHier geht es um intelligentes Birnbaumholz\n### Tipps\nGanz toller Tipp - *aber nicht weitersagen*"
+  },{
+    "uuid":"7d0c87ae-077f-11ea-8d71-362b9e155667",
+    "name": "Epic Station",
+    "description": "Dies ist eine ganz tolle Station.\n### Schwerpunkt\nHier geht es um intelligentes Birnbaumholz\n###Tipps\nGanz toller Tipp - *aber nicht weitersagen*"
+  }
+]

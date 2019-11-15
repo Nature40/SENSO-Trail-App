@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router'
+import StationList from './stationList.js'
 
-export default function TrailView ({ trail }) {
+import '../styles/trailView.scss'
+
+export default function TrailView ({ trail, stations }) {
   console.log(trail)
   if (trail === undefined) {
     return <Redirect to='/trails' />
@@ -13,7 +16,7 @@ export default function TrailView ({ trail }) {
         <h1>{trail.name}</h1>
       </header>
       <section className='trail_view__stations'>
-        @todo: Stations
+        <StationList stations={stations} />
       </section>
     </div>
   )

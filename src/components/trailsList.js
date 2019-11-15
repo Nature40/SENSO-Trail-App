@@ -11,7 +11,8 @@ const TrailsList = ({
   error,
   onStartTrail,
   onStartTrailAccept,
-  onStartTrailCancel
+  onStartTrailCancel,
+  onLoadStations
 }) => {
   let errorDialog = ''
   if (error !== undefined) {
@@ -41,12 +42,13 @@ const TrailsList = ({
   return (
     <section className='page--trails_list'>
       {errorDialog}
-      <ul className='trails_list'>
+      <ul className='trails_list no_list_style'>
         {trails.map(
           (trail) =>
             <TrailItem
               key={trail.uuid}
               onStartTrail={onStartTrail}
+              onLoadStations={onLoadStations}
               {...trail}
             />
         )}
@@ -66,7 +68,8 @@ TrailsList.propTypes = {
   error: PropTypes.object,
   onStartTrail: PropTypes.func,
   onStartTrailAccept: PropTypes.func,
-  onStartTrailCancel: PropTypes.func
+  onStartTrailCancel: PropTypes.func,
+  onLoadStations: PropTypes.func
 }
 
 export default TrailsList

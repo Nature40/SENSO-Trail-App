@@ -13,14 +13,15 @@ export function loadStationsEpic (action$, state$, { fetchJSON }) {
   return action$.pipe(
     ofType(LOAD_STATION_START),
     mergeMap(async action => {
-      const url = process.env.PUBLIC_URL + '/json/stationslist.json'
+      const url = process.env.PUBLIC_URL + '/json/stationlist.json'
       const result = await fetchJSON(url, { uuids: action.uuids })
       return {
         type: LOAD_STATION_SUCCESS,
-        transformedStation: normalizeEntityArray(result)
+        transformedStations: normalizeEntityArray(result)
       }
     }),
     catchError((e) => {
+      console.log(e)
       return of({
         type: LOAD_STATION_FAIL
       })

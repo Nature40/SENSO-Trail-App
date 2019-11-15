@@ -92,7 +92,7 @@ describe('stations redux', () => {
       const expectedOutputActions = [
         {
           type: types.LOAD_STATION_SUCCESS,
-          transformedStation: {
+          transformedStations: {
             uuid1: { ...testStation }
           }
         }

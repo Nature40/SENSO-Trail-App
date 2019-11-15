@@ -5,7 +5,7 @@ import station, { initialState as stationState } from './station.reducer.js'
 
 export const initialState = {
   trails: trailsState,
-  station: stationsState
+  station: stationState
 }
 
 export default function createRootReducer (history) {
