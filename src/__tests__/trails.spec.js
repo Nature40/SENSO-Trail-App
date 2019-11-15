@@ -226,7 +226,7 @@ describe('trails redux', () => {
       })
     })
 
-    it('loadTrailsEpic should dispatch LOAD_TRAILS_SUCCESS when it loads correct data', (done) => {
+    it('loadTrailsEpic should dispatch LOAD_TRAILS_FAIL when it does not load correct data', (done) => {
       const action$ = ActionsObservable.of(
         { type: types.LOAD_TRAILS_START }
       )
