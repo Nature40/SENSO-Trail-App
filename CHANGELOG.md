@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TrailsList component
 - loading Traillist via api call
 - TrailItem Component for TrailsList view
+- start Trail functionality
+- handle starting trail while trail is running
 
 ## [0.0.0] - Date
 ### Added

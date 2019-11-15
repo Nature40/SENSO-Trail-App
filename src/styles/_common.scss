@@ -18,3 +18,49 @@ h1, h2, h3, h4, h5 {
 button {
   @include green_button;
 }
+
+a {
+  @include green_button;
+  text-decoration: none;
+}
+
+.box {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  border-radius: 2px;
+  background: $color_black;
+  background: $color_black_transparent;
+  box-shadow: 10px 10px 10px #000;
+
+  header {
+    align-self: stretch;
+    background: $color_orange;
+    color: #fff;
+
+    h2 {
+      margin: 10px;
+      margin-left: 15px;
+      font-size: 1.6em;
+    }
+  }
+  &__content {
+    padding: 5px 19px;
+    padding-bottom: 15px;
+  }
+
+  &__toolbar {
+
+    border-top: 3px solid $color_orange;
+    padding: 10px 0;
+    padding-right: 15px;
+    display: flex;
+    justify-content: flex-start;
+
+    button {
+      margin-left: 15px;
+    }
+  } 
+}

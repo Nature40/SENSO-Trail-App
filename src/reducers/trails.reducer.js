@@ -1,7 +1,10 @@
 import {
   LOAD_TRAILS_SUCCESS,
   LOAD_TRAILS_FAIL,
-  LOAD_TRAILS_START
+  LOAD_TRAILS_START,
+  START_TRAIL_SUCCESS,
+  START_TRAIL_REJECT,
+  START_TRAIL_CANCEL
 } from '../constants/trails.constants.js'
 
 export const initialState = {
@@ -26,6 +29,24 @@ function trails (state = initialState, action) {
         ...state,
         loading: false,
         byUuid: { ...action.transformedTrails }
+      }
+    case START_TRAIL_SUCCESS:
+      return {
+        ...state,
+        error: undefined,
+        current_trail: action.trailId
+      }
+    case START_TRAIL_REJECT:
+      return {
+        ...state,
+        error: {
+          selected_trail: action.trailId
+        }
+      }
+    case START_TRAIL_CANCEL:
+      return {
+        ...state,
+        error: undefined
       }
     default:
       return state

@@ -1,11 +1,11 @@
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
-import { loadTrailsEpic } from './trails.epics.js'
+import trailsEpics from './trails.epics.js'
 
 /* DEPENDENCIES */
 import { fetchJSON } from '../utils/api.js'
 
 const rootEpic = combineEpics(
-  loadTrailsEpic
+  trailsEpics
 )
 
 export const configureEpicMiddleware = () => createEpicMiddleware({

@@ -1,0 +1,17 @@
+@import './_variables.scss';
+
+.dialog {
+  min-width: 100vw;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: $color_black_transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog--closed {
+  display: none !important;
+}
