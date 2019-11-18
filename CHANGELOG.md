@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - StationList for TrailView
 - StationView for StationList
 - loading Stations for Trail via api call
+- activityWrapper for handling different activities
+- textActivity for reading info texts at stations
+- loading Activities for Stations via api call
 
 ## [0.0.0] - Date
 ### Added
