@@ -2,9 +2,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import ActivityWrapper from '../components/activityWrapper.js'
 import TextActivity from '../containers/textActivity.container.js'
+import MultiChoiceActivity from '../containers/multiChoiceActivity.container.js'
 
 import {
-  ACTIVITY_TYPE_TEXT
+  ACTIVITY_TYPE_TEXT,
+  ACTIVITY_TYPE_MULTI_CHOICE
 } from '../constants/activity.constants.js'
 
 /* eslint-env jest */
@@ -25,5 +27,14 @@ describe('<ActivityWrapper>', () => {
     }
     const wrapper = shallow(<ActivityWrapper {...props} />)
     expect(wrapper.matchesElement(<TextActivity uuid='uuid1' />)).toEqual(true)
+  })
+
+  it('should render MultiChoiceActivity if activityType is ACTIVITY_TYPE_MULTI_CHOICE', () => {
+    const props = {
+      activityType: ACTIVITY_TYPE_MULTI_CHOICE,
+      uuid: 'uuid1'
+    }
+    const wrapper = shallow(<ActivityWrapper {...props} />)
+    expect(wrapper.matchesElement(<MultiChoiceActivity uuid='uuid1' />)).toEqual(true)
   })
 })

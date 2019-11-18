@@ -1,3 +1,11 @@
+@import './_variables.scss';
 .activity {
   width: 100%;
+  border-top: 1px solid $color_grey;
+  padding: 15px 5px;
+  margin: 0 2px;
+
+  &:first-child {
+    border-top: none;
+  }
 }

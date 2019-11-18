@@ -1,0 +1,18 @@
+.multi_choice_activity {
+  &__answers {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  &__question {
+    font-size: 1.1em;
+    padding: 10px 0;
+  }
+}
+
+.multi_choice_answer {
+  width: 100%;
+  flex: 1 1 45%;
+  margin: 5px 10px;
+}
