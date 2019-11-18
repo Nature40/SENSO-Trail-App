@@ -1,0 +1,14 @@
+.text_activity__content{
+  transition: min-height .5s ease,max-height .5s ease, transform .2s ease;
+  max-height: 0;
+  min-height: 0;
+  transform-origin: left top;
+  transform: scaleY(0);
+
+  &--open {
+    max-height: 100vh;
+    min-height: 100px;
+    transform: scaleY(1)
+  }
+}
+

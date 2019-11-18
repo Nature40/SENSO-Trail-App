@@ -6,7 +6,6 @@ import StationList from './stationList.js'
 import '../styles/trailView.scss'
 
 export default function TrailView ({ trail, stations }) {
-  console.log(trail)
   if (trail === undefined) {
     return <Redirect to='/trails' />
   }
