@@ -5,28 +5,42 @@ import shuffle from '../utils/shuffleArray.js'
 
 import '../styles/multiChoiceActivity.scss'
 
-function MultiChoiceAnswer ({ id, text, onClick }) {
+function MultiChoiceAnswer ({ id, text, onClick, choosen, correct }) {
+  let classes = 'multi_choice_answer'
+  if (choosen) {
+    classes += ' multi_choice_answer--choosen'
+    if (correct) {
+      classes += ' multi_choice_answer--correct'
+    } else {
+      classes += ' multi_choice_answer--wrong'
+    }
+  }
   return (
     <button
       onClick={() => onClick(id)}
-      className='multi_choice_answer'
+      className={classes}
     >
       {text}
+      <span />
     </button>
   )
 }
 MultiChoiceAnswer.propTypes = {
   text: PropTypes.string,
   id: PropTypes.string,
+  choosen: PropTypes.bool,
+  correct: PropTypes.bool,
   onClick: PropTypes.func
 }
 
 export default function MultiChoiceActivity ({
-  activity
+  activity,
+  onChooseAnswer
 }) {
-  function dummy (id) {
-    console.log('clicked answer: ' + id)
-    console.log((activity.answers[id].correct ? 'RICHTIGE ANWORT': 'FALSCHE ANTWORT'))
+  function onAnswerClicked (id) {
+    if (!activity.answers[id].choosen) {
+      onChooseAnswer(activity.uuid, id)
+    }
   }
   return (
     <section className='activity multi_choice_activity'>
@@ -35,7 +49,7 @@ export default function MultiChoiceActivity ({
         {activity.question}
       </div>
       <div className='multi_choice_activity__answers'>
-        {shuffle(Object.values(activity.answers)).map(a => <MultiChoiceAnswer key={a.id} {...a} onClick={dummy} />)}
+        {shuffle(Object.values(activity.answers)).map(a => <MultiChoiceAnswer key={a.id} {...a} onClick={onAnswerClicked} />)}
       </div>
     </section>
   )
@@ -48,6 +62,5 @@ MultiChoiceActivity.propTypes = {
     name: PropTypes.string,
     answers: PropTypes.object
   }),
-  onReadText: PropTypes.func,
-  onCloseText: PropTypes.func
+  onChooseAnswer: PropTypes.func
 }

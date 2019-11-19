@@ -1,11 +1,14 @@
 import {
   ACTIVITY_TYPE_TEXT,
+  ACTIVITY_TYPE_MULTI_CHOICE,
   LOAD_ACTIVITIES_START,
   LOAD_ACTIVITIES_FAIL,
   LOAD_ACTIVITIES_SUCCESS
 } from '../constants/activity.constants.js'
 
 import textActivity from './textActivity.reducer.js'
+
+import multiChoiceActivity from './multiChoiceActivity.reducer.js'
 
 export const initialState = {
   byUuid: {},
@@ -37,6 +40,8 @@ export default function activity (state = initialState, action) {
       switch (action.activityType) {
         case ACTIVITY_TYPE_TEXT:
           return textActivity(state, action)
+        case ACTIVITY_TYPE_MULTI_CHOICE:
+          return multiChoiceActivity(state, action)
         default:
           return state
       }
