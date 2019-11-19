@@ -27,6 +27,36 @@
     }
   }
 
+  &--reveal {
+
+    cursor: default;
+    color: $color_white;
+    background-color: $color_grey;
+    border: 3px solid $color_grey;
+
+    &:hover {
+      color: $color_white;
+      background-color: $color_grey;
+      border: 3px solid $color_grey;
+    }
+
+    &_wrong {
+      text-decoration: line-through;
+    }
+
+    &_correct {
+      span {
+        display: inline-block;
+        height: 100%;
+        width: 30px;
+        background: url('../assets/correct.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center; 
+      }
+    }
+  }
+
   &--correct{
     &:hover {
       color: $color_white;

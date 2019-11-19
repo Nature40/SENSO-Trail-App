@@ -2,6 +2,7 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import trailsEpics from './trails.epics.js'
 import stationEpics from './station.epics.js'
 import activityEpics from './activity.epics.js'
+import mulitChoiceActivityEpics from './multiChoiceActivity.epics.js'
 
 /* DEPENDENCIES */
 import { fetchJSON } from '../utils/api.js'
@@ -9,7 +10,8 @@ import { fetchJSON } from '../utils/api.js'
 const rootEpic = combineEpics(
   trailsEpics,
   stationEpics,
-  activityEpics
+  activityEpics,
+  mulitChoiceActivityEpics
 )
 
 export const configureEpicMiddleware = () => createEpicMiddleware({

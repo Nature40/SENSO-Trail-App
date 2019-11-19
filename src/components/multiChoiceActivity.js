@@ -5,7 +5,7 @@ import shuffle from '../utils/shuffleArray.js'
 
 import '../styles/multiChoiceActivity.scss'
 
-function MultiChoiceAnswer ({ id, text, onClick, choosen, correct }) {
+function MultiChoiceAnswer ({ id, text, onClick, reveal, choosen, correct }) {
   let classes = 'multi_choice_answer'
   if (choosen) {
     classes += ' multi_choice_answer--choosen'
@@ -13,6 +13,13 @@ function MultiChoiceAnswer ({ id, text, onClick, choosen, correct }) {
       classes += ' multi_choice_answer--correct'
     } else {
       classes += ' multi_choice_answer--wrong'
+    }
+  } else if (reveal) {
+    classes += ' multi_choice_answer--reveal'
+    if (correct) {
+      classes += ' multi_choice_answer--reveal_correct'
+    } else {
+      classes += ' multi_choice_answer--reveal_wrong'
     }
   }
   return (
@@ -30,6 +37,7 @@ MultiChoiceAnswer.propTypes = {
   id: PropTypes.string,
   choosen: PropTypes.bool,
   correct: PropTypes.bool,
+  reveal: PropTypes.bool,
   onClick: PropTypes.func
 }
 
@@ -38,7 +46,7 @@ export default function MultiChoiceActivity ({
   onChooseAnswer
 }) {
   function onAnswerClicked (id) {
-    if (!activity.answers[id].choosen) {
+    if (!activity.reveal && !activity.answers[id].choosen) {
       onChooseAnswer(activity.uuid, id)
     }
   }
@@ -49,7 +57,7 @@ export default function MultiChoiceActivity ({
         {activity.question}
       </div>
       <div className='multi_choice_activity__answers'>
-        {shuffle(Object.values(activity.answers)).map(a => <MultiChoiceAnswer key={a.id} {...a} onClick={onAnswerClicked} />)}
+        {shuffle(Object.values(activity.answers)).map(a => <MultiChoiceAnswer key={a.id} reveal={activity.reveal} {...a} onClick={onAnswerClicked} />)}
       </div>
     </section>
   )
