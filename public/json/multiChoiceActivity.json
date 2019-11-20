@@ -26,5 +26,57 @@
         "correct": true
       }
     }
+  },
+  {
+    "uuid":"bdb8dcc2-0b7f-11ea-8d71-362b9e155667",
+    "activityType":"ACTIVITY_TYPE_MULTI_CHOICE",
+    "name": "Die Aufgabe der Ents",
+    "question" : "Was ist der Darseinszweck der Ents",
+    "answers": {
+      "0":{
+        "id": "0",
+        "text":"Türme niederreißen",
+        "correct": false
+      },
+      "1":{
+        "id": "1",
+        "text":"Bäume pflegen",
+        "correct":true
+      },
+      "2":{
+        "id": "2",
+        "text":"Orks bekämpfen",
+        "correct": false
+      }
+    }
+  },
+  {
+    "uuid":"ecca4460-0b7f-11ea-8d71-362b9e155667",
+    "activityType":"ACTIVITY_TYPE_MULTI_CHOICE",
+    "name": "Hobbits und Ents",
+    "question" : "Welche Hobbits sprachen mit Baumbart",
+    "answers": {
+      "0":{
+        "id": "0",
+        "text":"Merry",
+        "correct": true
+      },
+      "1":{
+        "id": "1",
+        "text":"Pippin",
+        "correct":true
+      },
+      "2":{
+        "id": "2",
+        "text":"Frodo",
+        "correct": false
+      },
+      "3":{
+        "id": "3",
+        "text":"Sam",
+        "correct": false
+      }
+    }
   }
+
 ]

@@ -12,14 +12,18 @@
     "name": "station-2",
     "description": "Dies ist eine ganz tolle Station.\n### Schwerpunkt\nHier geht es um intelligentes Birnbaumholz\n### Tipps\nGanz toller Tipp - *aber nicht weitersagen*",
     "activities": [
-      "3e99e206-07a1-11ea-8d71-362b9e155667"
+      "7ca78178-ed4c-47e2-907d-f784d56686d0",
+      "bdb8dcc2-0b7f-11ea-8d71-362b9e155667",
+      "ecca4460-0b7f-11ea-8d71-362b9e155667"
     ]
   },{
     "uuid":"7d0c87ae-077f-11ea-8d71-362b9e155667",
     "name": "Epic Station",
     "description": "Dies ist eine ganz tolle Station.\n### Schwerpunkt\nHier geht es um intelligentes Birnbaumholz\n###Tipps\nGanz toller Tipp - *aber nicht weitersagen*",
     "activities": [
-      "3e99e206-07a1-11ea-8d71-362b9e155667"
+      "7ca78178-ed4c-47e2-907d-f784d56686d0",
+      "bdb8dcc2-0b7f-11ea-8d71-362b9e155667",
+      "ecca4460-0b7f-11ea-8d71-362b9e155667"
     ]
 
   }
