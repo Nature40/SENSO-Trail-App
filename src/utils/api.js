@@ -31,7 +31,8 @@ async function mockFetchActivities ({ uuids }) {
     method: 'GET'
   }
   const activities = [
-    process.env.PUBLIC_URL + '/json/textActivity.json'
+    process.env.PUBLIC_URL + '/json/textActivity.json',
+    process.env.PUBLIC_URL + '/json/multiChoiceActivity.json'
   ]
   const resposnes = await Promise.all(
     activities.map(activityUrl => window.fetch(activityUrl, request))

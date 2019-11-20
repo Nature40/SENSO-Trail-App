@@ -1,0 +1,93 @@
+@import './_variables.scss';
+
+.multi_choice_activity {
+  &__answers {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  &__question {
+    font-size: 1.1em;
+    padding: 10px 0;
+  }
+}
+
+.multi_choice_answer {
+  width: 100%;
+  flex: 1 1 45%;
+  margin: 5px 10px;
+
+  &--choosen {
+    cursor: default;
+    span {
+      display: inline-block;
+      height: 100%;
+      width: 30px;
+    }
+  }
+
+  &--reveal {
+
+    cursor: default;
+    color: $color_white;
+    background-color: $color_grey;
+    border: 3px solid $color_grey;
+
+    &:hover {
+      color: $color_white;
+      background-color: $color_grey;
+      border: 3px solid $color_grey;
+    }
+
+    &_wrong {
+      text-decoration: line-through;
+    }
+
+    &_correct {
+      span {
+        display: inline-block;
+        height: 100%;
+        width: 30px;
+        background: url('../assets/correct.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center; 
+      }
+    }
+  }
+
+  &--correct{
+    &:hover {
+      color: $color_white;
+      background-color: $color_green;
+      border: 3px solid $color_green;
+    }
+
+    span {
+      background: url('../assets/correct.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center; 
+    }
+  }
+  &--wrong{
+    text-decoration: line-through;
+
+    background-color: $color_red;
+    border: 3px solid $color_red;
+
+    &:hover {
+      color: $color_white;
+      background-color: $color_red;
+      border: 3px solid $color_red;
+    }
+
+    span {
+      background: url('../assets/wrong.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+}

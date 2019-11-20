@@ -1,0 +1,30 @@
+[
+  {
+    "uuid":"ad05e194-0a31-11ea-9a9f-362b9e155667",
+    "activityType":"ACTIVITY_TYPE_MULTI_CHOICE",
+    "name": "Intelligentes Birnbaumholz - Vorkommen",
+    "question" : "Wo gibt es größere Vorkommen von intelligentem Birnbaumholz",
+    "answers": {
+      "0":{
+        "id": "0",
+        "text":"Ankh-Morpork",
+        "correct": false
+      },
+      "1":{
+        "id": "1",
+        "text":"Klatsch",
+        "correct":false
+      },
+      "2":{
+        "id": "2",
+        "text":"Überwald",
+        "correct": false
+      },
+      "3":{
+        "id": "3",
+        "text": "Achatenes Reich",
+        "correct": true
+      }
+    }
+  }
+]
