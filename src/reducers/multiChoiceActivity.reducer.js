@@ -8,7 +8,6 @@ export const initialState = {
 }
 
 export default function multiChoiceActivityCase (state = initialState, action) {
-  console.log(action)
   switch (action.type) {
     case CHOOSE_ANSWER:
       return {

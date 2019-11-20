@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - textActivity for reading info texts at stations
 - loading Activities for Stations via api call
 - MultiChoiceActivity view
+- handle choose and reveal answers of multi choice view
 
 ## [0.0.0] - Date
 ### Added

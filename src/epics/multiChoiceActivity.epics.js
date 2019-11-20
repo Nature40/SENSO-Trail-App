@@ -19,8 +19,7 @@ export function revealAnswersEpic (action$, state$) {
         return of(revealAnswers(action.uuid))
       }
       const wrongNotChoose = answers.filter((a) => !a.correct)
-      console.log(wrongNotChoose)
-      if (wrongNotChoose.length < 2) {
+      if (wrongNotChoose.length < 1) {
         return of(revealAnswers(action.uuid))
       }
       return EMPTY
