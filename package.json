@@ -2,6 +2,7 @@
   "name": "senso-trail-app",
   "version": "0.1.0",
   "private": true,
+  "homepage":"http://nature40.github.io/senso-trail-app",
   "dependencies": {
     "connected-react-router": "^6.5.2",
     "enzyme": "^3.10.0",
