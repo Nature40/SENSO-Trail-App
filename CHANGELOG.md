@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+
+## [0.1.0] - 20.11.2019
+### Added
 - Routing
 - 404 - Page
 - TrailsList component
@@ -21,7 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - loading Activities for Stations via api call
 - MultiChoiceActivity view
 - handle choose and reveal answers of multi choice view
-
 ## [0.0.0] - Date
 ### Added
 - ...
