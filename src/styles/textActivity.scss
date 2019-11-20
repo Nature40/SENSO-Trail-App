@@ -10,5 +10,19 @@
     min-height: 100px;
     transform: scaleY(1)
   }
+
+  a {
+    padding: inherit;
+    background-color: inherit;
+    border: none;
+    text-decoration: underline;
+    font-size: inherit;
+    color: inherit;
+
+    &:hover {
+      color: inherit;
+      background-color: inherit;
+    }
+  }
 }
 
