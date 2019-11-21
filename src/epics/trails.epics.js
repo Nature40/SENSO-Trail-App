@@ -1,3 +1,8 @@
+import { take, mergeMap, skipUntil, catchError, map} from 'rxjs/operators'
+import { of, EMPTY } from 'rxjs'
+import { ofType, combineEpics } from 'redux-observable'
+import { normalizeEntityArray } from '../utils/transforms/entityArray.transforms.js'
+
 import {
   LOAD_TRAILS_START,
   LOAD_TRAILS_SUCCESS,
@@ -6,10 +11,13 @@ import {
   START_TRAIL_SUCCESS,
   START_TRAIL_REJECT
 } from '../constants/trails.constants.js'
-import { mergeMap, catchError, map, mapTo } from 'rxjs/operators'
-import { of } from 'rxjs'
-import { ofType, combineEpics } from 'redux-observable'
-import { normalizeEntityArray } from '../utils/transforms/entityArray.transforms.js'
+
+import { loadStations } from '../actions/station.action.js'
+
+import { LOAD_ACTIVITIES_SUCCESS } from '../constants/activity.constants.js'
+
+import { getCurrentTrail } from '../selectors/trails.selectors.js'
+
 import { push } from 'connected-react-router'
 
 export const loadTrailsEpic = (action$, state$, { fetchJSON }) => action$.pipe(
@@ -52,20 +60,28 @@ export const startTrailEpic = (action$, state$, dep) => action$.pipe(
   }) */
 )
 
+export const gotoCurrentStartedTrail = (action$, state$, dep) => action$.pipe(
+  ofType(START_TRAIL_SUCCESS),
+  mergeMap(action => action$.pipe(
+    ofType(LOAD_ACTIVITIES_SUCCESS),
+    map(action => {
+      return push('/mytrail')
+    }),
+    take(1)
+  ))
+)
+
 export const startTrailSuccessEpic = (action$, state$, dep) => action$.pipe(
   ofType(START_TRAIL_SUCCESS),
-  mapTo(push('/mytrail'))
-  /* ,
-   catchError((e) => {
-    console.error(e)
-    return of({
-      type: LOAD_TRAILS_FAIL,
-    })
-  }) */
+  mergeMap((action) => {
+    const currentTrail = getCurrentTrail(state$.value)
+    return [loadStations(currentTrail.stations)]
+  })
 )
 
 export default combineEpics(
   startTrailEpic,
   loadTrailsEpic,
-  startTrailSuccessEpic
+  startTrailSuccessEpic,
+  gotoCurrentStartedTrail
 )
