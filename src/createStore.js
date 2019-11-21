@@ -13,12 +13,20 @@ export const history = createBrowserHistory()
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 
 export default function configureStore (preloadedState = initialState) {
-  const persistConfig = {
-    key: 'root',
-    storage
-  }
 
-  const persistedReducer = persistReducer(persistConfig, createRootReducer(history))
+  let rootReducer, persistor
+
+  if (process.env && process.env.NODE_ENV === 'production') {
+    const persistConfig = {
+      key: 'root',
+      storage,
+      blacklist: ['router']
+    }
+
+    rootReducer = persistReducer(persistConfig, createRootReducer(history))
+  } else {
+    rootReducer = createRootReducer(history)
+  }
 
   const epicMiddleware = configureEpicMiddleware()
 
@@ -28,7 +36,7 @@ export default function configureStore (preloadedState = initialState) {
   ]
 
   const store = createStore(
-    persistedReducer,
+    rootReducer,
     preloadedState,
     composeEnhancers(
       applyMiddleware(...middlewares)
@@ -37,7 +45,9 @@ export default function configureStore (preloadedState = initialState) {
 
   epicMiddleware.run(rootEpic)
 
-  const persistor = persistStore(store)
+  if (process.env && process.env.NODE_ENV === 'production') {
+    persistor = persistStore(store)
+  }
 
   return { store, persistor }
 }
