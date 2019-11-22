@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Offline Caching of static data
 - Offline Caching of state with redux-persist
 - Complete Activities and stations
+- Reveal next station if current station is completed
 
 ## [0.1.0] - 20.11.2019
 ### Added
