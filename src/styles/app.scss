@@ -23,6 +23,18 @@
   color: $color_white;
 
   box-shadow: 10px 10px 10px #000;
+
+  a {
+    border: none;
+    color: inherit;
+    background: inherit;
+    text-decoration: none;
+    &:hover {
+      border: none;
+      color: inherit;
+      background: inherit;
+    }
+  }
 }
 
 .App-link {
