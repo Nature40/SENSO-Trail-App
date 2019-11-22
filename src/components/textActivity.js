@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactMarkdown from 'react-markdown'
 
+import CorrectSymbol from '../assets/correct.svg'
+
 import '../styles/textActivity.scss'
 
 export default function TextActivity ({
@@ -31,7 +33,7 @@ export default function TextActivity ({
   }
   return (
     <section className='activity text_activity'>
-      <h3>{activity.name}</h3>
+      <h2>{activity.name} {activity.completed ? <img src={CorrectSymbol} alt='completed' /> : ''}</h2>
       <div className={contentClass}>
         {(activity.open ? <ReactMarkdown source={activity.text} /> : '')}
       </div>
