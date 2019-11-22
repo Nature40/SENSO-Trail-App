@@ -1,8 +1,8 @@
 import {
   LOAD_STATION_START,
   LOAD_STATION_SUCCESS,
-  LOAD_STATION_FAIL
-
+  LOAD_STATION_FAIL,
+  COMPLETE_STATION_SUCCESS
 } from '../constants/station.constants.js'
 
 export const initialState = {
@@ -27,6 +27,17 @@ function stations (state = initialState, action) {
         ...state,
         loading: false,
         byUuid: { ...state.byUuid, ...action.transformedStations }
+      }
+    case COMPLETE_STATION_SUCCESS:
+      return {
+        ...state,
+        byUuid: {
+          ...state.byUuid,
+          [action.uuid]: {
+            ...state.byUuid[action.uuid],
+            completed: true
+          }
+        }
       }
     default:
       return state

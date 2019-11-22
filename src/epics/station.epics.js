@@ -21,7 +21,6 @@ export function loadStationsEpic (action$, state$, { fetchJSON }) {
       }
     }),
     catchError((e) => {
-      console.log(e)
       return of({
         type: LOAD_STATION_FAIL
       })

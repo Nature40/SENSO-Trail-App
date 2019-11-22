@@ -19,6 +19,33 @@ describe('stations redux', () => {
 
       expect(actions.loadStations(['uuid1', 'uuid2'])).toEqual(expectedAction)
     })
+
+    it('should create an action to start completing a station', () => {
+      const expectedAction = {
+        type: types.COMPLETE_STATION_START,
+        uuid: 'uuid1'
+      }
+
+      expect(actions.completeStationStart('uuid1')).toEqual(expectedAction)
+    })
+
+    it('should create an action to fail completing a station', () => {
+      const expectedAction = {
+        type: types.COMPLETE_STATION_FAIL,
+        uuid: 'uuid1'
+      }
+
+      expect(actions.completeStationFail('uuid1')).toEqual(expectedAction)
+    })
+
+    it('should create an action to succeed completing a station', () => {
+      const expectedAction = {
+        type: types.COMPLETE_STATION_SUCCESS,
+        uuid: 'uuid1'
+      }
+
+      expect(actions.completeStationSuccess('uuid1')).toEqual(expectedAction)
+    })
   })
 
   describe('reducer', () => {
@@ -74,6 +101,22 @@ describe('stations redux', () => {
           uuid1: {},
           uuid2: {},
           uuid3: {}
+        }
+      })
+    })
+    it('should handle COMPLETE_STATION_SUCCESS', () => {
+      const state = {
+        byUuid: {
+          uuid1: {}
+        }
+      }
+      const action = {
+        type: types.COMPLETE_STATION_SUCCESS,
+        uuid: 'uuid1'
+      }
+      expect(reducer(state, action)).toEqual({
+        byUuid: {
+          uuid1: { completed: true }
         }
       })
     })

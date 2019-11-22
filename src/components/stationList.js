@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import StationView from './stationView.js'
+import StationView from '../containers/stationView.container.js'
 
 import '../styles/stationList.scss'
 
@@ -9,8 +9,8 @@ export default function StationList ({ stations }) {
   if (stations.length > 0) {
     stationViews = stations.map((station) => {
       return (
-        <li key={station.uuid}>
-          <StationView {...station} />
+        <li className='station_list__item' key={station}>
+          <StationView uuid={station} />
         </li>
       )
     })
@@ -25,5 +25,5 @@ export default function StationList ({ stations }) {
 }
 
 StationList.propTypes = {
-  stations: PropTypes.arrayOf(PropTypes.object)
+  stations: PropTypes.arrayOf(PropTypes.string)
 }
