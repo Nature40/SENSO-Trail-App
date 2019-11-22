@@ -23,7 +23,7 @@ store.dispatch(loadTrails())
 if (process.env && process.env.NODE_ENV === 'production') {
   ReactDOM.render(
     <Provider store={store}>
-      <ConnectedRouter history={history}>
+      <ConnectedRouter history={history} basename={process.env.PUBLIC_URL}>
         <PersistGate loading={null} persistor={persistor}>
           <App />
         </PersistGate>
@@ -35,7 +35,7 @@ if (process.env && process.env.NODE_ENV === 'production') {
 } else {
   ReactDOM.render(
     <Provider store={store}>
-      <ConnectedRouter history={history}>
+      <ConnectedRouter history={history} basename={process.env.PUBLIC_URL}>
         <App />
       </ConnectedRouter>
     </Provider>
