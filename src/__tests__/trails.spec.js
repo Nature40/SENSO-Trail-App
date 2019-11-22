@@ -1,11 +1,16 @@
 import { ActionsObservable, StateObservable } from 'redux-observable'
 import { toArray } from 'rxjs/operators'
-import { Subject } from 'rxjs'
+import { Subject, from  } from 'rxjs'
 
 import * as actions from '../actions/trails.action.js'
 import * as types from '../constants/trails.constants.js'
 import * as epics from '../epics/trails.epics.js'
 import reducer, { initialState } from '../reducers/trails.reducer.js'
+
+import { LOAD_STATION_START } from '../constants/station.constants.js'
+import { LOAD_ACTIVITIES_SUCCESS } from '../constants/activity.constants'
+
+import { push } from 'connected-react-router'
 
 /* eslint-env jest */
 
@@ -140,6 +145,61 @@ describe('trails redux', () => {
   })
 
   describe('epics', () => {
+    it('startTrailSuccessEpic should dispatch LOAD_STATIONS_START when START_TRAIL_SUCCESS is dispatched', (done) => {
+      const trailId = 'trailid'
+      const action$ = ActionsObservable.of(
+        {
+          type: types.START_TRAIL_SUCCESS,
+          trailId
+        }
+      )
+      const state$ = new StateObservable(
+        new Subject(),
+        {
+          trails: {
+            current_trail: trailId,
+            byUuid: {
+              [trailId]: {
+                stations: ['station1', 'station2']
+              }
+            }
+          }
+        }
+      )
+      const expectedOutputActions = [
+        {
+          type: LOAD_STATION_START,
+          uuids: ['station1', 'station2']
+        }
+      ]
+      const res$ = epics.startTrailSuccessEpic(action$, state$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
+    it('gotoCurrentStartedTrail should push(\'/mytrail\') if LOAD_ACTIVITIES_SUCCESS is dispatched after START_TRAIL_SUCCESS ', (done) => {
+      const action$ = from([
+        {
+          type: types.START_TRAIL_SUCCESS
+        },
+        {
+          type: LOAD_ACTIVITIES_SUCCESS
+        }
+      ])
+      const expectedOutputActions = [
+        push('/mytrail')
+      ]
+      const res$ = epics.gotoCurrentStartedTrail(action$, null).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
     it('startTrailEpic should dispatch START_TRAIL_SUCCESS when current_trail is undefined', (done) => {
       const trailId = 'trailid'
       const action$ = ActionsObservable.of(
@@ -168,6 +228,7 @@ describe('trails redux', () => {
         done()
       })
     })
+
     it('startTrailEpic should dispatch START_TRAIL_REJECT when current_trail is defined', (done) => {
       const currentTrailId = 'trailid'
       const newTrailId = 'trailid2'
