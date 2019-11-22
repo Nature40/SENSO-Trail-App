@@ -5,14 +5,17 @@ import { normalizeEntityArray } from '../utils/transforms/entityArray.transforms
 
 import {
   LOAD_STATION_START,
-  LOAD_STATION_SUCCESS,
-  LOAD_STATION_FAIL,
   COMPLETE_STATION_START
 } from '../constants/station.constants.js'
 
 import { getActivity } from '../selectors/activity.selectors.js'
 
-import { completeStationFail, completeStationSuccess } from '../actions/station.action.js'
+import {
+  loadStationsSuccess,
+  loadStationsFail,
+  completeStationFail,
+  completeStationSuccess
+} from '../actions/station.action.js'
 
 export function loadStationsEpic (action$, state$, { fetchJSON }) {
   return action$.pipe(
@@ -20,15 +23,10 @@ export function loadStationsEpic (action$, state$, { fetchJSON }) {
     mergeMap(async action => {
       const url = process.env.PUBLIC_URL + '/json/stationlist.json'
       const result = await fetchJSON(url, { uuids: action.uuids })
-      return {
-        type: LOAD_STATION_SUCCESS,
-        transformedStations: normalizeEntityArray(result)
-      }
+      return loadStationsSuccess(normalizeEntityArray(result))
     }),
     catchError((e) => {
-      return of({
-        type: LOAD_STATION_FAIL
-      })
+      return of(loadStationsFail())
     })
   )
 }

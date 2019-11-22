@@ -1,5 +1,7 @@
 import {
   LOAD_STATION_START,
+  LOAD_STATION_SUCCESS,
+  LOAD_STATION_FAIL,
   COMPLETE_STATION_START,
   COMPLETE_STATION_SUCCESS,
   COMPLETE_STATION_FAIL
@@ -12,6 +14,24 @@ export function loadStations (uuids) {
   return {
     type: LOAD_STATION_START,
     uuids
+  }
+}
+
+/**
+ * @param {Object} transformedStations - loaded Stations
+ */
+export function loadStationsSuccess (transformedStations) {
+  return {
+    type: LOAD_STATION_SUCCESS,
+    transformedStations
+  }
+}
+
+/**
+ */
+export function loadStationsFail () {
+  return {
+    type: LOAD_STATION_FAIL,
   }
 }
 
