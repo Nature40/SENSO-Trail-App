@@ -9,11 +9,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Build and Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+      - name: Use Node.js 8
+        uses: actions/setup-node@v1
+        with:
+          node-version: 8.x
+      - name: Install NPM dependencies
+        run: npm install
+      - name: Build
+        run: npm build
+      - name: Deploy
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v1
+        with:
+          target_branch: gh-pages
+          build_dir: build
         env:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BASE_BRANCH: master # The branch the action should deploy from.
-          BRANCH: gh-pages
-          FOLDER: build
-          BUILD_SCRIPT: npm install && npm run build
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
