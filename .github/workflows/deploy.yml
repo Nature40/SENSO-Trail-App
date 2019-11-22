@@ -19,9 +19,8 @@ jobs:
         run: npm run build
       - name: Deploy
         if: success()
-        uses: crazy-max/ghaction-github-pages@v1
-        with:
-          target_branch: gh-pages
-          build_dir: build
+        uses: peaceiris/actions-gh-pages@v2.5.0
         env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./public
