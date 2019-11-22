@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Offline Caching of static data
+- Offline Caching of state with redux-persist
+- Complete Activities and stations
 
 ## [0.1.0] - 20.11.2019
 ### Added
