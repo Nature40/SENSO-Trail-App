@@ -17,7 +17,7 @@ store.dispatch(loadTrails())
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <ConnectedRouter history={history} basename={process.env.PUBLIC_URL}>
       <App />
     </ConnectedRouter>
   </Provider>
