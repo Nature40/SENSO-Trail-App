@@ -17,6 +17,8 @@ import {
   completeStationSuccess
 } from '../actions/station.action.js'
 
+import { selectNextStation } from '../actions/trails.action.js'
+
 export function loadStationsEpic (action$, state$, { fetchJSON }) {
   return action$.pipe(
     ofType(LOAD_STATION_START),
@@ -41,7 +43,7 @@ export function completeStationEpic (action$, state$) {
         .map((uuid) => getActivity(state$.value, { uuid }))
         .reduce((isCompleted, activity) => isCompleted && activity.completed)
       if (isCompleted) {
-        return of(completeStationSuccess(action.uuid))
+        return [completeStationSuccess(action.uuid), selectNextStation()]
       }
       return of(completeStationFail(action.uuid))
     })

@@ -4,13 +4,13 @@ import StationView from '../containers/stationView.container.js'
 
 import '../styles/stationList.scss'
 
-export default function StationList ({ stations }) {
+export default function StationList ({ stations, currentStation }) {
   let stationViews
   if (stations.length > 0) {
-    stationViews = stations.map((station) => {
+    stationViews = stations.map((station, i) => {
       return (
         <li className='station_list__item' key={station}>
-          <StationView uuid={station} />
+          {i > currentStation ? '' : <StationView uuid={station} />}
         </li>
       )
     })

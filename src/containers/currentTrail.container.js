@@ -5,6 +5,7 @@ import { getCurrentTrail } from '../selectors/trails.selectors.js'
 function mapStateToProps (state) {
   return {
     trail: getCurrentTrail(state),
+    currentStation: state.trails.currentStation
   }
 }
 

@@ -5,7 +5,7 @@ import StationList from './stationList.js'
 
 import '../styles/trailView.scss'
 
-export default function TrailView ({ trail }) {
+export default function TrailView ({ trail, currentStation }) {
   if (trail === undefined) {
     return <Redirect to='/trails' />
   }
@@ -15,7 +15,7 @@ export default function TrailView ({ trail }) {
         <h1>{trail.name}</h1>
       </header>
       <section className='trail_view__stations'>
-        <StationList stations={trail.stations} />
+        <StationList stations={trail.stations} currentStation={currentStation} />
       </section>
     </div>
   )
