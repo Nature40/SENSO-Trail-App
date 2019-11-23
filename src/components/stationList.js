@@ -10,7 +10,7 @@ export default function StationList ({ stations, currentStation }) {
     stationViews = stations.map((station, i) => {
       return (
         <li className='station_list__item' key={station}>
-          {i > currentStation ? '' : <StationView uuid={station} />}
+          {i > currentStation ? '' : <StationView uuid={station} isLastStation={i+1 === stations.length} />}
         </li>
       )
     })

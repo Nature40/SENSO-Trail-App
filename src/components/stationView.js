@@ -8,7 +8,8 @@ import '../styles/stationView.scss'
 
 export default function StationView ({
   station,
-  onCompleteStation
+  onCompleteStation,
+  isLastStation
 }) {
   return (
     <div className='box station'>
@@ -26,7 +27,11 @@ export default function StationView ({
         }
       </div>
       <footer className='box__toolbar'>
-        <button onClick={() => onCompleteStation(station.uuid)}>Zur nächsten Station</button>
+        {
+          isLastStation
+            ? (<button>Trail beenden (macht noch nix)</button>)
+            : (<button onClick={() => onCompleteStation(station.uuid)}>Zur nächsten Station</button>)
+        }
       </footer>
     </div>
   )

@@ -8,7 +8,8 @@ import { completeStationStart } from '../actions/station.action.js'
 
 function mapStateToProps (state, props) {
   return {
-    station: getStation(state, props)
+    station: getStation(state, props),
+    ...props
   }
 }
 
