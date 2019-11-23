@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/SENSO-Trail-App/static/css/main.ccf41563.chunk.css",
-    "main.js": "/SENSO-Trail-App/static/js/main.2b0f9b16.chunk.js",
-    "main.js.map": "/SENSO-Trail-App/static/js/main.2b0f9b16.chunk.js.map",
-    "runtime-main.js": "/SENSO-Trail-App/static/js/runtime-main.b8c2dca3.js",
-    "runtime-main.js.map": "/SENSO-Trail-App/static/js/runtime-main.b8c2dca3.js.map",
-    "static/js/2.7c178de0.chunk.js": "/SENSO-Trail-App/static/js/2.7c178de0.chunk.js",
-    "static/js/2.7c178de0.chunk.js.map": "/SENSO-Trail-App/static/js/2.7c178de0.chunk.js.map",
-    "index.html": "/SENSO-Trail-App/index.html",
-    "precache-manifest.6dcbba94c108a41fac846148838bf6c2.js": "/SENSO-Trail-App/precache-manifest.6dcbba94c108a41fac846148838bf6c2.js",
-    "service-worker.js": "/SENSO-Trail-App/service-worker.js",
-    "static/css/main.ccf41563.chunk.css.map": "/SENSO-Trail-App/static/css/main.ccf41563.chunk.css.map",
-    "static/media/app.scss": "/SENSO-Trail-App/static/media/background-test.8fb0645c.png",
-    "static/media/multiChoiceActivity.scss": "/SENSO-Trail-App/static/media/wrong.d262446d.svg",
-    "static/media/simple-forest.4a77c0d8.svg": "/SENSO-Trail-App/static/media/simple-forest.4a77c0d8.svg"
+    "main.css": "./static/css/main.7bf5ee62.chunk.css",
+    "main.js": "./static/js/main.69f28ff6.chunk.js",
+    "main.js.map": "./static/js/main.69f28ff6.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.12bce3db.js",
+    "runtime-main.js.map": "./static/js/runtime-main.12bce3db.js.map",
+    "static/js/2.8dd568b3.chunk.js": "./static/js/2.8dd568b3.chunk.js",
+    "static/js/2.8dd568b3.chunk.js.map": "./static/js/2.8dd568b3.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.9a6848338e9078a48c70fa9b44173a17.js": "./precache-manifest.9a6848338e9078a48c70fa9b44173a17.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/main.7bf5ee62.chunk.css.map": "./static/css/main.7bf5ee62.chunk.css.map",
+    "static/media/app.scss": "./static/media/background-test.8fb0645c.png",
+    "static/media/multiChoiceActivity.scss": "./static/media/wrong.c5e176bb.svg",
+    "static/media/simple-forest.4a77c0d8.svg": "./static/media/simple-forest.4a77c0d8.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.b8c2dca3.js",
-    "static/js/2.7c178de0.chunk.js",
-    "static/css/main.ccf41563.chunk.css",
-    "static/js/main.2b0f9b16.chunk.js"
+    "static/js/runtime-main.12bce3db.js",
+    "static/js/2.8dd568b3.chunk.js",
+    "static/css/main.7bf5ee62.chunk.css",
+    "static/js/main.69f28ff6.chunk.js"
   ]
 }
