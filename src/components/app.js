@@ -6,16 +6,17 @@ import NoMatch from './noMatch.js'
 import TrailsListContainer from '../containers/trailslist.container.js'
 import CurrentTrail from '../containers/currentTrail.container.js'
 
-function dummyFrontPage () {
+function dummyFrontPage (clearButton) {
   return (
     <div className='dummy_front_page'>
       <Link to='/trails'>GOTO Trails</Link>
       <Link to='/mytrail'>GOTO Current Trail</Link>
+      {clearButton || ''}
     </div>
   )
 }
 
-function App () {
+function App ({ clearButton }) {
   return (
     <div className='App'>
       <header className='App-header'>
@@ -23,7 +24,7 @@ function App () {
       </header>
       <main>
         <Switch>
-          <Route exact path='/' render={dummyFrontPage} />
+          <Route exact path='/' render={() => dummyFrontPage(clearButton)} />
           <Route exact path='/trails' component={TrailsListContainer} />
           <Route exact path='/mytrail' component={CurrentTrail} />
           <Route component={NoMatch} />
