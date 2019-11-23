@@ -83,29 +83,29 @@ describe('stations redux', () => {
       })
     })
 
-    it('should handle LOAD_STATION_SUCCESS', () => {
+    it('override existing data on LOAD_STATION_SUCCESS', () => {
       const state = {
         loading: true,
         byUuid: {
-          uuid1: {}
+          uuid1: {
+            completed: true
+          }
         }
       }
       const action = {
         type: types.LOAD_STATION_SUCCESS,
         transformedStations: {
-          uuid2: {},
-          uuid3: {}
+          uuid1: {}
         }
       }
       expect(reducer(state, action)).toEqual({
         loading: false,
         byUuid: {
-          uuid1: {},
-          uuid2: {},
-          uuid3: {}
+          uuid1: {}
         }
       })
     })
+
     it('should handle COMPLETE_STATION_SUCCESS', () => {
       const state = {
         byUuid: {

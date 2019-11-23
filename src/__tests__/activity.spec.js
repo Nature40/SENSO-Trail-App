@@ -101,6 +101,28 @@ describe('activity redux', () => {
         }
       })
     })
+    it('should override existing data on LOAD_ACTIVITIES_SUCCESS', () => {
+      const state = {
+        loading: true,
+        byUuid: {
+          uuid1: {
+            completed: true
+          }
+        }
+      }
+      const action = {
+        type: types.LOAD_ACTIVITIES_SUCCESS,
+        transformedActivities: {
+          uuid1: {}
+        }
+      }
+      expect(reducer(state, action)).toEqual({
+        loading: false,
+        byUuid: {
+          uuid1: {}
+        }
+      })
+    })
     it('should handle COMPLETE_ACTIVITY', () => {
       const state = {
         byUuid: {
