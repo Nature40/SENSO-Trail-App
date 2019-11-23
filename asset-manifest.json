@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/SENSO-Trail-App/static/css/main.8edb3a46.chunk.css",
-    "main.js": "/SENSO-Trail-App/static/js/main.474f062f.chunk.js",
-    "main.js.map": "/SENSO-Trail-App/static/js/main.474f062f.chunk.js.map",
+    "main.js": "/SENSO-Trail-App/static/js/main.f426af77.chunk.js",
+    "main.js.map": "/SENSO-Trail-App/static/js/main.f426af77.chunk.js.map",
     "runtime-main.js": "/SENSO-Trail-App/static/js/runtime-main.b8c2dca3.js",
     "runtime-main.js.map": "/SENSO-Trail-App/static/js/runtime-main.b8c2dca3.js.map",
     "static/js/2.8dd568b3.chunk.js": "/SENSO-Trail-App/static/js/2.8dd568b3.chunk.js",
     "static/js/2.8dd568b3.chunk.js.map": "/SENSO-Trail-App/static/js/2.8dd568b3.chunk.js.map",
     "index.html": "/SENSO-Trail-App/index.html",
-    "precache-manifest.a66b3bd6fa6afd74e288b17f3330f201.js": "/SENSO-Trail-App/precache-manifest.a66b3bd6fa6afd74e288b17f3330f201.js",
+    "precache-manifest.63ef3ecc85b59f3fc0ce73018c3601db.js": "/SENSO-Trail-App/precache-manifest.63ef3ecc85b59f3fc0ce73018c3601db.js",
     "service-worker.js": "/SENSO-Trail-App/service-worker.js",
     "static/css/main.8edb3a46.chunk.css.map": "/SENSO-Trail-App/static/css/main.8edb3a46.chunk.css.map",
     "static/media/app.scss": "/SENSO-Trail-App/static/media/background-test.8fb0645c.png",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.b8c2dca3.js",
     "static/js/2.8dd568b3.chunk.js",
     "static/css/main.8edb3a46.chunk.css",
-    "static/js/main.474f062f.chunk.js"
+    "static/js/main.f426af77.chunk.js"
   ]
 }
