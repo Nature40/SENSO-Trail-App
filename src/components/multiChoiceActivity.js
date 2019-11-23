@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import shuffle from '../utils/shuffleArray.js'
-
 import CorrectSymbol from '../assets/correct.svg'
 
 import '../styles/multiChoiceActivity.scss'
@@ -59,7 +57,7 @@ export default function MultiChoiceActivity ({
         {activity.question}
       </div>
       <div className='multi_choice_activity__answers'>
-        {shuffle(Object.values(activity.answers)).map(a => <MultiChoiceAnswer key={a.id} reveal={activity.reveal} {...a} onClick={onAnswerClicked} />)}
+        {Object.values(activity.answers).map(a => <MultiChoiceAnswer key={a.id} reveal={activity.reveal} {...a} onClick={onAnswerClicked} />)}
       </div>
     </section>
   )
