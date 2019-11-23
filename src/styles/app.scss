@@ -5,6 +5,10 @@
   min-height: 100vh;
   color: $color_grey;
   @include font_text;
+
+  & > main {
+    margin-top: 60px;
+  }
 }
 
 .App-logo {
@@ -21,6 +25,12 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: $color_white;
+
+  width: 100vw;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  z-index: 20;
 
   box-shadow: 10px 10px 10px #000;
 

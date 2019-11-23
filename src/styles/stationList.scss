@@ -1,12 +1,22 @@
+@import './_variables.scss';
+
 .station_list {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 
+  background: url('../assets/station-line-test.png');
+  background-repeat: repeat-y;
+  background-position: center ;
+
+  border-top: 3px solid $color_orange;
+  border-bottom: 3px solid $color_orange;
+
   li {
     width: 100%;
     max-width: 1024px;
     margin: 20px;
   }
+
 }
