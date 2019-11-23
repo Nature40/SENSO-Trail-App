@@ -3,7 +3,8 @@ import {
   ACTIVITY_TYPE_MULTI_CHOICE,
   LOAD_ACTIVITIES_START,
   LOAD_ACTIVITIES_FAIL,
-  LOAD_ACTIVITIES_SUCCESS
+  LOAD_ACTIVITIES_SUCCESS,
+  COMPLETE_ACTIVITY
 } from '../constants/activity.constants.js'
 
 import textActivity from './textActivity.reducer.js'
@@ -34,6 +35,17 @@ export default function activity (state = initialState, action) {
         byUuid: {
           ...state.byUuid,
           ...action.transformedActivities
+        }
+      }
+    case COMPLETE_ACTIVITY:
+      return {
+        ...state,
+        byUuid: {
+          ...state.byUuid,
+          [action.uuid]: {
+            ...state.byUuid[action.uuid],
+            completed: true
+          }
         }
       }
     default:

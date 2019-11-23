@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import shuffle from '../utils/shuffleArray.js'
 
+import CorrectSymbol from '../assets/correct.svg'
+
 import '../styles/multiChoiceActivity.scss'
 
 function MultiChoiceAnswer ({ id, text, onClick, reveal, choosen, correct }) {
@@ -52,7 +54,7 @@ export default function MultiChoiceActivity ({
   }
   return (
     <section className='activity multi_choice_activity'>
-      <h3>{activity.name}</h3>
+      <h2>{activity.name} {activity.completed ? <img src={CorrectSymbol} alt='completed' /> : ''}</h2>
       <div className='multi_choice_activity__question'>
         {activity.question}
       </div>

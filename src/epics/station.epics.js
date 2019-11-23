@@ -1,13 +1,23 @@
-import {
-  LOAD_STATION_START,
-  LOAD_STATION_SUCCESS,
-  LOAD_STATION_FAIL
-} from '../constants/station.constants.js'
-
-import { mergeMap, catchError } from 'rxjs/operators'
+import { mergeMap, catchError, switchMap } from 'rxjs/operators'
 import { of } from 'rxjs'
 import { ofType, combineEpics } from 'redux-observable'
 import { normalizeEntityArray } from '../utils/transforms/entityArray.transforms.js'
+
+import {
+  LOAD_STATION_START,
+  COMPLETE_STATION_START
+} from '../constants/station.constants.js'
+
+import { getActivity } from '../selectors/activity.selectors.js'
+
+import {
+  loadStationsSuccess,
+  loadStationsFail,
+  completeStationFail,
+  completeStationSuccess
+} from '../actions/station.action.js'
+
+import { selectNextStation } from '../actions/trails.action.js'
 
 export function loadStationsEpic (action$, state$, { fetchJSON }) {
   return action$.pipe(
@@ -15,20 +25,32 @@ export function loadStationsEpic (action$, state$, { fetchJSON }) {
     mergeMap(async action => {
       const url = process.env.PUBLIC_URL + '/json/stationlist.json'
       const result = await fetchJSON(url, { uuids: action.uuids })
-      return {
-        type: LOAD_STATION_SUCCESS,
-        transformedStations: normalizeEntityArray(result)
-      }
+      return loadStationsSuccess(normalizeEntityArray(result))
     }),
     catchError((e) => {
-      console.log(e)
-      return of({
-        type: LOAD_STATION_FAIL
-      })
+      return of(loadStationsFail())
+    })
+  )
+}
+
+export function completeStationEpic (action$, state$) {
+  return action$.pipe(
+    ofType(COMPLETE_STATION_START),
+    switchMap((action) => {
+      const station = state$.value.station.byUuid[action.uuid]
+      const activityUuids = station.activities
+      const isCompleted = activityUuids
+        .map((uuid) => getActivity(state$.value, { uuid }))
+        .reduce((isCompleted, activity) => isCompleted && activity.completed)
+      if (isCompleted) {
+        return [completeStationSuccess(action.uuid), selectNextStation()]
+      }
+      return of(completeStationFail(action.uuid))
     })
   )
 }
 
 export default combineEpics(
-  loadStationsEpic
+  loadStationsEpic,
+  completeStationEpic
 )

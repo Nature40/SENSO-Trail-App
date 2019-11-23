@@ -7,30 +7,36 @@ import Activity from '../containers/activityWrapper.container.js'
 import '../styles/stationView.scss'
 
 export default function StationView ({
-  name,
-  description,
-  activities
+  station,
+  onCompleteStation
 }) {
   return (
     <div className='box station'>
       <header>
-        <h2>{name}</h2>
+        <h2>{station.name}</h2>
       </header>
       <div className='box__content station__description'>
-        <ReactMarkdown source={description} />
+        <ReactMarkdown source={station.description} />
       </div>
       <div className='box__content station__activities'>
-        {activities.map(uuid => <Activity key={uuid} uuid={uuid} />)}
+        {
+          station.activities
+            ? station.activities.map(uuid => <Activity key={uuid} uuid={uuid} />)
+            : ''
+        }
       </div>
       <footer className='box__toolbar'>
-        <button>Weiter</button>
+        <button onClick={() => onCompleteStation(station.uuid)}>Zur nächsten Station</button>
       </footer>
     </div>
   )
 }
 
 StationView.propTypes = {
-  name: PropTypes.string,
-  description: PropTypes.string,
-  activities: PropTypes.array
+  station: PropTypes.shape({
+    uuid: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    activities: PropTypes.array
+  }).isRequired
 }

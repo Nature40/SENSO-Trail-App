@@ -3,10 +3,12 @@ import { of, EMPTY } from 'rxjs'
 import { ofType, combineEpics } from 'redux-observable'
 
 import {
-  CHOOSE_ANSWER
+  CHOOSE_ANSWER,
+  REVEAL_ANSWERS
 } from '../constants/multiChoiceActivity.constants.js'
 
 import { revealAnswers } from '../actions/multiChoiceActivity.action.js'
+import { completeActivity } from '../actions/activity.action.js'
 
 export function revealAnswersEpic (action$, state$) {
   return action$.pipe(
@@ -27,6 +29,14 @@ export function revealAnswersEpic (action$, state$) {
   )
 }
 
+export function completeMultiChoiceActivityEpic (action$, state$) {
+  return action$.pipe(
+    ofType(REVEAL_ANSWERS),
+    switchMap((action) => of(completeActivity(action.uuid)))
+  )
+}
+
 export default combineEpics(
-  revealAnswersEpic
+  revealAnswersEpic,
+  completeMultiChoiceActivityEpic
 )

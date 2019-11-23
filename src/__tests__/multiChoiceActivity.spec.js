@@ -8,7 +8,8 @@ import * as epics from '../epics/multiChoiceActivity.epics.js'
 import reducer, { initialState } from '../reducers/multiChoiceActivity.reducer.js'
 
 import {
-  ACTIVITY_TYPE_MULTI_CHOICE
+  ACTIVITY_TYPE_MULTI_CHOICE,
+  COMPLETE_ACTIVITY
 } from '../constants/activity.constants.js'
 
 /* eslint-env jest */
@@ -245,6 +246,28 @@ describe('multiChoiceActivity redux', () => {
         }
       ]
       const res$ = epics.revealAnswersEpic(action$, state$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
+    it('should dispatch COMPLETE_ACTIVITY when answers are revealed', (done) => {
+      const action$ = ActionsObservable.of(
+        {
+          type: types.REVEAL_ANSWERS,
+          activityType: ACTIVITY_TYPE_MULTI_CHOICE,
+          uuid: 'uuid1'
+        }
+      )
+      const expectedOutputActions = [
+        {
+          type: COMPLETE_ACTIVITY,
+          uuid: 'uuid1'
+        }
+      ]
+      const res$ = epics.completeMultiChoiceActivityEpic(action$, null).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {

@@ -6,19 +6,30 @@ import StationView from '../components/stationView.js'
 
 describe('<StationView>', () => {
   it('should render without crashing', () => {
-    shallow(<StationView activities={[{ uuid: 'uuid' }]} />)
+    const props = {
+      station: {}
+    }
+    shallow(<StationView {...props} />)
   })
 
   it('should render Activities', () => {
-    const activities = [
-      {
-        uuid: 'uuid1'
-      },
-      {
-        uuid: 'uuid2'
+    const props = {
+      station: {
+        uuid: 'uuid-s1',
+        name: 'name',
+        desription: '',
+        activities: [
+          {
+            uuid: 'uuid1'
+          },
+          {
+            uuid: 'uuid2'
+          }
+        ]
       }
-    ]
-    const wrapper = shallow(<StationView name='name' description='' activities={activities} />)
-    expect(wrapper.find('.station__activities').children()).toHaveLength(activities.length)
+    }
+    const wrapper = shallow(<StationView {...props} />)
+    expect(wrapper.find('.station__activities').children())
+      .toHaveLength(props.station.activities.length)
   })
 })

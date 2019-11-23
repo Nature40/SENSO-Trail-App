@@ -17,15 +17,11 @@ describe('<StationList>', () => {
 
   it('should render "Station Views" if stations had been loaded', () => {
     const stations = [
-      {
-        uuid: 'uuid1'
-      },
-      {
-        uuid: 'uuid2'
-      }
+      'uuid1',
+      'uuid2'
     ]
     const wrapper = shallow(<StationList stations={stations} />)
 
-    expect(wrapper.find('StationView')).toHaveLength(2)
+    expect(wrapper.find('.station_list__item')).toHaveLength(2)
   })
 })

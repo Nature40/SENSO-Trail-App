@@ -34,6 +34,15 @@ describe('activity redux', () => {
 
       expect(actions.loadActivitySuccess({ uuid1: {} })).toEqual(expectedAction)
     })
+
+    it('should create an complete activity action', () => {
+      const expectedAction = {
+        type: types.COMPLETE_ACTIVITY,
+        uuid: 'uuid1'
+      }
+
+      expect(actions.completeActivity('uuid1')).toEqual(expectedAction)
+    })
   })
 
   describe('reducer', () => {
@@ -89,6 +98,26 @@ describe('activity redux', () => {
           uuid1: {},
           uuid2: {},
           uuid3: {}
+        }
+      })
+    })
+    it('should handle COMPLETE_ACTIVITY', () => {
+      const state = {
+        byUuid: {
+          uuid1: {},
+          uuid2: {}
+        }
+      }
+      const action = {
+        type: types.COMPLETE_ACTIVITY,
+        uuid: 'uuid1'
+      }
+      expect(reducer(state, action)).toEqual({
+        byUuid: {
+          uuid1: {
+            completed: true
+          },
+          uuid2: {}
         }
       })
     })

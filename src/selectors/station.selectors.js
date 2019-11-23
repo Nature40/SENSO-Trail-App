@@ -1,6 +1,10 @@
+import { createSelector } from 'reselect'
 
-export function selectStationList (state) {
-  return Object.keys(state.station.byUuid).map((key, index) => {
-    return state.station.byUuid[key]
-  })
+function selectStation (state, { uuid }) {
+  return state.station.byUuid[uuid]
 }
+
+export const getStation = createSelector(
+  [selectStation],
+  (station) => station
+)

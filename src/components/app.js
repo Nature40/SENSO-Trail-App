@@ -19,7 +19,7 @@ function App () {
   return (
     <div className='App'>
       <header className='App-header'>
-        <p>SENSO-Trail App</p>
+        <Link to='/'>SENSO-Trail App</Link>
       </header>
       <main>
         <Switch>

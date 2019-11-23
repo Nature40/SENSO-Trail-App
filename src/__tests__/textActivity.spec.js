@@ -1,8 +1,13 @@
+import { ActionsObservable, StateObservable } from 'redux-observable'
+import { toArray } from 'rxjs/operators'
+import { Subject } from 'rxjs'
+
 import * as actions from '../actions/textActivity.action.js'
 import * as types from '../constants/textActivity.constants.js'
+import * as epics from '../epics/textActivity.epics.js'
 import reducer, { initialState } from '../reducers/textActivity.reducer.js'
 
-import { ACTIVITY_TYPE_TEXT } from '../constants/activity.constants.js'
+import { ACTIVITY_TYPE_TEXT, COMPLETE_ACTIVITY } from '../constants/activity.constants.js'
 
 /* eslint-env jest */
 
@@ -88,6 +93,68 @@ describe('textActivity Redux', () => {
           }
         }
       )
+    })
+  })
+  describe('epics', () => {
+    it('should dispatch COMPLETE_ACTIVITY if not completeted textActivity is opened', (done) => {
+      const action$ = ActionsObservable.of(
+        {
+          type: types.OPEN_TEXT,
+          uuid: 'uuid1'
+        }
+      )
+      const state$ = new StateObservable(
+        new Subject(),
+        {
+          activity: {
+            byUuid: {
+              uuid1: {}
+            }
+          }
+        }
+      )
+      const expectedOutputActions = [
+        {
+          type: COMPLETE_ACTIVITY,
+          uuid: 'uuid1'
+        }
+      ]
+      const res$ = epics.completeTextActivityEpic(action$, state$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
+    it('should dispatch Nothing if completeted textActivity is opened', (done) => {
+      const action$ = ActionsObservable.of(
+        {
+          type: types.OPEN_TEXT,
+          uuid: 'uuid1'
+        }
+      )
+      const state$ = new StateObservable(
+        new Subject(),
+        {
+          activity: {
+            byUuid: {
+              uuid1: {
+                completed: true
+              }
+            }
+          }
+        }
+      )
+      const expectedOutputActions = [
+      ]
+      const res$ = epics.completeTextActivityEpic(action$, state$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
     })
   })
 })

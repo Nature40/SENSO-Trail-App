@@ -7,6 +7,8 @@ import * as types from '../constants/station.constants.js'
 import * as epics from '../epics/station.epics.js'
 import reducer, { initialState } from '../reducers/station.reducer.js'
 
+import { SELECT_NEXT_STATION } from '../constants/trails.constants.js'
+
 /* eslint-env jest */
 
 describe('stations redux', () => {
@@ -18,6 +20,33 @@ describe('stations redux', () => {
       }
 
       expect(actions.loadStations(['uuid1', 'uuid2'])).toEqual(expectedAction)
+    })
+
+    it('should create an action to start completing a station', () => {
+      const expectedAction = {
+        type: types.COMPLETE_STATION_START,
+        uuid: 'uuid1'
+      }
+
+      expect(actions.completeStationStart('uuid1')).toEqual(expectedAction)
+    })
+
+    it('should create an action to fail completing a station', () => {
+      const expectedAction = {
+        type: types.COMPLETE_STATION_FAIL,
+        uuid: 'uuid1'
+      }
+
+      expect(actions.completeStationFail('uuid1')).toEqual(expectedAction)
+    })
+
+    it('should create an action to succeed completing a station', () => {
+      const expectedAction = {
+        type: types.COMPLETE_STATION_SUCCESS,
+        uuid: 'uuid1'
+      }
+
+      expect(actions.completeStationSuccess('uuid1')).toEqual(expectedAction)
     })
   })
 
@@ -77,9 +106,77 @@ describe('stations redux', () => {
         }
       })
     })
+    it('should handle COMPLETE_STATION_SUCCESS', () => {
+      const state = {
+        byUuid: {
+          uuid1: {}
+        }
+      }
+      const action = {
+        type: types.COMPLETE_STATION_SUCCESS,
+        uuid: 'uuid1'
+      }
+      expect(reducer(state, action)).toEqual({
+        byUuid: {
+          uuid1: { completed: true }
+        }
+      })
+    })
   })
 
   describe('epics', () => {
+    it('should dispatch COMPLETE_STATION_SUCCESS if all activities are completed', (done) => {
+      const testStation = {
+        uuid: 'uuid1',
+        activities: ['a1', 'a2']
+      }
+      const action$ = ActionsObservable.of(
+        {
+          type: types.COMPLETE_STATION_START,
+          uuid: 'uuid1'
+        }
+      )
+      const state$ = new StateObservable(
+        new Subject(),
+        {
+          station: {
+            byUuid: {
+              uuid1: {
+                ...testStation
+              }
+            }
+          },
+          activity: {
+            byUuid: {
+              a1: {
+                uuid: 'a1',
+                completed: true
+              },
+              a2: {
+                uuid: 'a2',
+                completed: true
+              }
+            }
+          }
+        }
+      )
+      const expectedOutputActions = [
+        {
+          type: types.COMPLETE_STATION_SUCCESS,
+          uuid: 'uuid1'
+        },
+        {
+          type: SELECT_NEXT_STATION
+        }
+      ]
+      const res$ = epics.completeStationEpic(action$, state$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
     it('should dispatch LOAD_STATION_SUCCESS when it loads correct data', (done) => {
       const testStation = {
         uuid: 'uuid1'
