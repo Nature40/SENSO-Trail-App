@@ -15,7 +15,12 @@ jobs:
           node-version: 8.x
       - name: Install NPM dependencies
         run: npm install
+      - name: Test App
+        env:
+          CI: true
+        run: npm run test
       - name: Build
+        if: success()
         run: npm run build
       - name: Deploy
         if: success()
