@@ -13,6 +13,7 @@ import multiChoiceActivity from './multiChoiceActivity.reducer.js'
 
 export const initialState = {
   byUuid: {},
+  slugToUuid: {},
   loading: false
 }
 
@@ -35,6 +36,10 @@ export default function activity (state = initialState, action) {
         byUuid: {
           ...state.byUuid,
           ...action.transformedActivities
+        },
+        slugToUuid: {
+          ...state.slugToUuid,
+          ...action.slugToUuid
         }
       }
     case COMPLETE_ACTIVITY:

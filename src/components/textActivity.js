@@ -11,34 +11,14 @@ export default function TextActivity ({
   onReadText,
   onCloseText
 }) {
-  let contentClass = 'text_activity__content'
-  let button = (
-    <button
-      id={'open_text--' + activity.uuid}
-      onClick={() => onReadText(activity.uuid)}
-    >
-    Text öffnen
-    </button>
-  )
-  if (activity.open) {
-    contentClass += ' text_activity__content--open'
-    button = (
-      <button
-        id={'close_text--' + activity.uuid}
-        onClick={() => onCloseText(activity.uuid)}
-      >
-      Text schließen
-      </button>
-    )
+  if (!activity.open) {
+    onReadText(activity.uuid)
   }
   return (
-    <section className='activity text_activity'>
+    <section className='activity text_activity card card_info'>
       <h2>{activity.name} {activity.completed ? <img src={CorrectSymbol} alt='completed' /> : ''}</h2>
-      <div className={contentClass}>
-        {(activity.open ? <ReactMarkdown source={activity.text} /> : '')}
-      </div>
-      <div className='text_activity__tools'>
-        {button}
+      <div className="card_info_content">
+        <ReactMarkdown source={activity.text} />
       </div>
     </section>
   )

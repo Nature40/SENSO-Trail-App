@@ -13,11 +13,11 @@ function TrailItem ({
   onLoadStations
 }) {
   return (
-    <li className='trail_item'>
+    <li className='trail_item card info_card'>
       <header>
         <h2>{name}</h2>
       </header>
-      <div className='trail_item__content'>
+      <div className='info_card__content'>
         <ReactMarkdown source={description} />
       </div>
       <div className='trail_item__toolbar'>

@@ -1,27 +1,30 @@
 import { connect } from 'react-redux'
 
 import StationViewComponent from '../components/stationView.js'
+import StationInfoComponent from '../components/stationInfo.js'
 
-import { getStation } from '../selectors/station.selectors.js'
+import { getStationBySlug } from '../selectors/station.selectors.js'
 
-import { completeStationStart } from '../actions/station.action.js'
+import { unlockStationStart } from '../actions/station.action.js'
 
 function mapStateToProps (state, props) {
+  console.log(props)
+  console.log(getStationBySlug(state, {slug: props.match.params.stationSlug}))
   return {
-    station: getStation(state, props),
+    station: getStationBySlug(state, {slug: props.match.params.stationSlug}),
     ...props
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    onCompleteStation: (uuid) => dispatch(completeStationStart(uuid))
+    onUnlockStation: (uuid) => dispatch(unlockStationStart(uuid))
   }
 }
 
 const StationView = connect(
   mapStateToProps,
   mapDispatchToProps
-)(StationViewComponent)
+)(StationInfoComponent)
 
 export default StationView

@@ -51,8 +51,10 @@ export default function MultiChoiceActivity ({
     }
   }
   return (
-    <section className='activity multi_choice_activity'>
-      <h2>{activity.name} {activity.completed ? <img src={CorrectSymbol} alt='completed' /> : ''}</h2>
+    <section className='activity multi_choice_activity card card_info'>
+      <header>
+        <h2>{activity.name} {activity.completed ? <img src={CorrectSymbol} alt='completed' /> : ''}</h2>
+      </header>
       <div className='multi_choice_activity__question'>
         {activity.question}
       </div>

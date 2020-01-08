@@ -4,6 +4,8 @@ $base_color_brown: #34623f;
 
 $color_black_transparent: rgba(10,15,10, .5);
 
+$background_image: url('../assets/background-test.png');
+
 $color_black: #101510;
 $color_grey: #a4a4a4;
 $color_white: #e4e4ee;
@@ -35,7 +37,7 @@ $font_head: 'Cabin', sans-serif;
   padding: 8px 13px;
   color: #fff;
   background-color: $color_green;
-  border: 3px solid $color_green;
+  //border: 3px solid $color_green;
   font-size: 1.1em;
   border-radius: 2px;
   outline: none;
@@ -47,6 +49,6 @@ $font_head: 'Cabin', sans-serif;
 
   &:hover {
     color: $color_green;
-    background-color: transparent;
+    background-color: $color_black;
   }
 }

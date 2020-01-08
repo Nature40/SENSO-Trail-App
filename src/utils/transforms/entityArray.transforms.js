@@ -5,3 +5,11 @@ export function normalizeEntityArray (trailsArray) {
   }
   return res
 }
+
+export function getSlugsEntityArray (array) {
+  const res = {}
+  for (const entity of array) {
+    res[entity.slug] = entity.uuid
+  }
+  return res
+}

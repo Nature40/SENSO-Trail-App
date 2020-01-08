@@ -1,6 +1,7 @@
 [
   {
     "uuid":"2b5ad3f2-077f-11ea-8d71-362b9e15",
+    "slug": "birnbaum",
     "name": "Intelligents Birnbaumholz der Scheibenwelt",
     "description": "Dies ist eine ganz tolle Station.\n### Schwerpunkt\nHier geht es um intelligentes Birnbaumholz\n### Tipps\nGanz toller Tipp - *aber nicht weitersagen*",
     "activities": [
@@ -10,6 +11,7 @@
   },{
     "uuid":"3825b778-077f-11ea-8d71-362b9e155667",
     "name": "Ents in Herr der Ringe",
+    "slug": "ents",
     "description": "Dies ist eine ganz tolle Station.\n### Schwerpunkt\nHier geht es um Ents\n### Tipps\nGanz toller Tipp - *aber nicht weitersagen*",
     "activities": [
       "7ca78178-ed4c-47e2-907d-f784d56686d0",
@@ -19,7 +21,8 @@
   },{
     "uuid":"7d0c87ae-077f-11ea-8d71-362b9e155667",
     "name": "Epic Station",
-    "description": "Dies ist eine ganz tolle Station.\n### Schwerpunkt\nHier geht es um Ents\n###Tipps\nGanz toller Tipp - *aber nicht weitersagen*",
+    "slug": "epic",
+    "description": "Dies ist eine ganz tolle Station.\n### Schwerpunkt\nHier geht es um Epische Sachen\n###Tipps\nGanz toller Tipp - *aber nicht weitersagen*",
     "activities": [
       "7ca78178-ed4c-47e2-907d-f784d56686d0",
       "bdb8dcc2-0b7f-11ea-8d71-362b9e155667",
