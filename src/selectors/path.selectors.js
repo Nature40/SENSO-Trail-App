@@ -62,9 +62,10 @@ export const getStationUnlockable = createSelector(
     selectActivities
   ],
   (stationUuid, trailUuid, trails, stations, activities) => {
-    if(!trailUuid) return []
+    if(!trailUuid) return false
     
     let unlockIdx = trails[trailUuid].stations.indexOf(stationUuid)
+    if(unlockIdx < 0) return false
     return trails[trailUuid].stations
       .filter((val, idx) => idx < unlockIdx)
       .map(

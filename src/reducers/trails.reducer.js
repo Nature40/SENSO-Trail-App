@@ -35,7 +35,6 @@ function trails (state = initialState, action) {
       return {
         ...state,
         error: undefined,
-        currentStation: 0,
         current_trail: action.trailId
       }
     case START_TRAIL_REJECT:
@@ -49,11 +48,6 @@ function trails (state = initialState, action) {
       return {
         ...state,
         error: undefined
-      }
-    case SELECT_NEXT_STATION:
-      return {
-        ...state,
-        currentStation: state.currentStation + 1
       }
     default:
       return state

@@ -28,7 +28,7 @@ export default function TrailView ({ trail, currentStation }) {
   )
 }
 
-function TrailInfoView ( {name, description} ) {
+export function TrailInfoView ( {name, description} ) {
   return (
     <li className='card info_card'>
       <header>

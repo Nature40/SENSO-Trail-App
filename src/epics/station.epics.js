@@ -20,7 +20,6 @@ import {
   unlockStationSuccess
 } from '../actions/station.action.js'
 
-import { selectNextStation } from '../actions/trails.action.js'
 
 export function loadStationsEpic (action$, state$, { fetchJSON }) {
   return action$.pipe(
@@ -40,30 +39,9 @@ export function unlockStationEpic (action$, state$) {
   return action$.pipe(
     ofType(UNLOCK_STATION_START),
     switchMap((action) => {
-      //const station = state$.value.station.byUuid[action.uuid]
-      /*
-      const currentTrail = getCurrentTrail(state$.value)
-      const unlockIdx = currentTrail.stations.indexOf(action.uuid)
-      console.log("START UNLOCKING TEST")
-
-      let unlockable = currentTrail.stations
-        .filter((val, idx) => idx < unlockIdx)
-        .map(
-          (uuid) => getStation(state$.value, {uuid}).activities.map(
-            (aUuid) => (getActivity(state$.value, {uuid: aUuid}).completed || false)
-          )
-        ).flat()
-      console.log("ARRAY: ", unlockable)
-      unlockable = unlockable.reduce((acc, cur) => acc && cur, true)
-
-      console.log("IS UNLOCKABLE: ", unlockable)
-      */
       if (getStationUnlockable(state$.value, {uuid: action.uuid})) {
-        console.log("UNLOCK STAION:", getStation(state$.value, {uuid: action.uuid}))
-        return [unlockStationSuccess(action.uuid), selectNextStation()]
+        return of(unlockStationSuccess(action.uuid))
       }
-
-      console.log("DONT UNLOCK STAION:", getStation(state$.value, {uuid: action.uuid}))
       return of(unlockStationFail(action.uuid))
     })
   )
