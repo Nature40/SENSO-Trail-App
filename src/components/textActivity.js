@@ -8,16 +8,17 @@ import '../styles/textActivity.scss'
 
 export default function TextActivity ({
   activity,
-  onReadText,
-  onCloseText
+  onReadText
 }) {
-  if (!activity.open) {
+  if (!activity.completed) {
     onReadText(activity.uuid)
   }
   return (
-    <section className='activity text_activity card card_info'>
-      <h2>{activity.name} {activity.completed ? <img src={CorrectSymbol} alt='completed' /> : ''}</h2>
-      <div className="card_info_content">
+    <section className='activity text_activity card info_card'>
+      <header>
+        <h2>{activity.name} {activity.completed ? <img src={CorrectSymbol} alt='completed' /> : ''}</h2>
+      </header>
+      <div className="info_card__content">
         <ReactMarkdown source={activity.text} />
       </div>
     </section>
@@ -29,8 +30,8 @@ TextActivity.propTypes = {
     text: PropTypes.string,
     uuid: PropTypes.string,
     open: PropTypes.bool,
-    name: PropTypes.string
+    name: PropTypes.string,
+    completed: PropTypes.bool
   }),
   onReadText: PropTypes.func,
-  onCloseText: PropTypes.func
 }
