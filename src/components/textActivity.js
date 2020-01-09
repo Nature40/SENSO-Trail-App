@@ -4,7 +4,6 @@ import ReactMarkdown from 'react-markdown'
 
 import CorrectSymbol from '../assets/correct.svg'
 
-import '../styles/textActivity.scss'
 
 export default function TextActivity ({
   activity,

@@ -68,6 +68,20 @@ a {
     grid-area: content;
     padding: 0 19px;
     text-align: left;
+
+    a {
+      padding: inherit;
+      background-color: inherit;
+      border: none;
+      text-decoration: underline;
+      font-size: inherit;
+      color: inherit;
+
+      &:hover {
+        color: inherit;
+        background-color: inherit;
+      }
+    }
   }
 
 }
