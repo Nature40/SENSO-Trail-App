@@ -23,6 +23,16 @@ export async function fetchJSON (url, params = {}) {
   return data
 }
 
+export async function getResources (urls, params = {}) {
+  const request = {
+    method: 'GET'
+  }
+  const requests = urls.map((url) => window.fetch(url, {...request}))
+  await Promise.all(requests)
+
+  return true;
+}
+
 async function mockFetchActivities ({ uuids }) {
   const request = {
     headers: {
@@ -32,6 +42,7 @@ async function mockFetchActivities ({ uuids }) {
   }
   const activities = [
     process.env.PUBLIC_URL + '/json/textActivity.json',
+    process.env.PUBLIC_URL + '/json/imageActivity.json',
     process.env.PUBLIC_URL + '/json/multiChoiceActivity.json'
   ]
   const resposnes = await Promise.all(

@@ -255,5 +255,52 @@ describe('activity redux', () => {
         done()
       })
     })
+    it('loadREsourceEpic should dispatch LOAD_RESOURCE_SUCCESS if resource had been loaded', (done) => {
+      const action$ = ActionsObservable.of(
+        {
+          type: types.LOAD_RESOURCE_START,
+          resourceUrls: ['test1.jpg','test2.jpg'],
+          uuids: ['uuid1']
+        }
+      )
+      const expectedOutputActions = [
+        {
+          type: types.LOAD_RESOURCE_SUCCESS,
+          uuids: ['uuid1']
+        }
+      ]
+
+      const getResources = (url) => new Promise((resolve) => { resolve(true) })
+      const res$ = epics.loadActivitiesResourceEpic(action$, null, {getResources}).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
+    it('loadREsourceEpic should dispatch LOAD_RESOURCE_FAIL if resource loading failed', (done) => {
+      const action$ = ActionsObservable.of(
+        {
+          type: types.LOAD_RESOURCE_START,
+          resourceUrls: ['test1.jpg','test2.jpg'],
+          uuids: ['uuid1']
+        }
+      )
+      const expectedOutputActions = [
+        {
+          type: types.LOAD_RESOURCE_FAIL
+        }
+      ]
+
+      const getResources = (url) => new Promise((resolve,reject) => { reject() })
+      const res$ = epics.loadActivitiesResourceEpic(action$, null, {getResources}).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
   })
 })

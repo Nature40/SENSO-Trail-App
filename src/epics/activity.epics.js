@@ -1,6 +1,7 @@
 import {
   LOAD_ACTIVITIES_START,
-  LOAD_ACTIVITIES_FAIL
+  LOAD_ACTIVITIES_FAIL,
+  LOAD_RESOURCE_START
 } from '../constants/activity.constants.js'
 
 import {
@@ -9,8 +10,11 @@ import {
 
 import {
   loadActivitySuccess,
-  loadActivity
+  loadActivity,
+  loadResourceFail,
+  loadResourceSuccess
 } from '../actions/activity.action.js'
+
 
 import { mergeMap, catchError, map } from 'rxjs/operators'
 import { of } from 'rxjs'
@@ -46,7 +50,21 @@ export function startLoadActivitiesEpic (action$, state$, dep) {
   )
 }
 
+export function loadActivitiesResourceEpic (action$, state$, { getResources }) {
+  return action$.pipe(
+    ofType(LOAD_RESOURCE_START),
+    mergeMap(async action => {
+      const result = await getResources(action.resourceUrls)
+      return loadResourceSuccess(action.uuids)
+    }),
+    catchError((e) => {
+      return of(loadResourceFail())
+    })
+
+  )
+}
 export default combineEpics(
   loadActivitiesEpic,
-  startLoadActivitiesEpic
+  startLoadActivitiesEpic,
+  loadActivitiesResourceEpic 
 )
