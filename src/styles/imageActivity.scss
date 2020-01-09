@@ -1,0 +1,21 @@
+@import 'base/_card.scss';
+
+.image_activity {
+  grid-template-areas: 
+    "head"
+    "image"
+    "content"
+    "toolbar";
+  &__image {
+    grid-area: image;
+    max-width: 95vw;
+    max-height: 80vh;
+    justify-self: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}

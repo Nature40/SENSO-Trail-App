@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown'
 
 import CorrectSymbol from '../assets/correct.svg'
 
+import '../styles/imageActivity.scss'
 
 export default function ImageActivity ({
   activity,
@@ -13,7 +14,7 @@ export default function ImageActivity ({
     onViewImage(activity.uuid)
   }
   return (
-    <section className='activity text_activity card info_card'>
+    <section className='activity image_activity card info_card'>
       <header>
         <h2>{activity.name} {activity.completed ? <img src={CorrectSymbol} alt='completed' /> : ''}</h2>
       </header>
