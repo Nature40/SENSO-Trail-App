@@ -1,3 +1,4 @@
+import _POLYFILLS from './utils/polyfills'
 import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 

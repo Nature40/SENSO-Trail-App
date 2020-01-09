@@ -2,9 +2,9 @@ import {
   LOAD_STATION_START,
   LOAD_STATION_SUCCESS,
   LOAD_STATION_FAIL,
-  COMPLETE_STATION_START,
-  COMPLETE_STATION_SUCCESS,
-  COMPLETE_STATION_FAIL
+  UNLOCK_STATION_START,
+  UNLOCK_STATION_SUCCESS,
+  UNLOCK_STATION_FAIL
 } from '../constants/station.constants.js'
 
 /**
@@ -20,10 +20,11 @@ export function loadStations (uuids) {
 /**
  * @param {Object} transformedStations - loaded Stations
  */
-export function loadStationsSuccess (transformedStations) {
+export function loadStationsSuccess (transformedStations, slugToUuid) {
   return {
     type: LOAD_STATION_SUCCESS,
-    transformedStations
+    transformedStations,
+    slugToUuid
   }
 }
 
@@ -36,31 +37,33 @@ export function loadStationsFail () {
 }
 
 /**
- * @param {string} uuid - uuid of the Station to complete
+ * @param {string} uuid - uuid of the Station to unlock
  */
-export function completeStationStart (uuid) {
+export function unlockStationStart (uuid) {
   return {
-    type: COMPLETE_STATION_START,
+    type: UNLOCK_STATION_START,
+    uuid
+  }
+}
+
+
+/**
+ * @param {string} uuid - uuid of the Station to unlock
+ */
+export function unlockStationSuccess (uuid) {
+  return {
+    type: UNLOCK_STATION_SUCCESS,
     uuid
   }
 }
 
 /**
- * @param {string} uuid - uuid of the Station to complete
+ * @param {string} uuid - uuid of the Station to unlock
  */
-export function completeStationSuccess (uuid) {
+export function unlockStationFail (uuid) {
   return {
-    type: COMPLETE_STATION_SUCCESS,
+    type: UNLOCK_STATION_FAIL,
     uuid
   }
 }
 
-/**
- * @param {string} uuid - uuid of the Station to complete
- */
-export function completeStationFail (uuid) {
-  return {
-    type: COMPLETE_STATION_FAIL,
-    uuid
-  }
-}

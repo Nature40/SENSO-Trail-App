@@ -42,12 +42,6 @@ describe('trails redux', () => {
       }
       expect(actions.acceptStartTrail('id')).toEqual(expectedAction)
     })
-    it('should create an select next trail to go to the next station', () => {
-      const expectedAction = {
-        type: types.SELECT_NEXT_STATION
-      }
-      expect(actions.selectNextStation()).toEqual(expectedAction)
-    })
   })
 
   describe('trails reducer', () => {
@@ -96,22 +90,7 @@ describe('trails redux', () => {
       }
       expect(reducer(state, action)).toEqual({
         current_trail: 'trailid',
-        currentStation: 0,
         error: undefined
-      })
-    })
-
-    it('should handle SELECT_NEXT_STATION', () => {
-      const state = {
-        current_trail: 'trailid',
-        currentStation: 0
-      }
-      const action = {
-        type: types.SELECT_NEXT_STATION
-      }
-      expect(reducer(state, action)).toEqual({
-        current_trail: 'trailid',
-        currentStation: 1
       })
     })
 

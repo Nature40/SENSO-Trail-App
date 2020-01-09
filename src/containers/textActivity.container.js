@@ -4,7 +4,7 @@ import TextActivityComponent from '../components/textActivity.js'
 
 import { getActivity } from '../selectors/activity.selectors.js'
 
-import { openText, closeText } from '../actions/textActivity.action.js'
+import { completeActivity } from '../actions/activity.action.js'
 
 function mapStateToProps (state, props) {
   return {
@@ -14,9 +14,7 @@ function mapStateToProps (state, props) {
 
 function mapDispatchTopProps (dispatch) {
   return {
-    onReadText: (uuid) => dispatch(openText(uuid)),
-    onCloseText: (uuid) => dispatch(closeText(uuid))
-
+    onReadText: (uuid) => dispatch(completeActivity(uuid)),
   }
 }
 

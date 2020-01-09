@@ -17,10 +17,11 @@ export function loadActivity (uuids) {
 /**
  * @param {Object} transformedActivities - Activities transformed into a key value pair Object
  */
-export function loadActivitySuccess (transformedActivities) {
+export function loadActivitySuccess (transformedActivities, slugToUuid) {
   return {
     type: LOAD_ACTIVITIES_SUCCESS,
-    transformedActivities
+    transformedActivities,
+    slugToUuid
   }
 }
 

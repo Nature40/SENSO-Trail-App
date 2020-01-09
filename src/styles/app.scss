@@ -1,4 +1,5 @@
 @import './_variables.scss';
+@import 'base/_card.scss';
 
 .App {
   background: url('../assets/background-test.png');
@@ -6,9 +7,46 @@
   color: $color_grey;
   @include font_text;
 
+  display: grid;
+  grid-template-areas:
+    "head"
+    "content"
+    "toolbar";
+
   & > main {
-    margin-top: 60px;
+    margin: 80px 0;
   }
+}
+
+@keyframes reveal_toolbar {
+  from { 
+    opacity: 0;
+    bottom: -200px; 
+  }
+  to { 
+    opacity: 1;
+    bottom: 0; 
+  }
+}
+
+.toolbar {
+  animation: reveal_toolbar .2s ease-in-out;
+  @include card_shadow;
+  background: $color_orange;
+  padding: 10px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  a {
+    @include card_shadow(darken( $color_green, 15% ));
+    margin: 3px 10px;
+  }
+
 }
 
 .App-logo {

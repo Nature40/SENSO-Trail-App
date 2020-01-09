@@ -15,7 +15,7 @@ import {
 import { mergeMap, catchError, map } from 'rxjs/operators'
 import { of } from 'rxjs'
 import { ofType, combineEpics } from 'redux-observable'
-import { normalizeEntityArray } from '../utils/transforms/entityArray.transforms.js'
+import { normalizeEntityArray, getSlugsEntityArray } from '../utils/transforms/entityArray.transforms.js'
 
 export function loadActivitiesEpic (action$, state$, { fetchJSON }) {
   return action$.pipe(
@@ -23,7 +23,7 @@ export function loadActivitiesEpic (action$, state$, { fetchJSON }) {
     mergeMap(async action => {
       const url = process.env.PUBLIC_URL + '/json/activities.json'
       const result = await fetchJSON(url, { uuids: action.uuids })
-      return loadActivitySuccess(normalizeEntityArray(result))
+      return loadActivitySuccess(normalizeEntityArray(result), getSlugsEntityArray(result))
     }),
     catchError((e) => {
       return of({

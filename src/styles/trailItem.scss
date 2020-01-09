@@ -1,43 +1,11 @@
 @import './_variables.scss';
 
 .trail_item {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  overflow: hidden;
-  border-radius: 2px;
-  background: $color_black;
-  background: $color_black_transparent;
-  box-shadow: 10px 10px 10px #000;
-
-  header {
-    align-self: stretch;
-    background: $color_orange;
-    color: #fff;
-
-    h2 {
-      margin: 10px;
-      margin-left: 15px;
-      font-size: 1.6em;
-    }
-  }
-
-  &__content {
-    padding: 5px 19px;
-    padding-bottom: 15px;
-  }
-
   &__toolbar {
-
-    border-top: 3px solid $color_orange;
-    padding: 10px 0;
-    padding-right: 15px;
-    display: flex;
-    justify-content: flex-start;
-
+    grid-area: toolbar;
+    margin: 10px 15px;
     button {
-      margin-left: 15px;
+      margin: 10px;
     }
   }
 }

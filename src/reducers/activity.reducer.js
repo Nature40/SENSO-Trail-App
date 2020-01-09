@@ -7,12 +7,11 @@ import {
   COMPLETE_ACTIVITY
 } from '../constants/activity.constants.js'
 
-import textActivity from './textActivity.reducer.js'
-
 import multiChoiceActivity from './multiChoiceActivity.reducer.js'
 
 export const initialState = {
   byUuid: {},
+  slugToUuid: {},
   loading: false
 }
 
@@ -35,6 +34,10 @@ export default function activity (state = initialState, action) {
         byUuid: {
           ...state.byUuid,
           ...action.transformedActivities
+        },
+        slugToUuid: {
+          ...state.slugToUuid,
+          ...action.slugToUuid
         }
       }
     case COMPLETE_ACTIVITY:
@@ -50,8 +53,6 @@ export default function activity (state = initialState, action) {
       }
     default:
       switch (action.activityType) {
-        case ACTIVITY_TYPE_TEXT:
-          return textActivity(state, action)
         case ACTIVITY_TYPE_MULTI_CHOICE:
           return multiChoiceActivity(state, action)
         default:

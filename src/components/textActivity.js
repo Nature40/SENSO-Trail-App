@@ -8,37 +8,18 @@ import '../styles/textActivity.scss'
 
 export default function TextActivity ({
   activity,
-  onReadText,
-  onCloseText
+  onReadText
 }) {
-  let contentClass = 'text_activity__content'
-  let button = (
-    <button
-      id={'open_text--' + activity.uuid}
-      onClick={() => onReadText(activity.uuid)}
-    >
-    Text öffnen
-    </button>
-  )
-  if (activity.open) {
-    contentClass += ' text_activity__content--open'
-    button = (
-      <button
-        id={'close_text--' + activity.uuid}
-        onClick={() => onCloseText(activity.uuid)}
-      >
-      Text schließen
-      </button>
-    )
+  if (!activity.completed) {
+    onReadText(activity.uuid)
   }
   return (
-    <section className='activity text_activity'>
-      <h2>{activity.name} {activity.completed ? <img src={CorrectSymbol} alt='completed' /> : ''}</h2>
-      <div className={contentClass}>
-        {(activity.open ? <ReactMarkdown source={activity.text} /> : '')}
-      </div>
-      <div className='text_activity__tools'>
-        {button}
+    <section className='activity text_activity card info_card'>
+      <header>
+        <h2>{activity.name} {activity.completed ? <img src={CorrectSymbol} alt='completed' /> : ''}</h2>
+      </header>
+      <div className="info_card__content">
+        <ReactMarkdown source={activity.text} />
       </div>
     </section>
   )
@@ -49,8 +30,8 @@ TextActivity.propTypes = {
     text: PropTypes.string,
     uuid: PropTypes.string,
     open: PropTypes.bool,
-    name: PropTypes.string
+    name: PropTypes.string,
+    completed: PropTypes.bool
   }),
   onReadText: PropTypes.func,
-  onCloseText: PropTypes.func
 }
