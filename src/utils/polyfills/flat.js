@@ -1,5 +1,6 @@
 if (!Array.prototype.flat)
 {
+ // eslint-disable-next-line 
     Object.defineProperty(Array.prototype, 'flat',
     {
         value: function(depth = 1, stack = [])
