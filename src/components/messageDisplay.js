@@ -6,11 +6,13 @@ import {
   MESSAGE_TYPE_LOG
 } from '../constants/messages.constatns.js'
 
+import '../styles/messages.scss'
+
 export default function MessageDisplay ({messages}) {
   return (
-    <div className="message_display">
+    <div className="message_display ">
       {messages.map((m, idx) => (
-          <p key={idx} className={['message', messageTypeCss[m.messageType]].join(' ')}>{m.text}</p>
+          <div key={idx} className={['card','message', messageTypeCss[m.messageType]].join(' ')}>{m.text}</div>
       ))}
     </div>
   )

@@ -8,5 +8,5 @@ export function selectMessages (state) {
 
 export const getNewestMessages = createSelector(
   [selectMessages],
-  (messages) => messages.slice(0,lastMessageCount)
+  (messages) => messages.slice(-lastMessageCount)
 )

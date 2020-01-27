@@ -11,11 +11,11 @@ export default function messages (state = initialState, action) {
     case ADD_MESSAGE: 
       return {
         messages: [
+          ...state.messages,
           {
             messageType: action.messageType,
             text: action.text
-          },
-          ...state.messages
+          }
         ]
       }
     default: 
