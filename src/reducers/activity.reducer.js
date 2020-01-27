@@ -1,9 +1,11 @@
 import {
-  ACTIVITY_TYPE_TEXT,
   ACTIVITY_TYPE_MULTI_CHOICE,
   LOAD_ACTIVITIES_START,
   LOAD_ACTIVITIES_FAIL,
   LOAD_ACTIVITIES_SUCCESS,
+  LOAD_RESOURCE_START,
+  LOAD_RESOURCE_SUCCESS,
+  LOAD_RESOURCE_FAIL,
   COMPLETE_ACTIVITY
 } from '../constants/activity.constants.js'
 
@@ -39,6 +41,21 @@ export default function activity (state = initialState, action) {
           ...state.slugToUuid,
           ...action.slugToUuid
         }
+      }
+    case LOAD_RESOURCE_START:
+      return {
+        ...state,
+        loading: true
+      }
+    case LOAD_RESOURCE_FAIL:
+      return {
+        ...state,
+        loading: false
+      }
+    case LOAD_RESOURCE_SUCCESS:
+      return {
+        ...state,
+        loading: false
       }
     case COMPLETE_ACTIVITY:
       return {

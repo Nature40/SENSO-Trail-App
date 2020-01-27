@@ -8,9 +8,6 @@ import {
   UNLOCK_STATION_START
 } from '../constants/station.constants.js'
 
-import { getCurrentTrail } from '../selectors/trails.selectors.js'
-import { getStation } from '../selectors/station.selectors.js'
-import { getActivity } from '../selectors/activity.selectors.js'
 import { getStationUnlockable } from '../selectors/path.selectors.js'
 
 import {

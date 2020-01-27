@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { selectCurrentTrailId, selectTrailsByUuid, selectCurrentTrailsStation } from './trails.selectors.js'
+import { selectCurrentTrailId, selectTrailsByUuid } from './trails.selectors.js'
 import { selectStations } from './station.selectors.js'
 import { selectActivities } from './activity.selectors.js'
 

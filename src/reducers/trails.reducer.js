@@ -4,8 +4,7 @@ import {
   LOAD_TRAILS_START,
   START_TRAIL_SUCCESS,
   START_TRAIL_REJECT,
-  START_TRAIL_CANCEL,
-  SELECT_NEXT_STATION
+  START_TRAIL_CANCEL
 } from '../constants/trails.constants.js'
 
 export const initialState = {

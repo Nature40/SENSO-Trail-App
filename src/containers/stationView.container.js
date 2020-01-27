@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 
-import StationViewComponent from '../components/stationView.js'
 import StationInfoComponent from '../components/stationInfo.js'
 
 import { getStationBySlug } from '../selectors/station.selectors.js'

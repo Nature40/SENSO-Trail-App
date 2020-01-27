@@ -4,19 +4,23 @@ import ReactMarkdown from 'react-markdown'
 
 import CorrectSymbol from '../assets/correct.svg'
 
+import '../styles/imageActivity.scss'
 
-export default function TextActivity ({
+export default function ImageActivity ({
   activity,
-  onReadText
+  onViewImage
 }) {
   if (!activity.completed) {
-    onReadText(activity.uuid)
+    onViewImage(activity.uuid)
   }
   return (
-    <section className='activity text_activity card info_card'>
+    <section className='activity image_activity card info_card'>
       <header>
         <h2>{activity.name} {activity.completed ? <img src={CorrectSymbol} alt='completed' /> : ''}</h2>
       </header>
+      <div className="image_activity__image">
+        <img src={activity.image.src} alt={activity.image.alt} />
+      </div>
       <div className="info_card__content">
         <ReactMarkdown source={activity.text} />
       </div>
@@ -24,13 +28,17 @@ export default function TextActivity ({
   )
 }
 
-TextActivity.propTypes = {
+ImageActivity.propTypes = {
   activity: PropTypes.shape({
     text: PropTypes.string,
     uuid: PropTypes.string,
     open: PropTypes.bool,
     name: PropTypes.string,
-    completed: PropTypes.bool
+    completed: PropTypes.bool,
+    image: PropTypes.shape({
+      src: PropTypes.string,
+      alt: PropTypes.string
+    })
   }),
-  onReadText: PropTypes.func,
+  onViewImage: PropTypes.func,
 }

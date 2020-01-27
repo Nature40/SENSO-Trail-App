@@ -2,7 +2,6 @@ import { connect } from 'react-redux'
 import TrailView from '../components/trailView.js'
 import TrailTool from '../components/trailToolbar.component.js'
 import { getCurrentTrail } from '../selectors/trails.selectors.js'
-import { getStation } from '../selectors/station.selectors.js'
 import { getPath } from '../selectors/path.selectors.js'
 
 function mapStateToProps (state) {
