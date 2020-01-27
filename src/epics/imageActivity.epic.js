@@ -1,5 +1,5 @@
 import { ofType, combineEpics } from 'redux-observable'
-import { mergeMap, catchError, map } from 'rxjs/operators'
+import { map } from 'rxjs/operators'
 import { filter } from 'rxjs/operators';
 
 import {

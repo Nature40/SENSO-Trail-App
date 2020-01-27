@@ -54,7 +54,7 @@ export function loadActivitiesResourceEpic (action$, state$, { getResources }) {
   return action$.pipe(
     ofType(LOAD_RESOURCE_START),
     mergeMap(async action => {
-      const result = await getResources(action.resourceUrls)
+      await getResources(action.resourceUrls)
       return loadResourceSuccess(action.uuids)
     }),
     catchError((e) => {
