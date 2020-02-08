@@ -221,17 +221,15 @@ describe('stations redux', () => {
           }
         }
       )
-      const expectedOutputActions = [
-        {
+      const expectedFirstOutputAction = {
           type: types.UNLOCK_STATION_SUCCESS,
           uuid: 'uuid2'
         } 
-      ]
       const res$ = epics.unlockStationEpic(action$, state$).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {
-        expect(actualOutputActions).toEqual(expectedOutputActions)
+        expect(actualOutputActions[0]).toEqual(expectedFirstOutputAction)
         done()
       })
     })
@@ -287,17 +285,15 @@ describe('stations redux', () => {
           }
         }
       )
-      const expectedOutputActions = [
-        {
+      const expectedFirstOutputAction = {
           type: types.UNLOCK_STATION_SUCCESS,
           uuid: 'uuid1'
         } 
-      ]
       const res$ = epics.unlockStationEpic(action$, state$).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {
-        expect(actualOutputActions).toEqual(expectedOutputActions)
+        expect(actualOutputActions[0]).toEqual(expectedFirstOutputAction)
         done()
       })
     })
@@ -353,17 +349,15 @@ describe('stations redux', () => {
           }
         }
       )
-      const expectedOutputActions = [
-        {
-          type: types.UNLOCK_STATION_FAIL,
-          uuid: 'uuid2'
-        } 
-      ]
+      const expectedFirstOutputAction = {
+        type: types.UNLOCK_STATION_FAIL,
+        uuid: 'uuid2'
+      } 
       const res$ = epics.unlockStationEpic(action$, state$).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {
-        expect(actualOutputActions).toEqual(expectedOutputActions)
+        expect(actualOutputActions[0]).toEqual(expectedFirstOutputAction)
         done()
       })
     })
@@ -418,17 +412,15 @@ describe('stations redux', () => {
           }
         }
       )
-      const expectedOutputActions = [
-        {
-          type: types.UNLOCK_STATION_FAIL,
-          uuid: 'uuid2'
-        } 
-      ]
+      const expectedFirstOutputAction = {
+        type: types.UNLOCK_STATION_FAIL,
+        uuid: 'uuid2'
+      } 
       const res$ = epics.unlockStationEpic(action$, state$).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {
-        expect(actualOutputActions).toEqual(expectedOutputActions)
+        expect(actualOutputActions[0]).toEqual(expectedFirstOutputAction)
         done()
       })
     })
@@ -482,17 +474,15 @@ describe('stations redux', () => {
           }
         }
       )
-      const expectedOutputActions = [
-        {
-          type: types.UNLOCK_STATION_FAIL,
-          uuid: 'uuid2'
-        } 
-      ]
+      const expectedFirstOutputAction = {
+        type: types.UNLOCK_STATION_FAIL,
+        uuid: 'uuid2'
+      } 
       const res$ = epics.unlockStationEpic(action$, state$).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {
-        expect(actualOutputActions).toEqual(expectedOutputActions)
+        expect(actualOutputActions[0]).toEqual(expectedFirstOutputAction)
         done()
       })
     })
@@ -525,22 +515,20 @@ describe('stations redux', () => {
         done()
       })
     })
-    it('should dispatch LOAD_STATION_FAIL when it does not load correct data', (done) => {
+    it('should first dispatch LOAD_STATION_FAIL when it does not load correct data', (done) => {
       const action$ = ActionsObservable.of(
         { type: types.LOAD_STATION_START }
       )
       const fetchJSON = (url) => new Promise((resolve, reject) => { reject() })
 
-      const expectedOutputActions = [
-        {
-          type: types.LOAD_STATION_FAIL
-        }
-      ]
+      const expectedOutputFirstAction = {
+        type: types.LOAD_STATION_FAIL
+      }
       const res$ = epics.loadStationsEpic(action$, null, { fetchJSON }).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {
-        expect(actualOutputActions).toEqual(expectedOutputActions)
+        expect(actualOutputActions[0]).toEqual(expectedOutputFirstAction)
         done()
       })
     })

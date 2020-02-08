@@ -12,6 +12,12 @@ import {
   START_TRAIL_REJECT
 } from '../constants/trails.constants.js'
 
+import {
+  MESSAGE_TYPE_ERROR
+} from '../constants/messages.constatns.js'
+
+import { addMessage } from '../actions/messages.actions.js'
+
 import { loadStations } from '../actions/station.action.js'
 
 import { LOAD_ACTIVITIES_SUCCESS } from '../constants/activity.constants.js'
@@ -31,9 +37,12 @@ export const loadTrailsEpic = (action$, state$, { fetchJSON }) => action$.pipe(
     }
   }),
   catchError((e) => {
-    return of({
-      type: LOAD_TRAILS_FAIL
-    })
+    return [
+      {
+        type: LOAD_TRAILS_FAIL
+      },
+      addMessage(MESSAGE_TYPE_ERROR, "Die Trails konnten leider nicht geladen werden.")
+    ]
   })
 )
 

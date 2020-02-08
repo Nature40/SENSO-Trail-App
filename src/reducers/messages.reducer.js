@@ -14,7 +14,8 @@ export default function messages (state = initialState, action) {
           ...state.messages,
           {
             messageType: action.messageType,
-            text: action.text
+            text: action.text,
+            timestamp: action.timestamp
           }
         ]
       }

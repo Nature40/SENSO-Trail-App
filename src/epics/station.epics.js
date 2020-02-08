@@ -17,6 +17,12 @@ import {
   unlockStationSuccess
 } from '../actions/station.action.js'
 
+import {
+  MESSAGE_TYPE_ERROR,
+  MESSAGE_TYPE_LOG
+} from '../constants/messages.constatns.js'
+
+import { addMessage } from '../actions/messages.actions.js'
 
 export function loadStationsEpic (action$, state$, { fetchJSON }) {
   return action$.pipe(
@@ -27,7 +33,10 @@ export function loadStationsEpic (action$, state$, { fetchJSON }) {
       return loadStationsSuccess(normalizeEntityArray(result), getSlugsEntityArray(result))
     }),
     catchError((e) => {
-      return of(loadStationsFail())
+      return [
+        loadStationsFail(),
+        addMessage(MESSAGE_TYPE_ERROR, 'Die Stadtionen konnten nicht geladen werden')
+      ]
     })
   )
 }
@@ -37,9 +46,15 @@ export function unlockStationEpic (action$, state$) {
     ofType(UNLOCK_STATION_START),
     switchMap((action) => {
       if (getStationUnlockable(state$.value, {uuid: action.uuid})) {
-        return of(unlockStationSuccess(action.uuid))
+        return [
+          unlockStationSuccess(action.uuid),
+          addMessage(MESSAGE_TYPE_LOG, "Station freigeschaltet!")
+        ]
       }
-      return of(unlockStationFail(action.uuid))
+      return [
+        unlockStationFail(action.uuid),
+        addMessage(MESSAGE_TYPE_ERROR, "Diese Stadtion kann noch nich freigeschaltet werden")
+      ]
     })
   )
 }

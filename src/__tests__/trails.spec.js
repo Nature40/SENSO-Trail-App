@@ -287,22 +287,20 @@ describe('trails redux', () => {
       })
     })
 
-    it('loadTrailsEpic should dispatch LOAD_TRAILS_FAIL when it does not load correct data', (done) => {
+    it('loadTrailsEpic should first dispatch LOAD_TRAILS_FAIL when it does not load correct data', (done) => {
       const action$ = ActionsObservable.of(
         { type: types.LOAD_TRAILS_START }
       )
       const fetchJSON = (url) => new Promise((resolve, reject) => { reject() })
 
-      const expectedOutputActions = [
-        {
-          type: types.LOAD_TRAILS_FAIL
-        }
-      ]
+      const expectedOutputFirstAction = {
+        type: types.LOAD_TRAILS_FAIL
+      }
       const res$ = epics.loadTrailsEpic(action$, null, { fetchJSON }).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {
-        expect(actualOutputActions).toEqual(expectedOutputActions)
+        expect(actualOutputActions[0]).toEqual(expectedOutputFirstAction)
         done()
       })
     })
