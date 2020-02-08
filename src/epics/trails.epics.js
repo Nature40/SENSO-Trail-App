@@ -1,5 +1,4 @@
 import { take, mergeMap, catchError, map } from 'rxjs/operators'
-import { of } from 'rxjs'
 import { ofType, combineEpics } from 'redux-observable'
 import { normalizeEntityArray } from '../utils/transforms/entityArray.transforms.js'
 
@@ -11,12 +10,6 @@ import {
   START_TRAIL_SUCCESS,
   START_TRAIL_REJECT
 } from '../constants/trails.constants.js'
-
-import {
-  MESSAGE_TYPE_ERROR
-} from '../constants/messages.constatns.js'
-
-import { addMessage } from '../actions/messages.actions.js'
 
 import { loadStations } from '../actions/station.action.js'
 
@@ -40,8 +33,7 @@ export const loadTrailsEpic = (action$, state$, { fetchJSON }) => action$.pipe(
     return [
       {
         type: LOAD_TRAILS_FAIL
-      },
-      addMessage(MESSAGE_TYPE_ERROR, "Die Trails konnten leider nicht geladen werden.")
+      }
     ]
   })
 )

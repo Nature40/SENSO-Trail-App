@@ -3,23 +3,24 @@ import {
 } from '../constants/messages.constatns.js'
 
 export const initialState = {
-  messages: []
+  byUuid: {}
 }
 
 export default function messages (state = initialState, action) {
-  switch(action.type) {
-    case ADD_MESSAGE: 
+  switch (action.type) {
+    case ADD_MESSAGE:
       return {
-        messages: [
-          ...state.messages,
-          {
+        byUuid: {
+          ...state.byUuid,
+          [action.uuid]: {
             messageType: action.messageType,
             text: action.text,
-            timestamp: action.timestamp
+            timestamp: action.timestamp,
+            uuid: action.uuid
           }
-        ]
+        }
       }
-    default: 
+    default:
       return state
   }
 }
