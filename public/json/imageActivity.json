@@ -5,6 +5,7 @@
     "text":"**Rinde**\nDie Rinde eines Baums",
     "activityType":"ACTIVITY_TYPE_IMAGE",
     "name": "Baum Rinde",
+    "points":100,
     "image": {
       "src": "/Test-Bild-Rinde.jpg",
       "alt": "Rinde"

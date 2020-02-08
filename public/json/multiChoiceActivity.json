@@ -4,6 +4,7 @@
     "slug":"vorkommen",
     "activityType":"ACTIVITY_TYPE_MULTI_CHOICE",
     "name": "Intelligentes Birnbaumholz - Vorkommen",
+    "points":100,
     "question" : "Wo gibt es größere Vorkommen von intelligentem Birnbaumholz",
     "answers": {
       "0":{
@@ -33,6 +34,7 @@
     "slug":"aufgabe",
     "activityType":"ACTIVITY_TYPE_MULTI_CHOICE",
     "name": "Die Aufgabe der Ents",
+    "points":100,
     "question" : "Was ist der Darseinszweck der Ents",
     "answers": {
       "0":{
@@ -57,6 +59,7 @@
     "activityType":"ACTIVITY_TYPE_MULTI_CHOICE",
     "slug":"hobbits-und-ents",
     "name": "Hobbits und Ents",
+    "points":100,
     "question" : "Welche Hobbits sprachen mit Baumbart",
     "answers": {
       "0":{
