@@ -3,11 +3,13 @@ import { connectRouter } from 'connected-react-router'
 import trails, { initialState as trailsState } from './trails.reducer.js'
 import station, { initialState as stationState } from './station.reducer.js'
 import activity, { initialState as activityState } from './activity.reducer.js'
+import messages, { initialState as messagesState } from './messages.reducer.js'
 
 export const initialState = {
   trails: trailsState,
   station: stationState,
-  activity: activityState
+  activity: activityState,
+  messages: messagesState
 }
 
 export default function createRootReducer (history) {
@@ -15,7 +17,8 @@ export default function createRootReducer (history) {
     router: connectRouter(history),
     trails,
     station,
-    activity
+    activity,
+    messages
     /* Other reducers */
   })
 }

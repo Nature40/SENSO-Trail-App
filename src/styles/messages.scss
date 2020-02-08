@@ -1,0 +1,31 @@
+@import './_variables.scss';
+
+.message_display {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  right: 0;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+}
+
+.message {
+  
+  background: $color_orange;
+  margin: 5px 0;
+
+  animation: reveal_message .2s ease-in-out;
+
+  &--error {
+    background: $color_red;
+  }
+}
+
+@keyframes reveal_message {
+  from { 
+    opacity: 0;
+  }
+  to { 
+    opacity: 1;
+  }
+}

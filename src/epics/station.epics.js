@@ -1,5 +1,4 @@
 import { mergeMap, catchError, switchMap } from 'rxjs/operators'
-import { of } from 'rxjs'
 import { ofType, combineEpics } from 'redux-observable'
 import { normalizeEntityArray, getSlugsEntityArray } from '../utils/transforms/entityArray.transforms.js'
 
@@ -17,7 +16,6 @@ import {
   unlockStationSuccess
 } from '../actions/station.action.js'
 
-
 export function loadStationsEpic (action$, state$, { fetchJSON }) {
   return action$.pipe(
     ofType(LOAD_STATION_START),
@@ -27,7 +25,9 @@ export function loadStationsEpic (action$, state$, { fetchJSON }) {
       return loadStationsSuccess(normalizeEntityArray(result), getSlugsEntityArray(result))
     }),
     catchError((e) => {
-      return of(loadStationsFail())
+      return [
+        loadStationsFail()
+      ]
     })
   )
 }
@@ -36,10 +36,14 @@ export function unlockStationEpic (action$, state$) {
   return action$.pipe(
     ofType(UNLOCK_STATION_START),
     switchMap((action) => {
-      if (getStationUnlockable(state$.value, {uuid: action.uuid})) {
-        return of(unlockStationSuccess(action.uuid))
+      if (getStationUnlockable(state$.value, { uuid: action.uuid })) {
+        return [
+          unlockStationSuccess(action.uuid)
+        ]
       }
-      return of(unlockStationFail(action.uuid))
+      return [
+        unlockStationFail(action.uuid)
+      ]
     })
   )
 }

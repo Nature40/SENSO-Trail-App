@@ -1,3 +1,4 @@
+ // eslint-disable-next-line 
 import _POLYFILL from './utils/polyfills/index.js'
 
 import React from 'react'

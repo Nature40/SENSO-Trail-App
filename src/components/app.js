@@ -7,6 +7,8 @@ import TrailsListContainer from '../containers/trailslist.container.js'
 import CurrentTrail from '../containers/currentTrail.container.js'
 import ToolbarComponent from '../components/toolbar.component.js'
 
+import Messages from '../containers/messages.container.js'
+
 function dummyFrontPage (clearButton) {
   return (
     <div className='dummy_front_page'>
@@ -22,6 +24,7 @@ function App ({ clearButton }) {
     <div className='App'>
       <header className='App-header'>
         <Link to='/'>SENSO-Trail App</Link>
+        <Messages />
       </header>
       <main>
         <Switch>
