@@ -168,6 +168,7 @@ describe('multiChoiceActivity redux', () => {
           activity: {
             byUuid: {
               uuid1: {
+                points: 300,
                 answers: {
                   1: {
                     id: '1',
@@ -192,7 +193,13 @@ describe('multiChoiceActivity redux', () => {
           type: types.REVEAL_ANSWERS,
           activityType: ACTIVITY_TYPE_MULTI_CHOICE,
           uuid: 'uuid1'
+        },
+        {
+          type: COMPLETE_ACTIVITY,
+          uuid: 'uuid1',
+          points: 300
         }
+
       ]
       const res$ = epics.revealAnswersEpic(action$, state$).pipe(
         toArray()
@@ -203,7 +210,7 @@ describe('multiChoiceActivity redux', () => {
       })
     })
 
-    it('should dispatch REVEAL_ANSWERES when there are no wrong answers left, to be choosen', (done) => {
+    it('should dispatch REVEAL_ANSWERES and COMPLETE_ACTIVITY when there are no wrong answers left, to be choosen', (done) => {
       const action$ = ActionsObservable.of(
         {
           type: types.CHOOSE_ANSWER,
@@ -243,6 +250,11 @@ describe('multiChoiceActivity redux', () => {
           type: types.REVEAL_ANSWERS,
           activityType: ACTIVITY_TYPE_MULTI_CHOICE,
           uuid: 'uuid1'
+        },
+        {
+          type: COMPLETE_ACTIVITY,
+          uuid: 'uuid1',
+          points: 0
         }
       ]
       const res$ = epics.revealAnswersEpic(action$, state$).pipe(
@@ -253,6 +265,7 @@ describe('multiChoiceActivity redux', () => {
         done()
       })
     })
+    /*
     it('should dispatch COMPLETE_ACTIVITY when answers are revealed', (done) => {
       const action$ = ActionsObservable.of(
         {
@@ -264,7 +277,8 @@ describe('multiChoiceActivity redux', () => {
       const expectedOutputActions = [
         {
           type: COMPLETE_ACTIVITY,
-          uuid: 'uuid1'
+          uuid: 'uuid1',
+          points: 0
         }
       ]
       const res$ = epics.completeMultiChoiceActivityEpic(action$, null).pipe(
@@ -275,5 +289,6 @@ describe('multiChoiceActivity redux', () => {
         done()
       })
     })
+    */
   })
 })

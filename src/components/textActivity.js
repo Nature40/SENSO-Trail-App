@@ -10,7 +10,7 @@ export default function TextActivity ({
   onReadText
 }) {
   if (!activity.completed) {
-    onReadText(activity.uuid)
+    onReadText(activity.uuid, activity.points)
   }
   return (
     <section className='activity text_activity card info_card'>

@@ -14,7 +14,7 @@ function mapStateToProps (state, props) {
 
 function mapDispatchTopProps (dispatch) {
   return {
-    onReadText: (uuid) => dispatch(completeActivity(uuid)),
+    onReadText: (uuid, points) => dispatch(completeActivity(uuid, points)),
   }
 }
 

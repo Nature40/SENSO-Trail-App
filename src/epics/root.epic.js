@@ -5,7 +5,7 @@ import activityEpics from './activity.epics.js'
 import mulitChoiceActivityEpics from './multiChoiceActivity.epics.js'
 import ImageActivityEpics from './imageActivity.epic.js'
 import messageEpics from './message.epic.js'
-import resetScore from './score.epics.js'
+import scoreEpic from './score.epics.js'
 
 /* DEPENDENCIES */
 import { fetchJSON, getResources } from '../utils/api.js'
@@ -17,7 +17,7 @@ const rootEpic = combineEpics(
   ImageActivityEpics,
   mulitChoiceActivityEpics,
   messageEpics,
-  resetScore
+  scoreEpic
 )
 
 export const configureEpicMiddleware = () => createEpicMiddleware({

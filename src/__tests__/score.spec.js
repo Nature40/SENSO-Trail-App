@@ -10,6 +10,10 @@ import {
   START_TRAIL_SUCCESS
 } from '../constants/trails.constants.js'
 
+import {
+  COMPLETE_ACTIVITY
+} from '../constants/activity.constants.js'
+
 /* eslint-env jest */
 
 describe('score redux', () => {
@@ -75,6 +79,48 @@ describe('score redux', () => {
         }
       ]
       const res$ = epics.resetScoreEpic(action$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
+
+    it('should dispatch ADD_POINTS on COMPLETE_ACTIVITY', (done) => {
+      const action$ = ActionsObservable.of(
+        {
+          type: COMPLETE_ACTIVITY,
+          points: 100
+        }
+      )
+
+      const expectedOutputActions = [
+        {
+          type: types.ADD_POINTS,
+          points: 100
+        }
+      ]
+      const res$ = epics.addPointsEpic(action$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
+
+    it('should not dispatch ADD_POINTS on COMPLETE_ACTIVITY and points are 0', (done) => {
+      const action$ = ActionsObservable.of(
+        {
+          type: COMPLETE_ACTIVITY,
+          points: 0
+        }
+      )
+
+      const expectedOutputActions = [
+      ]
+      const res$ = epics.addPointsEpic(action$).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {
