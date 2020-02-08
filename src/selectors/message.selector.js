@@ -11,8 +11,8 @@ export function selectMessages (state) {
 export const getNewestMessages = createSelector(
   [selectMessages],
   (messages) => messages
+    .filter(m => !m.hide && m.timestamp + MESSAGE_TIME_IN_SECONDS * 1000 >= Date.now())
     .sort((a,b) => a - b)
-    .filter(m => m.timestamp + MESSAGE_TIME_IN_SECONDS * 1000 >= Date.now())
     .slice(-LAST_MESSAGE_COUNT)
 )
  

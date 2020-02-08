@@ -1,5 +1,6 @@
 import {
-  ADD_MESSAGE
+  ADD_MESSAGE,
+  HIDE_MESSAGE
 } from '../constants/messages.constatns.js'
 
 /*
@@ -18,6 +19,17 @@ export function addMessage (messageType, text, uuid, timestamp = null) {
     messageType,
     text,
     timestamp,
+    uuid
+  }
+}
+
+/*
+ * @param {String} uuid
+ * @return {Object}
+ */
+export function hideMessage (uuid) {
+  return {
+    type: HIDE_MESSAGE,
     uuid
   }
 }

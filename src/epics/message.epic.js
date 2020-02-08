@@ -1,4 +1,5 @@
-import { map } from 'rxjs/operators'
+import { map, switchMap, delay } from 'rxjs/operators'
+import { of } from 'rxjs'
 import { ofType, combineEpics } from 'redux-observable'
 import uuidv1 from 'uuid/v1'
 
@@ -13,11 +14,13 @@ import {
 } from '../constants/trails.constants.js'
 
 import {
+  ADD_MESSAGE,
   MESSAGE_TYPE_ERROR,
-  MESSAGE_TYPE_LOG
+  MESSAGE_TYPE_LOG,
+  MESSAGE_TIME_IN_SECONDS
 } from '../constants/messages.constatns.js'
 
-import { addMessage } from '../actions/messages.actions.js'
+import { addMessage, hideMessage } from '../actions/messages.actions.js'
 
 const messagesArray = [
   {
@@ -42,7 +45,7 @@ const messagesArray = [
   }
 ]
 
-export function genEpic(messageSpec, genUuid = uuidv1) {
+export function genEpic (messageSpec, genUuid = uuidv1) {
   return (action$, state$) => action$.pipe(
     ofType(messageSpec.trigger),
     map((action) => {
@@ -52,4 +55,15 @@ export function genEpic(messageSpec, genUuid = uuidv1) {
   )
 }
 
-export default combineEpics(...messagesArray.map(mS => genEpic(mS)))
+export function hideMessageEpic (action$) {
+  return action$.pipe(
+    ofType(ADD_MESSAGE),
+    switchMap(action => {
+      return of(hideMessage(action.uuid)).pipe(
+        delay(MESSAGE_TIME_IN_SECONDS * 1000)
+      )
+    })
+  )
+}
+
+export default combineEpics(hideMessageEpic, ...messagesArray.map(mS => genEpic(mS)))
