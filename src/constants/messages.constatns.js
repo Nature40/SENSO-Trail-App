@@ -4,6 +4,7 @@
  */
 export const MESSAGE_TYPE_ERROR = 'MESSAGE_TYPE_ERROR'
 export const MESSAGE_TYPE_LOG = 'MESSAGE_TYPE_LOG'
+export const MESSAGE_TYPE_SUCCESS = 'MESSAGE_TYPE_SUCCESS'
 
 /**
  * Message params

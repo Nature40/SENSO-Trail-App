@@ -17,6 +17,7 @@ import {
   ADD_MESSAGE,
   MESSAGE_TYPE_ERROR,
   MESSAGE_TYPE_LOG,
+  MESSAGE_TYPE_SUCCESS,
   MESSAGE_TIME_IN_SECONDS
 } from '../constants/messages.constatns.js'
 
@@ -35,7 +36,7 @@ const messagesArray = [
   },
   {
     trigger: UNLOCK_STATION_SUCCESS,
-    type: MESSAGE_TYPE_LOG,
+    type: MESSAGE_TYPE_SUCCESS,
     message: 'Station erfolgreich freigeschaltet'
   },
   {

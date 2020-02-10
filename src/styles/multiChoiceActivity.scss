@@ -1,4 +1,5 @@
 @import './_variables.scss';
+@import 'base/_card.scss';
 
 .multi_choice_activity {
   &__answers {
@@ -18,6 +19,8 @@
   flex: 1 1 45%;
   margin: 5px 10px;
 
+  transition: transform .2s ease;
+
   &--choosen {
     cursor: default;
     span {
@@ -25,6 +28,12 @@
       height: 100%;
       width: 30px;
     }
+
+    transform: translate(2px, 2px);
+
+    box-shadow: 
+      inset 0 0 1px 1px rgba(255,255,255,0.1),
+      inset 10px 10px 40px rgba(255,255,255,0.1) !important;
   }
 
   &--reveal {
@@ -32,28 +41,16 @@
     cursor: default;
     color: $color_white;
     background-color: $color_grey;
-    border: 3px solid $color_grey;
+
+    @include card_shadow(darken( $color_grey, 15% ));
 
     &:hover {
       color: $color_white;
       background-color: $color_grey;
-      border: 3px solid $color_grey;
     }
 
     &_wrong {
       text-decoration: line-through;
-    }
-
-    &_correct {
-      span {
-        display: inline-block;
-        height: 100%;
-        width: 30px;
-        background: url('../assets/correct.svg');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center; 
-      }
     }
   }
 
@@ -61,33 +58,17 @@
     &:hover {
       color: $color_white;
       background-color: $color_green;
-      border: 3px solid $color_green;
-    }
-
-    span {
-      background: url('../assets/correct.svg');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center; 
     }
   }
   &--wrong{
     text-decoration: line-through;
 
     background-color: $color_red;
-    border: 3px solid $color_red;
+    @include card_shadow(darken( $color_red, 15% ));
 
     &:hover {
       color: $color_white;
       background-color: $color_red;
-      border: 3px solid $color_red;
-    }
-
-    span {
-      background: url('../assets/wrong.svg');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
     }
   }
 }

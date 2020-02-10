@@ -4,6 +4,8 @@ import MessageDisplay from '../components/messageDisplay.js'
 
 import { getNewestMessages } from '../selectors/message.selector.js'
 
+import { hideMessage } from '../actions/messages.actions.js'
+
 const mapStateToProps = state => {
   return {
     messages: getNewestMessages(state)
@@ -11,7 +13,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    onMessageRead: (uuid) => dispatch(hideMessage(uuid))
+  }
 }
 
 const Messages = connect(

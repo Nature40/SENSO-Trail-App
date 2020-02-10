@@ -3,16 +3,21 @@ import PropTypes from 'prop-types'
 
 import {
   MESSAGE_TYPE_ERROR,
-  MESSAGE_TYPE_LOG
+  MESSAGE_TYPE_LOG,
+  MESSAGE_TYPE_SUCCESS,
 } from '../constants/messages.constatns.js'
 
 import '../styles/messages.scss'
 
-export default function MessageDisplay ({messages}) {
+export default function MessageDisplay ({ messages, onMessageRead }) {
   return (
-    <div className="message_display ">
+    <div className='message_display'>
       {messages.map((m, idx) => (
-          <div key={idx} className={['card','message', messageTypeCss[m.messageType]].join(' ')}>{m.text}</div>
+        <div
+          key={m.uuid}
+          className={['card', 'message', messageTypeCss[m.messageType]].join(' ')}
+          onClick={() => onMessageRead(m.uuid)}
+        >{m.text}</div>
       ))}
     </div>
   )
@@ -24,10 +29,12 @@ MessageDisplay.propTypes = {
       messageType: PropTypes.string,
       text: PropTypes.string
     })
-  )
+  ),
+  onMessageRead: PropTypes.func
 }
 
 const messageTypeCss = {
   [MESSAGE_TYPE_ERROR]: 'message--error',
   [MESSAGE_TYPE_LOG]: 'message--log',
+  [MESSAGE_TYPE_SUCCESS]: 'message--success'
 }
