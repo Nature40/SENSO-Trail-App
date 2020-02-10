@@ -1,24 +1,25 @@
 {
   "files": {
-    "main.css": "/SENSO-Trail-App/static/css/main.8edb3a46.chunk.css",
-    "main.js": "/SENSO-Trail-App/static/js/main.f426af77.chunk.js",
-    "main.js.map": "/SENSO-Trail-App/static/js/main.f426af77.chunk.js.map",
-    "runtime-main.js": "/SENSO-Trail-App/static/js/runtime-main.b8c2dca3.js",
-    "runtime-main.js.map": "/SENSO-Trail-App/static/js/runtime-main.b8c2dca3.js.map",
-    "static/js/2.8dd568b3.chunk.js": "/SENSO-Trail-App/static/js/2.8dd568b3.chunk.js",
-    "static/js/2.8dd568b3.chunk.js.map": "/SENSO-Trail-App/static/js/2.8dd568b3.chunk.js.map",
+    "main.css": "/SENSO-Trail-App/static/css/main.be619bbc.chunk.css",
+    "main.js": "/SENSO-Trail-App/static/js/main.62b7126e.chunk.js",
+    "main.js.map": "/SENSO-Trail-App/static/js/main.62b7126e.chunk.js.map",
+    "runtime-main.js": "/SENSO-Trail-App/static/js/runtime-main.9b240413.js",
+    "runtime-main.js.map": "/SENSO-Trail-App/static/js/runtime-main.9b240413.js.map",
+    "static/js/2.53b1fadb.chunk.js": "/SENSO-Trail-App/static/js/2.53b1fadb.chunk.js",
+    "static/js/2.53b1fadb.chunk.js.map": "/SENSO-Trail-App/static/js/2.53b1fadb.chunk.js.map",
     "index.html": "/SENSO-Trail-App/index.html",
-    "precache-manifest.63ef3ecc85b59f3fc0ce73018c3601db.js": "/SENSO-Trail-App/precache-manifest.63ef3ecc85b59f3fc0ce73018c3601db.js",
+    "precache-manifest.e1a8bb4e81635e2e2860a92185f3e634.js": "/SENSO-Trail-App/precache-manifest.e1a8bb4e81635e2e2860a92185f3e634.js",
     "service-worker.js": "/SENSO-Trail-App/service-worker.js",
-    "static/css/main.8edb3a46.chunk.css.map": "/SENSO-Trail-App/static/css/main.8edb3a46.chunk.css.map",
+    "static/css/main.be619bbc.chunk.css.map": "/SENSO-Trail-App/static/css/main.be619bbc.chunk.css.map",
+    "static/js/2.53b1fadb.chunk.js.LICENSE.txt": "/SENSO-Trail-App/static/js/2.53b1fadb.chunk.js.LICENSE.txt",
     "static/media/app.scss": "/SENSO-Trail-App/static/media/background-test.8fb0645c.png",
     "static/media/multiChoiceActivity.scss": "/SENSO-Trail-App/static/media/wrong.c5e176bb.svg",
     "static/media/simple-forest.4a77c0d8.svg": "/SENSO-Trail-App/static/media/simple-forest.4a77c0d8.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.b8c2dca3.js",
-    "static/js/2.8dd568b3.chunk.js",
-    "static/css/main.8edb3a46.chunk.css",
-    "static/js/main.f426af77.chunk.js"
+    "static/js/runtime-main.9b240413.js",
+    "static/js/2.53b1fadb.chunk.js",
+    "static/css/main.be619bbc.chunk.css",
+    "static/js/main.62b7126e.chunk.js"
   ]
 }

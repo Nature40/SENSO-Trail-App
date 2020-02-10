@@ -1,23 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5bbfa667b80b8a70aebeeb2ca8fdf142",
+    "revision": "125ae63bd10d87f1f0189c0dc5369354",
     "url": "/SENSO-Trail-App/index.html"
   },
   {
-    "revision": "b003ae6271113f116169",
-    "url": "/SENSO-Trail-App/static/css/main.8edb3a46.chunk.css"
+    "revision": "345a43a5d1efd07dfc8b",
+    "url": "/SENSO-Trail-App/static/css/main.be619bbc.chunk.css"
   },
   {
-    "revision": "d2b4dab761c4bc0bbcf1",
-    "url": "/SENSO-Trail-App/static/js/2.8dd568b3.chunk.js"
+    "revision": "83da9677936f0275cd52",
+    "url": "/SENSO-Trail-App/static/js/2.53b1fadb.chunk.js"
   },
   {
-    "revision": "b003ae6271113f116169",
-    "url": "/SENSO-Trail-App/static/js/main.f426af77.chunk.js"
+    "revision": "c0533a56bac4ccbe02a4b58931811807",
+    "url": "/SENSO-Trail-App/static/js/2.53b1fadb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "26d361b54751880f5b60",
-    "url": "/SENSO-Trail-App/static/js/runtime-main.b8c2dca3.js"
+    "revision": "345a43a5d1efd07dfc8b",
+    "url": "/SENSO-Trail-App/static/js/main.62b7126e.chunk.js"
+  },
+  {
+    "revision": "40ac58b3f188a4c46160",
+    "url": "/SENSO-Trail-App/static/js/runtime-main.9b240413.js"
   },
   {
     "revision": "8fb0645c655110c14abc0f146767c126",
