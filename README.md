@@ -4,7 +4,7 @@
 
 ### Prerequisites
 
-You need to have node, npm and npx installed
+You need to have node, npm installed
 
 ### Getting Started
 
