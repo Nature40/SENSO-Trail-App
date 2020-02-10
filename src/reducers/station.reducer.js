@@ -2,11 +2,12 @@ import {
   LOAD_STATION_START,
   LOAD_STATION_SUCCESS,
   LOAD_STATION_FAIL,
-  COMPLETE_STATION_SUCCESS
+  UNLOCK_STATION_SUCCESS
 } from '../constants/station.constants.js'
 
 export const initialState = {
   byUuid: {},
+  slugToUuid: {},
   loading: false
 }
 
@@ -26,16 +27,17 @@ function stations (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        byUuid: { ...state.byUuid, ...action.transformedStations }
+        byUuid: { ...state.byUuid, ...action.transformedStations },
+        slugToUuid: { ...state.slugToUuid, ...action.slugToUuid}
       }
-    case COMPLETE_STATION_SUCCESS:
+    case UNLOCK_STATION_SUCCESS:
       return {
         ...state,
         byUuid: {
           ...state.byUuid,
           [action.uuid]: {
             ...state.byUuid[action.uuid],
-            completed: true
+            unlocked: true
           }
         }
       }

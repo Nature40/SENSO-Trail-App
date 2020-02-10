@@ -28,20 +28,26 @@ describe('activity redux', () => {
       const expectedAction = {
         type: types.LOAD_ACTIVITIES_SUCCESS,
         transformedActivities: {
-          uuid1: {}
+          uuid1: {
+            slug: 'slug1'
+          }
+        },
+        slugToUuid: {
+          slug1: 'uuid1'
         }
       }
 
-      expect(actions.loadActivitySuccess({ uuid1: {} })).toEqual(expectedAction)
+      expect(actions.loadActivitySuccess({ uuid1: { slug: 'slug1' } }, {slug1: 'uuid1'})).toEqual(expectedAction)
     })
 
     it('should create an complete activity action', () => {
       const expectedAction = {
         type: types.COMPLETE_ACTIVITY,
-        uuid: 'uuid1'
+        uuid: 'uuid1',
+        points: 100
       }
 
-      expect(actions.completeActivity('uuid1')).toEqual(expectedAction)
+      expect(actions.completeActivity('uuid1', 100)).toEqual(expectedAction)
     })
   })
 
@@ -82,23 +88,37 @@ describe('activity redux', () => {
       const state = {
         loading: true,
         byUuid: {
-          uuid1: {}
-        }
+          uuid1: {
+            slug: 'slug1'
+          }
+        },
+        slugToUuid: {
+          slug1: 'uuid1'
+        },
       }
       const action = {
         type: types.LOAD_ACTIVITIES_SUCCESS,
         transformedActivities: {
-          uuid2: {},
-          uuid3: {}
-        }
+          uuid2: {slug: 'slug2'},
+          uuid3: {slug: 'slug3'}
+        },
+        slugToUuid: {
+          slug2: 'uuid2',
+          slug3: 'uuid3'
+        },
       }
       expect(reducer(state, action)).toEqual({
         loading: false,
         byUuid: {
-          uuid1: {},
-          uuid2: {},
-          uuid3: {}
-        }
+          uuid1: {slug: 'slug1'},
+          uuid2: {slug: 'slug2'},
+          uuid3: {slug: 'slug3'}
+        },
+        slugToUuid: {
+          slug1: 'uuid1',
+          slug2: 'uuid2',
+          slug3: 'uuid3'
+        },
       })
     })
     it('should override existing data on LOAD_ACTIVITIES_SUCCESS', () => {
@@ -108,19 +128,28 @@ describe('activity redux', () => {
           uuid1: {
             completed: true
           }
-        }
+        },
+        slugToUuid: {
+          slug1: 'uuid1'
+        },
       }
       const action = {
         type: types.LOAD_ACTIVITIES_SUCCESS,
         transformedActivities: {
           uuid1: {}
+        },
+        slugToUuid: {
+          slug1: 'uuid1'
         }
       }
       expect(reducer(state, action)).toEqual({
         loading: false,
         byUuid: {
           uuid1: {}
-        }
+        },
+        slugToUuid: {
+          slug1: 'uuid1'
+        },
       })
     })
     it('should handle COMPLETE_ACTIVITY', () => {
@@ -132,7 +161,8 @@ describe('activity redux', () => {
       }
       const action = {
         type: types.COMPLETE_ACTIVITY,
-        uuid: 'uuid1'
+        uuid: 'uuid1',
+        points: 100
       }
       expect(reducer(state, action)).toEqual({
         byUuid: {
@@ -151,11 +181,17 @@ describe('activity redux', () => {
           type: LOAD_STATION_SUCCESS,
           transformedStations: {
             station1: {
-              activities: ['uuid1']
+              activities: ['uuid1'],
+              slug: 'station1'
             },
             station2: {
-              activities: ['uuid2', 'uuid3']
+              activities: ['uuid2', 'uuid3'],
+              slug: 'station2'
             }
+          },
+          slugToUuid: {
+            station1: 'station1',
+            station2: 'station2'
           }
         }
       )
@@ -175,7 +211,8 @@ describe('activity redux', () => {
     })
     it('should dispatch LOAD_ACTIVITIES_SUCCESS when it loads correct data', (done) => {
       const testActivity = {
-        uuid: 'uuid1'
+        uuid: 'uuid1',
+        slug: 'slug1'
       }
       const action$ = ActionsObservable.of(
         { type: types.LOAD_ACTIVITIES_START }
@@ -187,6 +224,9 @@ describe('activity redux', () => {
           type: types.LOAD_ACTIVITIES_SUCCESS,
           transformedActivities: {
             uuid1: { ...testActivity }
+          },
+          slugToUuid: {
+            slug1: 'uuid1'
           }
         }
       ]
@@ -210,6 +250,53 @@ describe('activity redux', () => {
         }
       ]
       const res$ = epics.loadActivitiesEpic(action$, null, { fetchJSON }).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
+    it('loadREsourceEpic should dispatch LOAD_RESOURCE_SUCCESS if resource had been loaded', (done) => {
+      const action$ = ActionsObservable.of(
+        {
+          type: types.LOAD_RESOURCE_START,
+          resourceUrls: ['test1.jpg','test2.jpg'],
+          uuids: ['uuid1']
+        }
+      )
+      const expectedOutputActions = [
+        {
+          type: types.LOAD_RESOURCE_SUCCESS,
+          uuids: ['uuid1']
+        }
+      ]
+
+      const getResources = (url) => new Promise((resolve) => { resolve(true) })
+      const res$ = epics.loadActivitiesResourceEpic(action$, null, {getResources}).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions).toEqual(expectedOutputActions)
+        done()
+      })
+    })
+    it('loadREsourceEpic should dispatch LOAD_RESOURCE_FAIL if resource loading failed', (done) => {
+      const action$ = ActionsObservable.of(
+        {
+          type: types.LOAD_RESOURCE_START,
+          resourceUrls: ['test1.jpg','test2.jpg'],
+          uuids: ['uuid1']
+        }
+      )
+      const expectedOutputActions = [
+        {
+          type: types.LOAD_RESOURCE_FAIL
+        }
+      ]
+
+      const getResources = (url) => new Promise((resolve,reject) => { reject() })
+      const res$ = epics.loadActivitiesResourceEpic(action$, null, {getResources}).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {

@@ -1,18 +1,19 @@
 import {
-  ACTIVITY_TYPE_TEXT,
   ACTIVITY_TYPE_MULTI_CHOICE,
   LOAD_ACTIVITIES_START,
   LOAD_ACTIVITIES_FAIL,
   LOAD_ACTIVITIES_SUCCESS,
+  LOAD_RESOURCE_START,
+  LOAD_RESOURCE_SUCCESS,
+  LOAD_RESOURCE_FAIL,
   COMPLETE_ACTIVITY
 } from '../constants/activity.constants.js'
-
-import textActivity from './textActivity.reducer.js'
 
 import multiChoiceActivity from './multiChoiceActivity.reducer.js'
 
 export const initialState = {
   byUuid: {},
+  slugToUuid: {},
   loading: false
 }
 
@@ -35,7 +36,26 @@ export default function activity (state = initialState, action) {
         byUuid: {
           ...state.byUuid,
           ...action.transformedActivities
+        },
+        slugToUuid: {
+          ...state.slugToUuid,
+          ...action.slugToUuid
         }
+      }
+    case LOAD_RESOURCE_START:
+      return {
+        ...state,
+        loading: true
+      }
+    case LOAD_RESOURCE_FAIL:
+      return {
+        ...state,
+        loading: false
+      }
+    case LOAD_RESOURCE_SUCCESS:
+      return {
+        ...state,
+        loading: false
       }
     case COMPLETE_ACTIVITY:
       return {
@@ -50,8 +70,6 @@ export default function activity (state = initialState, action) {
       }
     default:
       switch (action.activityType) {
-        case ACTIVITY_TYPE_TEXT:
-          return textActivity(state, action)
         case ACTIVITY_TYPE_MULTI_CHOICE:
           return multiChoiceActivity(state, action)
         default:

@@ -1,25 +1,26 @@
 {
   "name": "senso-trail-app",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "homepage": "https://nature40.github.io/SENSO-Trail-App/",
   "dependencies": {
     "connected-react-router": "^6.5.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-markdown": "^4.2.2",
     "react-redux": "^7.1.3",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.3.1",
     "react-test-renderer": "^16.11.0",
     "redux": "^4.0.4",
     "redux-observable": "^1.2.0",
     "redux-persist": "^6.0.0",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "uuid": "^3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

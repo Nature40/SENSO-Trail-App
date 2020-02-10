@@ -1,2 +1,2 @@
-## SESNO Trail App
+## SENSO Trail App
 TEST

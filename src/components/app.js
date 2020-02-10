@@ -5,6 +5,11 @@ import '../styles/app.scss'
 import NoMatch from './noMatch.js'
 import TrailsListContainer from '../containers/trailslist.container.js'
 import CurrentTrail from '../containers/currentTrail.container.js'
+import ToolbarComponent from '../components/toolbar.component.js'
+
+import ScoreCounter from '../containers/scoreCounter.container.js'
+
+import Messages from '../containers/messages.container.js'
 
 function dummyFrontPage (clearButton) {
   return (
@@ -21,15 +26,18 @@ function App ({ clearButton }) {
     <div className='App'>
       <header className='App-header'>
         <Link to='/'>SENSO-Trail App</Link>
+        <ScoreCounter />
+        <Messages />
       </header>
       <main>
         <Switch>
           <Route exact path='/' render={() => dummyFrontPage(clearButton)} />
           <Route exact path='/trails' component={TrailsListContainer} />
-          <Route exact path='/mytrail' component={CurrentTrail} />
+          <Route path='/mytrail' component={CurrentTrail} />
           <Route component={NoMatch} />
         </Switch>
       </main>
+      <ToolbarComponent />
     </div>
   )
 }

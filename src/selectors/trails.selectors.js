@@ -11,12 +11,16 @@ export const getTrailsList = createSelector(
   (trails) => trails
 )
 
-function selectCurrentTrailId (state) {
+export function selectCurrentTrailId (state) {
   return state.trails.current_trail
 }
 
-function selectTrailsByUuid (state) {
+export function selectTrailsByUuid (state) {
   return state.trails.byUuid
+}
+
+export function selectCurrentTrailsStation (state) {
+  return state.trails.currentStation
 }
 
 export const getCurrentTrail = createSelector(

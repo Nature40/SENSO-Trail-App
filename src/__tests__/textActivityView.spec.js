@@ -13,89 +13,58 @@ describe('<TextActivity>', () => {
         uuid: 'uuid1',
         text: 'test text',
         name: 'test activity',
-        open: true
       },
       onReadText: jest.fn(),
-      onCloseText: jest.fn()
-    }
-    shallow(<TextActivity {...props} />)
-  })
-
-  it('should render text if open is true', () => {
-    const props = {
-      activity: {
-        uuid: 'uuid1',
-        text: 'test text',
-        name: 'test activity',
-        open: true
-      },
-      onReadText: jest.fn(),
-      onCloseText: jest.fn()
     }
     const wrapper = shallow(<TextActivity {...props} />)
+
     expect(wrapper
-      .find('.text_activity__content')
+      .find('.info_card__content')
       .containsMatchingElement(<ReactMarkdown source={props.activity.text} />)
     ).toEqual(true)
   })
 
-  it('should not render text if open is false', () => {
+  it('should not call onReadText if completed is true', () => {
     const props = {
       activity: {
         uuid: 'uuid1',
         text: 'test text',
         name: 'test activity',
-        open: false
+        completed: true
       },
       onReadText: jest.fn(),
-      onCloseText: jest.fn()
     }
     const wrapper = shallow(<TextActivity {...props} />)
-    expect(wrapper
-      .find('.text_activity__content')
-      .text()
-    ).toEqual('')
+
+    expect(props.onReadText.mock.calls.length).toEqual(0)
   })
 
-  it('should call onReadText if open Text button is clicked', () => {
+  it('should call onReadText if completed is false ', () => {
     const props = {
       activity: {
         uuid: 'uuid1',
         text: 'test text',
         name: 'test activity',
-        open: false
+        completed: false
       },
       onReadText: jest.fn(),
-      onCloseText: jest.fn()
     }
     const wrapper = shallow(<TextActivity {...props} />)
-    const button = wrapper.find('#open_text--uuid1')
-
-    expect(button).toHaveLength(1)
-
-    button.simulate('click')
 
     expect(props.onReadText.mock.calls.length).toEqual(1)
   })
 
-  it('should call onCloseText if close Text button is clicked', () => {
+  it('should call onReadText if completed is undefined', () => {
     const props = {
       activity: {
         uuid: 'uuid1',
         text: 'test text',
         name: 'test activity',
-        open: true
       },
       onReadText: jest.fn(),
-      onCloseText: jest.fn()
     }
     const wrapper = shallow(<TextActivity {...props} />)
-    const button = wrapper.find('#close_text--uuid1')
 
-    expect(button).toHaveLength(1)
-
-    button.simulate('click')
-
-    expect(props.onCloseText.mock.calls.length).toEqual(1)
+    expect(props.onReadText.mock.calls.length).toEqual(1)
   })
 })

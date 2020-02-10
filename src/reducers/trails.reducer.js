@@ -4,8 +4,7 @@ import {
   LOAD_TRAILS_START,
   START_TRAIL_SUCCESS,
   START_TRAIL_REJECT,
-  START_TRAIL_CANCEL,
-  SELECT_NEXT_STATION
+  START_TRAIL_CANCEL
 } from '../constants/trails.constants.js'
 
 export const initialState = {
@@ -35,7 +34,6 @@ function trails (state = initialState, action) {
       return {
         ...state,
         error: undefined,
-        currentStation: 0,
         current_trail: action.trailId
       }
     case START_TRAIL_REJECT:
@@ -49,11 +47,6 @@ function trails (state = initialState, action) {
       return {
         ...state,
         error: undefined
-      }
-    case SELECT_NEXT_STATION:
-      return {
-        ...state,
-        currentStation: state.currentStation + 1
       }
     default:
       return state

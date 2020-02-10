@@ -1,33 +1,33 @@
 import {
-  OPEN_TEXT,
-  CLOSE_TEXT
-} from '../constants/textActivity.constants.js'
+  ADD_MESSAGE,
+  HIDE_MESSAGE
+} from '../constants/messages.constatns.js'
 
 export const initialState = {
   byUuid: {}
 }
 
-export default function textActivityCase (state = initialState, action) {
+export default function messages (state = initialState, action) {
   switch (action.type) {
-    case OPEN_TEXT:
+    case ADD_MESSAGE:
       return {
-        ...state,
         byUuid: {
           ...state.byUuid,
           [action.uuid]: {
-            ...state.byUuid[action.uuid],
-            open: true
+            messageType: action.messageType,
+            text: action.text,
+            timestamp: action.timestamp,
+            uuid: action.uuid
           }
         }
       }
-    case CLOSE_TEXT:
+    case HIDE_MESSAGE:
       return {
-        ...state,
         byUuid: {
           ...state.byUuid,
           [action.uuid]: {
             ...state.byUuid[action.uuid],
-            open: false
+            hide: true
           }
         }
       }

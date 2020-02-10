@@ -1,6 +1,7 @@
 import {
   LOAD_ACTIVITIES_START,
-  LOAD_ACTIVITIES_FAIL
+  LOAD_ACTIVITIES_FAIL,
+  LOAD_RESOURCE_START
 } from '../constants/activity.constants.js'
 
 import {
@@ -9,13 +10,16 @@ import {
 
 import {
   loadActivitySuccess,
-  loadActivity
+  loadActivity,
+  loadResourceFail,
+  loadResourceSuccess
 } from '../actions/activity.action.js'
+
 
 import { mergeMap, catchError, map } from 'rxjs/operators'
 import { of } from 'rxjs'
 import { ofType, combineEpics } from 'redux-observable'
-import { normalizeEntityArray } from '../utils/transforms/entityArray.transforms.js'
+import { normalizeEntityArray, getSlugsEntityArray } from '../utils/transforms/entityArray.transforms.js'
 
 export function loadActivitiesEpic (action$, state$, { fetchJSON }) {
   return action$.pipe(
@@ -23,7 +27,7 @@ export function loadActivitiesEpic (action$, state$, { fetchJSON }) {
     mergeMap(async action => {
       const url = process.env.PUBLIC_URL + '/json/activities.json'
       const result = await fetchJSON(url, { uuids: action.uuids })
-      return loadActivitySuccess(normalizeEntityArray(result))
+      return loadActivitySuccess(normalizeEntityArray(result), getSlugsEntityArray(result))
     }),
     catchError((e) => {
       return of({
@@ -46,7 +50,21 @@ export function startLoadActivitiesEpic (action$, state$, dep) {
   )
 }
 
+export function loadActivitiesResourceEpic (action$, state$, { getResources }) {
+  return action$.pipe(
+    ofType(LOAD_RESOURCE_START),
+    mergeMap(async action => {
+      await getResources(action.resourceUrls)
+      return loadResourceSuccess(action.uuids)
+    }),
+    catchError((e) => {
+      return of(loadResourceFail())
+    })
+
+  )
+}
 export default combineEpics(
   loadActivitiesEpic,
-  startLoadActivitiesEpic
+  startLoadActivitiesEpic,
+  loadActivitiesResourceEpic 
 )

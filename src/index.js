@@ -1,5 +1,9 @@
+ // eslint-disable-next-line 
+import _POLYFILL from './utils/polyfills/index.js'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'

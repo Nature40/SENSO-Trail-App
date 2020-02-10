@@ -1,5 +1,4 @@
 import { take, mergeMap, catchError, map } from 'rxjs/operators'
-import { of } from 'rxjs'
 import { ofType, combineEpics } from 'redux-observable'
 import { normalizeEntityArray } from '../utils/transforms/entityArray.transforms.js'
 
@@ -31,9 +30,11 @@ export const loadTrailsEpic = (action$, state$, { fetchJSON }) => action$.pipe(
     }
   }),
   catchError((e) => {
-    return of({
-      type: LOAD_TRAILS_FAIL
-    })
+    return [
+      {
+        type: LOAD_TRAILS_FAIL
+      }
+    ]
   })
 )
 

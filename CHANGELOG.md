@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 
+## [0.3.0] - 10.02.2020
+### Changed
+- Activity/Station views - Activity has own view
+- Small Styling changes 
+- Stations must be unlocked
+### Added
+- Image View Activity
+- Messages/Notifications
+- Simple Score System
+
 ## [0.2.0] - 23.11.2019
 ### Added
 - Offline Caching of static data

@@ -7,8 +7,6 @@ import * as types from '../constants/station.constants.js'
 import * as epics from '../epics/station.epics.js'
 import reducer, { initialState } from '../reducers/station.reducer.js'
 
-import { SELECT_NEXT_STATION } from '../constants/trails.constants.js'
-
 /* eslint-env jest */
 
 describe('stations redux', () => {
@@ -22,31 +20,58 @@ describe('stations redux', () => {
       expect(actions.loadStations(['uuid1', 'uuid2'])).toEqual(expectedAction)
     })
 
+    it('should create an action to successfull finsish loading stations', () => {
+      const transformedStations = {
+        'uuid1':{
+          uuid: 'uuid1',
+          slug: 'slug1'
+        }
+      }
+      const slugToUuid = {
+        'slug1': 'uuid1'
+      }
+      const expectedAction = {
+        type: types.LOAD_STATION_SUCCESS,
+        transformedStations,
+        slugToUuid
+      }
+
+      expect(actions.loadStationsSuccess(transformedStations, slugToUuid)).toEqual(expectedAction)
+    })
+
+    it('should create an action to fail loading stations', () => {
+      const expectedAction = {
+        type: types.LOAD_STATION_FAIL
+      }
+
+      expect(actions.loadStationsFail()).toEqual(expectedAction)
+    })
+
     it('should create an action to start completing a station', () => {
       const expectedAction = {
-        type: types.COMPLETE_STATION_START,
+        type: types.UNLOCK_STATION_START,
         uuid: 'uuid1'
       }
 
-      expect(actions.completeStationStart('uuid1')).toEqual(expectedAction)
+      expect(actions.unlockStationStart('uuid1')).toEqual(expectedAction)
     })
 
     it('should create an action to fail completing a station', () => {
       const expectedAction = {
-        type: types.COMPLETE_STATION_FAIL,
+        type: types.UNLOCK_STATION_FAIL,
         uuid: 'uuid1'
       }
 
-      expect(actions.completeStationFail('uuid1')).toEqual(expectedAction)
+      expect(actions.unlockStationFail('uuid1')).toEqual(expectedAction)
     })
 
     it('should create an action to succeed completing a station', () => {
       const expectedAction = {
-        type: types.COMPLETE_STATION_SUCCESS,
+        type: types.UNLOCK_STATION_SUCCESS,
         uuid: 'uuid1'
       }
 
-      expect(actions.completeStationSuccess('uuid1')).toEqual(expectedAction)
+      expect(actions.unlockStationSuccess('uuid1')).toEqual(expectedAction)
     })
   })
 
@@ -58,28 +83,32 @@ describe('stations redux', () => {
     it('should handle LOAD_STATION_START', () => {
       const state = {
         loading: false,
-        byUuid: {}
+        byUuid: {},
+        slugToUuid: {}
       }
       const action = {
         type: types.LOAD_STATION_START
       }
       expect(reducer(state, action)).toEqual({
         loading: true,
-        byUuid: {}
+        byUuid: {},
+        slugToUuid: {}
       })
     })
 
     it('should handle LOAD_STATION_FAIL', () => {
       const state = {
-        loading: true,
-        byUuid: {}
+        loading: false,
+        byUuid: {},
+        slugToUuid: {}
       }
       const action = {
         type: types.LOAD_STATION_FAIL
       }
       expect(reducer(state, action)).toEqual({
         loading: false,
-        byUuid: {}
+        byUuid: {},
+        slugToUuid: {}
       })
     })
 
@@ -88,61 +117,93 @@ describe('stations redux', () => {
         loading: true,
         byUuid: {
           uuid1: {
-            completed: true
+            unlocked: true,
+            slug: 'slug1'
           }
+        },
+        slugToUuid: {
+          'slug1':'uuid1'
         }
       }
       const action = {
         type: types.LOAD_STATION_SUCCESS,
         transformedStations: {
-          uuid1: {}
+          uuid1: {
+            slug: 'slug1'
+          }
+        },
+        slugToUuid: {
+          'slug1':'uuid1'
         }
+
       }
       expect(reducer(state, action)).toEqual({
         loading: false,
         byUuid: {
-          uuid1: {}
+          uuid1: {
+            slug: 'slug1'
+          }   
+        },
+        slugToUuid: {
+          'slug1':'uuid1'
         }
       })
     })
 
-    it('should handle COMPLETE_STATION_SUCCESS', () => {
+    it('should handle UNLOCK_STATION_SUCCESS', () => {
       const state = {
         byUuid: {
           uuid1: {}
         }
       }
       const action = {
-        type: types.COMPLETE_STATION_SUCCESS,
+        type: types.UNLOCK_STATION_SUCCESS,
         uuid: 'uuid1'
       }
       expect(reducer(state, action)).toEqual({
         byUuid: {
-          uuid1: { completed: true }
+          uuid1: { unlocked: true }
         }
       })
     })
   })
 
   describe('epics', () => {
-    it('should dispatch COMPLETE_STATION_SUCCESS if all activities are completed', (done) => {
+    it('unlockStationEpic should dispatch UNLOCK_STATION_SUCCESS if all previous activities are completed', (done) => {
       const testStation = {
         uuid: 'uuid1',
         activities: ['a1', 'a2']
       }
+      const testStation2 = {
+        uuid: 'uuid2',
+      }
       const action$ = ActionsObservable.of(
         {
-          type: types.COMPLETE_STATION_START,
-          uuid: 'uuid1'
+          type: types.UNLOCK_STATION_START,
+          uuid: 'uuid2'
         }
       )
       const state$ = new StateObservable(
         new Subject(),
         {
+          trails: {
+            current_trail: 'trail',
+            byUuid: {
+              trail: {
+                stations: [
+                  'uuid1',
+                  'uuid2'
+                ]
+              }
+            }
+          },
           station: {
             byUuid: {
               uuid1: {
                 ...testStation
+              },
+              uuid2: {
+                ...testStation2
               }
             }
           },
@@ -160,26 +221,275 @@ describe('stations redux', () => {
           }
         }
       )
-      const expectedOutputActions = [
-        {
-          type: types.COMPLETE_STATION_SUCCESS,
-          uuid: 'uuid1'
-        },
-        {
-          type: SELECT_NEXT_STATION
-        }
-      ]
-      const res$ = epics.completeStationEpic(action$, state$).pipe(
+      const expectedFirstOutputAction = {
+          type: types.UNLOCK_STATION_SUCCESS,
+          uuid: 'uuid2'
+        } 
+      const res$ = epics.unlockStationEpic(action$, state$).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {
-        expect(actualOutputActions).toEqual(expectedOutputActions)
+        expect(actualOutputActions[0]).toEqual(expectedFirstOutputAction)
+        done()
+      })
+    })
+    it('unlockStationEpic should dispatch UNLOCK_STATION_SUCCESS if it is the first station on the trail', (done) => {
+      const testStation = {
+        uuid: 'uuid1',
+        activities: ['a1', 'a2']
+      }
+      const testStation2 = {
+        uuid: 'uuid2',
+      }
+      const action$ = ActionsObservable.of(
+        {
+          type: types.UNLOCK_STATION_START,
+          uuid: 'uuid1'
+        }
+      )
+      const state$ = new StateObservable(
+        new Subject(),
+        {
+          trails: {
+            current_trail: 'trail',
+            byUuid: {
+              trail: {
+                stations: [
+                  'uuid1',
+                  'uuid2'
+                ]
+              }
+            }
+          },
+          station: {
+            byUuid: {
+              uuid1: {
+                ...testStation
+              },
+              uuid2: {
+                ...testStation2
+              }
+            }
+          },
+          activity: {
+            byUuid: {
+              a1: {
+                uuid: 'a1',
+                completed: false
+              },
+              a2: {
+                uuid: 'a2',
+                completed: false
+              }
+            }
+          }
+        }
+      )
+      const expectedFirstOutputAction = {
+          type: types.UNLOCK_STATION_SUCCESS,
+          uuid: 'uuid1'
+        } 
+      const res$ = epics.unlockStationEpic(action$, state$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions[0]).toEqual(expectedFirstOutputAction)
+        done()
+      })
+    })
+    it('unlockStationEpic should dispatch UNLOCK_STATION_FAIL if one or more previous activities are not completed', (done) => {
+      const testStation = {
+        uuid: 'uuid1',
+        activities: ['a1', 'a2']
+      }
+      const testStation2 = {
+        uuid: 'uuid2',
+      }
+      const action$ = ActionsObservable.of(
+        {
+          type: types.UNLOCK_STATION_START,
+          uuid: 'uuid2'
+        }
+      )
+      const state$ = new StateObservable(
+        new Subject(),
+        {
+          trails: {
+            current_trail: 'trail',
+            byUuid: {
+              trail: {
+                stations: [
+                  'uuid1',
+                  'uuid2'
+                ]
+              }
+            }
+          },
+          station: {
+            byUuid: {
+              uuid1: {
+                ...testStation
+              },
+              uuid2: {
+                ...testStation2
+              }
+            }
+          },
+          activity: {
+            byUuid: {
+              a1: {
+                uuid: 'a1',
+                completed: false
+              },
+              a2: {
+                uuid: 'a2',
+                completed: true
+              }
+            }
+          }
+        }
+      )
+      const expectedFirstOutputAction = {
+        type: types.UNLOCK_STATION_FAIL,
+        uuid: 'uuid2'
+      } 
+      const res$ = epics.unlockStationEpic(action$, state$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions[0]).toEqual(expectedFirstOutputAction)
+        done()
+      })
+    })
+    it('unlockStationEpic should dispatch UNLOCK_STATION_FAIL if Station is not in current Trail', (done) => {
+      const testStation = {
+        uuid: 'uuid1',
+        activities: ['a1', 'a2']
+      }
+      const testStation2 = {
+        uuid: 'uuid2',
+      }
+      const action$ = ActionsObservable.of(
+        {
+          type: types.UNLOCK_STATION_START,
+          uuid: 'uuid2'
+        }
+      )
+      const state$ = new StateObservable(
+        new Subject(),
+        {
+          trails: {
+            current_trail: 'trail',
+            byUuid: {
+              trail: {
+                stations: [
+                  'uuid1',
+                ]
+              }
+            }
+          },
+          station: {
+            byUuid: {
+              uuid1: {
+                ...testStation
+              },
+              uuid2: {
+                ...testStation2
+              }
+            }
+          },
+          activity: {
+            byUuid: {
+              a1: {
+                uuid: 'a1',
+                completed: true
+              },
+              a2: {
+                uuid: 'a2',
+                completed: true
+              }
+            }
+          }
+        }
+      )
+      const expectedFirstOutputAction = {
+        type: types.UNLOCK_STATION_FAIL,
+        uuid: 'uuid2'
+      } 
+      const res$ = epics.unlockStationEpic(action$, state$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions[0]).toEqual(expectedFirstOutputAction)
+        done()
+      })
+    })
+    it('unlockStationEpic should dispatch UNLOCK_STATION_FAIL if current trail is undefined', (done) => {
+      const testStation = {
+        uuid: 'uuid1',
+        activities: ['a1', 'a2']
+      }
+      const testStation2 = {
+        uuid: 'uuid2',
+      }
+      const action$ = ActionsObservable.of(
+        {
+          type: types.UNLOCK_STATION_START,
+          uuid: 'uuid2'
+        }
+      )
+      const state$ = new StateObservable(
+        new Subject(),
+        {
+          trails: {
+            byUuid: {
+              trail: {
+                stations: [
+                  'uuid1',
+                ]
+              }
+            }
+          },
+          station: {
+            byUuid: {
+              uuid1: {
+                ...testStation
+              },
+              uuid2: {
+                ...testStation2
+              }
+            }
+          },
+          activity: {
+            byUuid: {
+              a1: {
+                uuid: 'a1',
+                completed: true
+              },
+              a2: {
+                uuid: 'a2',
+                completed: true
+              }
+            }
+          }
+        }
+      )
+      const expectedFirstOutputAction = {
+        type: types.UNLOCK_STATION_FAIL,
+        uuid: 'uuid2'
+      } 
+      const res$ = epics.unlockStationEpic(action$, state$).pipe(
+        toArray()
+      )
+      res$.subscribe(actualOutputActions => {
+        expect(actualOutputActions[0]).toEqual(expectedFirstOutputAction)
         done()
       })
     })
     it('should dispatch LOAD_STATION_SUCCESS when it loads correct data', (done) => {
       const testStation = {
-        uuid: 'uuid1'
+        uuid: 'uuid1',
+        slug: 'slug1'
       }
       const action$ = ActionsObservable.of(
         { type: types.LOAD_STATION_START }
@@ -191,6 +501,9 @@ describe('stations redux', () => {
           type: types.LOAD_STATION_SUCCESS,
           transformedStations: {
             uuid1: { ...testStation }
+          },
+          slugToUuid: {
+            'slug1':'uuid1'
           }
         }
       ]
@@ -202,22 +515,20 @@ describe('stations redux', () => {
         done()
       })
     })
-    it('should dispatch LOAD_STATION_FAIL when it does not load correct data', (done) => {
+    it('should first dispatch LOAD_STATION_FAIL when it does not load correct data', (done) => {
       const action$ = ActionsObservable.of(
         { type: types.LOAD_STATION_START }
       )
       const fetchJSON = (url) => new Promise((resolve, reject) => { reject() })
 
-      const expectedOutputActions = [
-        {
-          type: types.LOAD_STATION_FAIL
-        }
-      ]
+      const expectedOutputFirstAction = {
+        type: types.LOAD_STATION_FAIL
+      }
       const res$ = epics.loadStationsEpic(action$, null, { fetchJSON }).pipe(
         toArray()
       )
       res$.subscribe(actualOutputActions => {
-        expect(actualOutputActions).toEqual(expectedOutputActions)
+        expect(actualOutputActions[0]).toEqual(expectedOutputFirstAction)
         done()
       })
     })
