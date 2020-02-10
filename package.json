@@ -1,6 +1,6 @@
 {
   "name": "senso-trail-app",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "homepage": "https://nature40.github.io/SENSO-Trail-App/",
   "dependencies": {
