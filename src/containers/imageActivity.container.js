@@ -14,7 +14,7 @@ function mapStateToProps (state, props) {
 
 function mapDispatchTopProps (dispatch) {
   return {
-    onViewImage: (uuid) => dispatch(completeActivity(uuid)),
+    onViewImage: (uuid, points) => dispatch(completeActivity(uuid, points)),
   }
 }
 

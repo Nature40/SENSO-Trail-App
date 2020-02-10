@@ -11,7 +11,7 @@ export default function ImageActivity ({
   onViewImage
 }) {
   if (!activity.completed) {
-    onViewImage(activity.uuid)
+    onViewImage(activity.uuid, activity.points)
   }
   return (
     <section className='activity image_activity card info_card'>

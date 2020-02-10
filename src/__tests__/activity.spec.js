@@ -37,16 +37,17 @@ describe('activity redux', () => {
         }
       }
 
-      expect(actions.loadActivitySuccess({ uuid1: {slug: 'slug1'} }, {slug1: 'uuid1'})).toEqual(expectedAction)
+      expect(actions.loadActivitySuccess({ uuid1: { slug: 'slug1' } }, {slug1: 'uuid1'})).toEqual(expectedAction)
     })
 
     it('should create an complete activity action', () => {
       const expectedAction = {
         type: types.COMPLETE_ACTIVITY,
-        uuid: 'uuid1'
+        uuid: 'uuid1',
+        points: 100
       }
 
-      expect(actions.completeActivity('uuid1')).toEqual(expectedAction)
+      expect(actions.completeActivity('uuid1', 100)).toEqual(expectedAction)
     })
   })
 
@@ -160,7 +161,8 @@ describe('activity redux', () => {
       }
       const action = {
         type: types.COMPLETE_ACTIVITY,
-        uuid: 'uuid1'
+        uuid: 'uuid1',
+        points: 100
       }
       expect(reducer(state, action)).toEqual({
         byUuid: {

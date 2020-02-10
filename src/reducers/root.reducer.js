@@ -4,12 +4,14 @@ import trails, { initialState as trailsState } from './trails.reducer.js'
 import station, { initialState as stationState } from './station.reducer.js'
 import activity, { initialState as activityState } from './activity.reducer.js'
 import messages, { initialState as messagesState } from './messages.reducer.js'
+import score, { initialState as scoreState } from './score.reducer.js'
 
 export const initialState = {
   trails: trailsState,
   station: stationState,
   activity: activityState,
-  messages: messagesState
+  messages: messagesState,
+  score: scoreState
 }
 
 export default function createRootReducer (history) {
@@ -18,7 +20,7 @@ export default function createRootReducer (history) {
     trails,
     station,
     activity,
-    messages
-    /* Other reducers */
+    messages,
+    score
   })
 }

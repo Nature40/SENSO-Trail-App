@@ -31,10 +31,11 @@ export function loadActivitySuccess (transformedActivities, slugToUuid) {
 /**
  * @param {string} uuid - the uuid of the activity
  */
-export function completeActivity (uuid) {
+export function completeActivity (uuid, points = 0) {
   return {
     type: COMPLETE_ACTIVITY,
-    uuid
+    uuid,
+    points
   }
 }
 
