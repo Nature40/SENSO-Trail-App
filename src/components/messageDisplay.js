@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 
 import {
   MESSAGE_TYPE_ERROR,
-  MESSAGE_TYPE_LOG
+  MESSAGE_TYPE_LOG,
+  MESSAGE_TYPE_SUCCESS,
 } from '../constants/messages.constatns.js'
 
 import '../styles/messages.scss'
@@ -34,5 +35,6 @@ MessageDisplay.propTypes = {
 
 const messageTypeCss = {
   [MESSAGE_TYPE_ERROR]: 'message--error',
-  [MESSAGE_TYPE_LOG]: 'message--log'
+  [MESSAGE_TYPE_LOG]: 'message--log',
+  [MESSAGE_TYPE_SUCCESS]: 'message--success'
 }

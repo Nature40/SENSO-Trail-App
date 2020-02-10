@@ -17,7 +17,7 @@ import {
 } from '../actions/score.actions.js'
 
 import {
-  MESSAGE_TYPE_LOG
+  MESSAGE_TYPE_SUCCESS
 } from '../constants/messages.constatns.js'
 
 import {
@@ -53,7 +53,7 @@ export function scoreMessageEpic (action$) {
       const text = `+${action.points} Punkte`
       const uuid = uuidv1()
       return addMessage(
-        MESSAGE_TYPE_LOG,
+        MESSAGE_TYPE_SUCCESS,
         text,
         uuid
       )

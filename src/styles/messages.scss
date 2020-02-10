@@ -19,6 +19,10 @@
   &--error {
     background: $color_red;
   }
+
+  &--success {
+    background: $color_green;
+  }
 }
 
 @keyframes reveal_message {
