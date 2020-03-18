@@ -1,0 +1,3 @@
+export const ADD_CHAT_MESSAGE = 'ADD_CHAT_MESSAGE'
+
+export const SENDER_IS_PLAYER = 'SENDER_IS_PLAYER'
