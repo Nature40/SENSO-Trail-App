@@ -3,9 +3,11 @@ import { connect } from 'react-redux'
 import ChatView from '../components/Chat.view.js'
 import ChatTool from '../components/chatToolbar.component.js'
 
-import { addChatMessage } from '../actions/chat.actions.js'
+import { 
+  chooseChatOption
+} from '../actions/chat.actions.js'
 
-import {getChatMessages} from '../selectors/chat.selector.js'
+import { getChatMessages } from '../selectors/chat.selector.js'
 
 const mapStateToProps = state => {
   return {
@@ -32,7 +34,7 @@ function mapStateToToolbarProps (state) {
 
 const mapDispatchToToolbarProps = dispatch => {
   return {
-    onSendMessage: (message, sender) => dispatch(addChatMessage(message, sender))
+    onSendMessage: (message, sender) => dispatch(chooseChatOption(0))
   }
 }
 

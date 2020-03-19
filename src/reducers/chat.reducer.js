@@ -1,9 +1,14 @@
 import {
-  ADD_CHAT_MESSAGE
+  ADD_CHAT_MESSAGE,
+  LOAD_INK_JSON_START,
+  LOAD_INK_JSON_SUCCESS,
+  LOAD_INK_JSON_FAIL
 } from '../constants/chat.constants.js'
 
 export const initialState = {
-  messageQueue: []
+  messageQueue: [],
+  jsonFile: undefined,
+  loading: false
 }
 
 export default function chat (state = initialState, action) {
@@ -15,6 +20,23 @@ export default function chat (state = initialState, action) {
           message: action.message,
           sender: action.sender
         }])
+      }
+    case LOAD_INK_JSON_START:
+      return {
+        ...state,
+        loading: true
+      }
+    case LOAD_INK_JSON_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        jsonFile: action.json
+      }
+    case LOAD_INK_JSON_FAIL:
+      return {
+        ...state,
+        loading: false,
+        jsonFile: undefined
       }
     default:
       return state

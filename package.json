@@ -7,6 +7,7 @@
     "connected-react-router": "^6.5.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
+    "inkjs": "^1.10.3",
     "node-sass": "^4.13.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
