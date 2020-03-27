@@ -7,7 +7,7 @@ import {
   chooseChatOption
 } from '../actions/chat.actions.js'
 
-import { getChatMessages } from '../selectors/chat.selector.js'
+import { getChatMessages, getChatOptions } from '../selectors/chat.selector.js'
 
 const mapStateToProps = state => {
   return {
@@ -29,12 +29,13 @@ export default Chat
 
 function mapStateToToolbarProps (state) {
   return {
+    chatOptions: getChatOptions(state)
   }
 }
 
 const mapDispatchToToolbarProps = dispatch => {
   return {
-    onSendMessage: (message, sender) => dispatch(chooseChatOption(0))
+    onSendMessage: (option) => dispatch(chooseChatOption(option))
   }
 }
 

@@ -1,5 +1,6 @@
 import {
   ADD_CHAT_MESSAGE,
+  SET_CHAT_OPTIONS,
   LOAD_INK_JSON_START,
   LOAD_INK_JSON_SUCCESS,
   LOAD_INK_JSON_FAIL
@@ -8,7 +9,8 @@ import {
 export const initialState = {
   messageQueue: [],
   jsonFile: undefined,
-  loading: false
+  loading: false,
+  chatOptions: [{text: 'Start', index: -1}]
 }
 
 export default function chat (state = initialState, action) {
@@ -20,6 +22,11 @@ export default function chat (state = initialState, action) {
           message: action.message,
           sender: action.sender
         }])
+      }
+    case SET_CHAT_OPTIONS:
+      return {
+        ...state,
+        chatOptions: action.options.map(o => { return { ...o } })
       }
     case LOAD_INK_JSON_START:
       return {

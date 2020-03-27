@@ -51,6 +51,7 @@ export function loadInkJsonStart(filename){
 
 /**
  * @param {string} filename  
+ * @param {Object} json
  */
 export function loadInkJsonSuccess(filename, json){
   return {

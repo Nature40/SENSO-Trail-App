@@ -1,15 +1,20 @@
 import { ofType, combineEpics } from 'redux-observable'
-import { map, switchMap, catchError } from 'rxjs/operators'
+import { of, EMPTY } from 'rxjs'
+import { map, switchMap, catchError, delay } from 'rxjs/operators'
 
 import {
   CHOOSE_CHAT_OPTION,
-  LOAD_INK_JSON_START
+  LOAD_INK_JSON_START,
+  ADD_CHAT_MESSAGE,
+  SENDER_IS_PLAYER,
+  SENDER_IS_SENSI
 } from '../constants/chat.constants.js'
 
 import {
   addChatMessage,
   loadInkJsonSuccess,
-  loadInkJsonFail
+  loadInkJsonFail,
+  setChatOptions,
 } from '../actions/chat.actions.js'
 
 /**
@@ -18,17 +23,44 @@ export function sendChatMessage (action$, state$, { getCurrentStory }) {
   return action$.pipe(
     ofType(CHOOSE_CHAT_OPTION),
     switchMap(action => {
+      
       const story = getCurrentStory()
 
-      if(story.currentChoices.length > 0) {
+      if(action.option < 0){
+        return of(addChatMessage(story.Continue(), SENDER_IS_SENSI))
+      }
+
+      if (story.currentChoices.length > 0) {
         story.ChooseChoiceIndex(action.option)
       }
 
-      const tobeadd = []
-      while (story.canContinue) {
-        tobeadd.push(story.Continue())
+      return of(addChatMessage(story.Continue(), SENDER_IS_PLAYER))
+    })
+  )
+}
+
+export function getNextOptionOrContinue (action$, state$, { getCurrentStory }) {
+  return action$.pipe(
+    ofType(ADD_CHAT_MESSAGE),
+    switchMap(action => {
+      const story = getCurrentStory()
+
+      if (story.canContinue) {
+        return of(addChatMessage(story.Continue(), SENDER_IS_SENSI)).pipe(
+          delay(1000)
+        )
+      } else {
+        if (story.currentChoices.length > 0) {
+          const options = story.currentChoices.map(o => {
+            return {
+              text: o.text,
+              index: o.index
+            }
+          })
+          return of(setChatOptions(options))
+        }
+        return of(setChatOptions([]))
       }
-      return tobeadd.map(text => addChatMessage(text, 'TEST'))
     })
   )
 }
@@ -53,5 +85,6 @@ export function loadInkJsonEpic (action$, state$, { fetchJSON, initStory }) {
 
 export default combineEpics(
   sendChatMessage,
-  loadInkJsonEpic
+  loadInkJsonEpic,
+  getNextOptionOrContinue
 )
