@@ -4,8 +4,10 @@
 .App {
   background: url('../assets/background-test.png');
   min-height: 100vh;
+  height: 100vh;
   color: $color_grey;
   @include font_text;
+
 
   display: grid;
   grid-template-areas:
@@ -13,8 +15,11 @@
     "content"
     "toolbar";
 
+  grid-template-rows: 60px 1fr auto;
+  grid-template-columns: 100%;
+
   & > main {
-    margin: 80px 0;
+    overflow: auto;
   }
 }
 
@@ -36,8 +41,6 @@
   padding: 10px;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
-  position: fixed;
-  bottom: 0;
   display: flex;
   width: 100%;
   justify-content: center;
@@ -66,8 +69,6 @@
 
   width: 100vw;
   height: 60px;
-  position: fixed;
-  top: 0;
   z-index: 20;
 
   box-shadow: 10px 10px 10px #000;

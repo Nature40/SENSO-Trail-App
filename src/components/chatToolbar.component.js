@@ -5,10 +5,15 @@ export default function ChatToolbar({ onSendMessage, chatOptions }) {
   console.log(onSendMessage)
   const chooseFrom = chatOptions.map(option => {
     console.log(option)
-    return (<button key={option.index} onClick={() => onSendMessage(option.index)}>{option.text}</button>)
+    return (
+      <button
+        key={option.index} 
+        className='chat_toolbar__option'
+        onClick={() => onSendMessage(option.index)}
+      >{option.text}</button>)
   })
   return (
-    <div className='toolbar'>
+    <div className='toolbar chat_toolbar'>
       {chooseFrom}
     </div>
   )

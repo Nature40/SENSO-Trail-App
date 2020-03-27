@@ -6,6 +6,16 @@
   flex-direction: column;
 }
 
+.chat_toolbar {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__option {
+    margin: 6px 12px;
+  }
+}
+
 .chat_message {
   max-width: 90vw;
   min-width: 40vw;

@@ -4,20 +4,22 @@ import {SENDER_IS_PLAYER} from '../constants/chat.constants.js'
 
 import '../styles/chat.scss'
 
-export default function ChatMessageView ({message, sender}) {
-  const message_classes = [
+export default function ChatMessageView ({ message, sender }) {
+  const messageClasses = [
     'chat_message'
   ]
+  let senderName = 'SENSI'
 
   if(sender === SENDER_IS_PLAYER){
-    message_classes.push('chat_message--own')
+    messageClasses.push('chat_message--own')
+    senderName = '<SPIELERNAME>'
   } else {
-    message_classes.push('chat_message--others')
+    messageClasses.push('chat_message--others')
   }
   return (
-    <div className={message_classes.join(' ')}>
-      <h5 className="chat_message__sender">{sender}</h5>
-      <div className="chat_message__message"><p>{message}</p></div>
+    <div className={messageClasses.join(' ')}>
+      <h5 className='chat_message__sender'>{senderName}</h5>
+      <div className='chat_message__message'><p>{message}</p></div>
     </div>
   )
 }
