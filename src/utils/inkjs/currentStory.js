@@ -1,4 +1,6 @@
-import { Story } from 'inkjs'
+// import { Story } from 'inkjs'
+import { Story } from '../../../node_modules/inkjs/dist/ink.js'
+
 
 let currentStory
 
