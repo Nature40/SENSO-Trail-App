@@ -21,6 +21,8 @@ jobs:
         run: npm run test
       - name: Build
         if: success()
+        env:
+          PUBLIC_URL: https://nature40.github.io/SENSO-Trail-App/
         run: npm run build
       - name: Deploy
         if: success()

@@ -6,6 +6,7 @@ import NoMatch from './noMatch.js'
 import TrailsListContainer from '../containers/trailslist.container.js'
 import CurrentTrail from '../containers/currentTrail.container.js'
 import ToolbarComponent from '../components/toolbar.component.js'
+import Chat from '../containers/chat.container.js'
 
 import ScoreCounter from '../containers/scoreCounter.container.js'
 
@@ -16,6 +17,7 @@ function dummyFrontPage (clearButton) {
     <div className='dummy_front_page'>
       <Link to='/trails'>GOTO Trails</Link>
       <Link to='/mytrail'>GOTO Current Trail</Link>
+      <Link to='/chat'>GOTO Chat</Link>
       {clearButton || ''}
     </div>
   )
@@ -32,6 +34,7 @@ function App ({ clearButton }) {
       <main>
         <Switch>
           <Route exact path='/' render={() => dummyFrontPage(clearButton)} />
+          <Route exact path='/chat' component={Chat} />
           <Route exact path='/trails' component={TrailsListContainer} />
           <Route path='/mytrail' component={CurrentTrail} />
           <Route component={NoMatch} />

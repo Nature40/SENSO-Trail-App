@@ -1,0 +1,38 @@
+@import 'base/_card.scss';
+@import '_variables.scss';
+
+.message_board {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat_toolbar {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__option {
+    margin: 6px 12px;
+  }
+}
+
+.chat_message {
+  max-width: 90vw;
+  min-width: 40vw;
+  margin: 20px 10px;
+
+  padding: 20px 15px;
+  border-radius: 10px;
+
+  &--own {
+    @include card_shadow(darken( $color_green, 15% ));
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+  }
+
+  &--others {
+    @include card_shadow(darken( $color_orange, 15% ));
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+  }
+}

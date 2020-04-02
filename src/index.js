@@ -16,6 +16,7 @@ import * as serviceWorker from './serviceWorker'
 
 // For now only. Needs to be some sort of init action later
 import { loadTrails } from './actions/trails.action.js'
+import { loadInkJsonStart } from './actions/chat.actions.js'
 
 const { store, persistor } = configureStore()
 
@@ -39,6 +40,7 @@ function clearCaches () {
 }
 
 store.dispatch(loadTrails())
+store.dispatch(loadInkJsonStart('ink-test-story.json'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

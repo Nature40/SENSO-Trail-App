@@ -10,13 +10,10 @@ export default function TrailToolbar(
   }
 ){
   if(!trail) return (<div/>)
-  console.log(match)
-  console.log(path)
 
   const current = path.findIndex(
     (elem) => `/mytrail/${elem}` === match.url || `/mytrail${elem}` === match.url
   )
-  console.log(current)
   return (
     <div className="toolbar">
       {current > 0 ? (<Link to={`/mytrail/${path[current-1]}`}>{'<'}</Link>) :''}

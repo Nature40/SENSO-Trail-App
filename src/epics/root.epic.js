@@ -6,9 +6,11 @@ import mulitChoiceActivityEpics from './multiChoiceActivity.epics.js'
 import ImageActivityEpics from './imageActivity.epic.js'
 import messageEpics from './message.epic.js'
 import scoreEpic from './score.epics.js'
+import chatEpic from './chat.epic.js'
 
 /* DEPENDENCIES */
 import { fetchJSON, getResources } from '../utils/api.js'
+import { getCurrentStory, initStory } from '../utils/inkjs/currentStory.js'
 
 const rootEpic = combineEpics(
   trailsEpics,
@@ -17,13 +19,16 @@ const rootEpic = combineEpics(
   ImageActivityEpics,
   mulitChoiceActivityEpics,
   messageEpics,
-  scoreEpic
+  scoreEpic,
+  chatEpic
 )
 
 export const configureEpicMiddleware = () => createEpicMiddleware({
   dependencies: {
     fetchJSON,
-    getResources
+    getResources,
+    getCurrentStory,
+    initStory
   }
 })
 
