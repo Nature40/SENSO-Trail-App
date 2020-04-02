@@ -4,15 +4,15 @@ import ChatMessageView from './ChatMessage.view.js'
 
 import '../styles/chat.scss'
 
-export default function ChatView ({messages}) {
+export default function ChatView ({messages, chatOptions}) {
 
   const messagesEndRef = useRef(null)
 
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    messagesEndRef.current.scrollIntoView({ block: 'end', behavior: "smooth" })
   }
 
-  useEffect(scrollToBottom, [messages]);
+  useEffect(scrollToBottom, [messages, chatOptions]);
 
   return (
     <div className="chat">

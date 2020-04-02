@@ -11,7 +11,8 @@ import { getChatMessages, getChatOptions } from '../selectors/chat.selector.js'
 
 const mapStateToProps = state => {
   return {
-    messages: getChatMessages(state)
+    messages: getChatMessages(state),
+    chatOptions: getChatOptions(state)
   }
 }
 

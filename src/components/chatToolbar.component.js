@@ -2,9 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default function ChatToolbar({ onSendMessage, chatOptions }) {
-  console.log(onSendMessage)
   const chooseFrom = chatOptions.map(option => {
-    console.log(option)
     return (
       <button
         key={option.index} 
