@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/SENSO-Trail-App/static/css/main.be619bbc.chunk.css",
-    "main.js": "/SENSO-Trail-App/static/js/main.62b7126e.chunk.js",
-    "main.js.map": "/SENSO-Trail-App/static/js/main.62b7126e.chunk.js.map",
-    "runtime-main.js": "/SENSO-Trail-App/static/js/runtime-main.9b240413.js",
-    "runtime-main.js.map": "/SENSO-Trail-App/static/js/runtime-main.9b240413.js.map",
-    "static/js/2.53b1fadb.chunk.js": "/SENSO-Trail-App/static/js/2.53b1fadb.chunk.js",
-    "static/js/2.53b1fadb.chunk.js.map": "/SENSO-Trail-App/static/js/2.53b1fadb.chunk.js.map",
-    "index.html": "/SENSO-Trail-App/index.html",
-    "precache-manifest.e1a8bb4e81635e2e2860a92185f3e634.js": "/SENSO-Trail-App/precache-manifest.e1a8bb4e81635e2e2860a92185f3e634.js",
-    "service-worker.js": "/SENSO-Trail-App/service-worker.js",
-    "static/css/main.be619bbc.chunk.css.map": "/SENSO-Trail-App/static/css/main.be619bbc.chunk.css.map",
-    "static/js/2.53b1fadb.chunk.js.LICENSE.txt": "/SENSO-Trail-App/static/js/2.53b1fadb.chunk.js.LICENSE.txt",
-    "static/media/app.scss": "/SENSO-Trail-App/static/media/background-test.8fb0645c.png",
-    "static/media/multiChoiceActivity.scss": "/SENSO-Trail-App/static/media/wrong.c5e176bb.svg",
-    "static/media/simple-forest.4a77c0d8.svg": "/SENSO-Trail-App/static/media/simple-forest.4a77c0d8.svg"
+    "main.css": "https://nature40.github.io/SENSO-Trail-App/static/css/main.e0bf111d.chunk.css",
+    "main.js": "https://nature40.github.io/SENSO-Trail-App/static/js/main.ed9b3543.chunk.js",
+    "main.js.map": "https://nature40.github.io/SENSO-Trail-App/static/js/main.ed9b3543.chunk.js.map",
+    "runtime-main.js": "https://nature40.github.io/SENSO-Trail-App/static/js/runtime-main.00fab826.js",
+    "runtime-main.js.map": "https://nature40.github.io/SENSO-Trail-App/static/js/runtime-main.00fab826.js.map",
+    "static/js/2.e1df5185.chunk.js": "https://nature40.github.io/SENSO-Trail-App/static/js/2.e1df5185.chunk.js",
+    "static/js/2.e1df5185.chunk.js.map": "https://nature40.github.io/SENSO-Trail-App/static/js/2.e1df5185.chunk.js.map",
+    "index.html": "https://nature40.github.io/SENSO-Trail-App/index.html",
+    "precache-manifest.fb34187ae96402e6431c2954996dfdb3.js": "https://nature40.github.io/SENSO-Trail-App/precache-manifest.fb34187ae96402e6431c2954996dfdb3.js",
+    "service-worker.js": "https://nature40.github.io/SENSO-Trail-App/service-worker.js",
+    "static/css/main.e0bf111d.chunk.css.map": "https://nature40.github.io/SENSO-Trail-App/static/css/main.e0bf111d.chunk.css.map",
+    "static/js/2.e1df5185.chunk.js.LICENSE.txt": "https://nature40.github.io/SENSO-Trail-App/static/js/2.e1df5185.chunk.js.LICENSE.txt",
+    "static/media/app.scss": "https://nature40.github.io/SENSO-Trail-App/static/media/background-test.8fb0645c.png",
+    "static/media/correct.svg": "https://nature40.github.io/SENSO-Trail-App/static/media/correct.101c9dab.svg",
+    "static/media/simple-forest.4a77c0d8.svg": "https://nature40.github.io/SENSO-Trail-App/static/media/simple-forest.4a77c0d8.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.9b240413.js",
-    "static/js/2.53b1fadb.chunk.js",
-    "static/css/main.be619bbc.chunk.css",
-    "static/js/main.62b7126e.chunk.js"
+    "static/js/runtime-main.00fab826.js",
+    "static/js/2.e1df5185.chunk.js",
+    "static/css/main.e0bf111d.chunk.css",
+    "static/js/main.ed9b3543.chunk.js"
   ]
 }
