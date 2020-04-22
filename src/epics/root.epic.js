@@ -7,6 +7,7 @@ import ImageActivityEpics from './imageActivity.epic.js'
 import messageEpics from './message.epic.js'
 import scoreEpic from './score.epics.js'
 import chatEpic from './chat.epic.js'
+import geolocationEpic from './geolocation.epic.js'
 
 /* DEPENDENCIES */
 import { fetchJSON, getResources } from '../utils/api.js'
@@ -20,7 +21,8 @@ const rootEpic = combineEpics(
   mulitChoiceActivityEpics,
   messageEpics,
   scoreEpic,
-  chatEpic
+  chatEpic,
+  geolocationEpic
 )
 
 export const configureEpicMiddleware = () => createEpicMiddleware({

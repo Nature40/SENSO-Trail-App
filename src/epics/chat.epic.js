@@ -44,6 +44,9 @@ export function getNextOptionOrContinue (action$, state$, { getCurrentStory }) {
     ofType(ADD_CHAT_MESSAGE),
     switchMap(action => {
       const story = getCurrentStory()
+      if(!story){
+        return EMPTY
+      }
 
       if (story.canContinue) {
         return of(addChatMessage(story.Continue(), SENDER_IS_SENSI)).pipe(
