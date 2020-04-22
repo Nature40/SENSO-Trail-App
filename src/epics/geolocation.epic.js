@@ -1,6 +1,10 @@
 import { ofType, combineEpics } from 'redux-observable'
 import { of, EMPTY } from 'rxjs'
-import { map, switchMap, catchError, delay } from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
+
+import { loadInkJsonStart } from '../actions/chat.actions.js'
+
+import isNearLocation from '../utils/geo/nearLocation.js'
 
 import uuidv1 from 'uuid/v1'
 
@@ -8,6 +12,10 @@ import {
   GEOLOCATION_CHANGED,
   GEOLOCATION_ERROR
 } from '../constants/geolocation.constants.js'
+
+import {
+  setCurrentSite
+} from '../actions/geolocation.actions.js'
 
 import {
   SENDER_IS_SENSI
@@ -28,12 +36,31 @@ export function changeLocationEpic(action$, state$ ) {
   return action$.pipe(
     ofType(GEOLOCATION_CHANGED),
     switchMap(action => {
-      console.log(action)
-      console.log("NEW LOCATION?")
-      const message = `New Location: lat: ${action.latitude}, long: ${action.longitude}`
+
+      const stations = state$.value.resources.stations
+      const currentSite = state$.value.geolocation.currentSite
+      for(let id in stations){
+        if(id === currentSite.uuid){
+          continue
+        }
+        if(isNearLocation(
+          action.latitude,
+          action.longitude,
+          stations[id].latitude,
+          stations[id].longitude
+        )) {
+          return [
+            loadInkJsonStart(stations[id].storyUrl),
+            //TODO: Constants for type?
+            setCurrentSite(id, "stations")
+          ]
+        }
+      }
+        /*const message = `New Location: lat: ${action.latitude}, long: ${action.longitude}`
       let ret = addChatMessage(message, SENDER_IS_SENSI)
-      console.log(ret)
       return of(ret)
+      */
+      return EMPTY
     })
   )
 }

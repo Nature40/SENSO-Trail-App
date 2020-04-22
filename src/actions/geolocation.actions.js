@@ -1,4 +1,8 @@
-import { GEOLOCATION_CHANGED, GEOLOCATION_ERROR } from '../constants/geolocation.constants.js'
+import {
+  GEOLOCATION_CHANGED,
+  GEOLOCATION_ERROR,
+  SET_CURRENT_SITE
+} from '../constants/geolocation.constants.js'
 
 /**
  * @param {double} latitude 
@@ -22,5 +26,18 @@ export function locationError(error){
   return {
     type: GEOLOCATION_ERROR,
     error
+  }
+}
+
+/**
+ * @param {String} uuid
+ * @param {String} siteType
+ * @return {Object}
+ */
+export function setCurrentSite(uuid, siteType){
+  return {
+    type: SET_CURRENT_SITE,
+    uuid,
+    siteType
   }
 }

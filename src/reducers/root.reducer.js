@@ -3,11 +3,13 @@ import { connectRouter } from 'connected-react-router'
 import messages, { initialState as messagesState } from './messages.reducer.js'
 import chat, { initialState as chatState } from './chat.reducer.js'
 import resources, { initialState as resourceState } from './resources.reducer.js'
+import geolocation, { initialState as geolocationState } from './geolocation.reducer.js'
 
 export const initialState = {
   messages: messagesState,
   chat: chatState,
-  resources: resourceState
+  resources: resourceState,
+  geolocation: geolocationState
 }
 
 export default function createRootReducer (history) {
@@ -15,6 +17,7 @@ export default function createRootReducer (history) {
     router: connectRouter(history),
     messages,
     chat,
-    resources
+    resources,
+    geolocation,
   })
 }
