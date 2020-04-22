@@ -22,6 +22,7 @@ function init(dispatch){
 
   function onLocationError(error) {
     dispatch(locationError(error))
+    clear()
   }
   if(isAvailable()){
     watcher = navigator.geolocation.watchPosition(onLocationChanged, onLocationError)
