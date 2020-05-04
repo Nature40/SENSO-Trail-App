@@ -12,11 +12,14 @@ import { PersistGate } from 'redux-persist/integration/react'
 import configureStore, { history } from './createStore.js'
 import './styles/index.scss'
 import App from './components/app.js'
+
+import GeolocationEmitter from './utils/geo/geolocationEmitter.js'
+
 import * as serviceWorker from './serviceWorker'
 
 // For now only. Needs to be some sort of init action later
-import { loadTrails } from './actions/trails.action.js'
 import { loadInkJsonStart } from './actions/chat.actions.js'
+import { loadResource } from './actions/resources.actions.js'
 
 const { store, persistor } = configureStore()
 
@@ -39,9 +42,11 @@ function clearCaches () {
   })
 }
 
-store.dispatch(loadTrails())
-store.dispatch(loadInkJsonStart('ink-test-story.json'))
+//store.dispatch(loadInkJsonStart('ink-test-story.json'))
+store.dispatch(loadResource('stations/berlin.json'))
+store.dispatch(loadResource('stations/moskau.json'))
 
+GeolocationEmitter.init(store.dispatch)
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA

@@ -1,10 +1,11 @@
 import { ofType, combineEpics } from 'redux-observable'
 import { of, EMPTY } from 'rxjs'
-import { map, switchMap, catchError, delay } from 'rxjs/operators'
+import { map, switchMap, mergeMap, catchError, delay } from 'rxjs/operators'
 
 import {
   CHOOSE_CHAT_OPTION,
   LOAD_INK_JSON_START,
+  LOAD_INK_JSON_SUCCESS,
   ADD_CHAT_MESSAGE,
   SENDER_IS_PLAYER,
   SENDER_IS_SENSI
@@ -15,6 +16,7 @@ import {
   loadInkJsonSuccess,
   loadInkJsonFail,
   setChatOptions,
+  chooseChatOption,
 } from '../actions/chat.actions.js'
 
 /**
@@ -44,6 +46,9 @@ export function getNextOptionOrContinue (action$, state$, { getCurrentStory }) {
     ofType(ADD_CHAT_MESSAGE),
     switchMap(action => {
       const story = getCurrentStory()
+      if(!story){
+        return EMPTY
+      }
 
       if (story.canContinue) {
         return of(addChatMessage(story.Continue(), SENDER_IS_SENSI)).pipe(
@@ -72,7 +77,8 @@ export function loadInkJsonEpic (action$, state$, { fetchJSON, initStory }) {
       const url = process.env.PUBLIC_URL + '/json/' + action.filename
       const result = await fetchJSON(url)
       initStory(result)
-      return loadInkJsonSuccess(action.filename, result)
+      console.log("story loaded: ", action.filename)
+      return loadInkJsonSuccess(action.filename, result) 
     }),
     catchError((e) => {
       return [
@@ -82,9 +88,19 @@ export function loadInkJsonEpic (action$, state$, { fetchJSON, initStory }) {
   )
 }
 
+export function startStoryEpic (action$, state$, { fetchJSON, initStory }) {
+  return action$.pipe(
+    ofType(LOAD_INK_JSON_SUCCESS),
+    switchMap(action => {
+      return [chooseChatOption(-1)]
+    })
+  )
+}
+
 
 export default combineEpics(
   sendChatMessage,
   loadInkJsonEpic,
-  getNextOptionOrContinue
+  getNextOptionOrContinue,
+  startStoryEpic
 )
