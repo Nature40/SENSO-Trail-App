@@ -8,7 +8,8 @@ import {
   LOAD_INK_JSON_SUCCESS,
   ADD_CHAT_MESSAGE,
   SENDER_IS_PLAYER,
-  SENDER_IS_SENSI
+  SENDER_IS_SENSI,
+  JUMP_TO_SCENE
 } from '../constants/chat.constants.js'
 
 import {
@@ -42,6 +43,23 @@ export function sendChatMessage (action$, state$, { getCurrentStory, extractTags
     })
   )
 }
+
+export function getJumpToScene(action$, state$, { getCurrentStory }) {
+  return action$.pipe(
+    ofType(JUMP_TO_SCENE),
+    switchMap(action => {
+      const story = getCurrentStory()
+      if(!story){
+        return EMPTY
+      }
+      story.ChoosePathString(action.sceneId)
+
+      return [chooseChatOption(-1)]
+
+    })
+  )
+}
+
 
 export function getNextOptionOrContinue (action$, state$, { getCurrentStory, extractTags }) {
   return action$.pipe(
@@ -107,5 +125,6 @@ export default combineEpics(
   sendChatMessage,
   loadInkJsonEpic,
   getNextOptionOrContinue,
-  startStoryEpic
+  startStoryEpic,
+  getJumpToScene
 )

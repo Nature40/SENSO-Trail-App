@@ -42,7 +42,7 @@ function clearCaches () {
   })
 }
 
-//store.dispatch(loadInkJsonStart('ink-test-story.json'))
+store.dispatch(loadInkJsonStart('stories/main.json'))
 store.dispatch(loadResource('stations/berlin.json'))
 store.dispatch(loadResource('stations/moskau.json'))
 

@@ -23,6 +23,7 @@ import {
 
 import {
   addChatMessage,
+  jumpToScene,
 } from '../actions/chat.actions.js'
 
 import {
@@ -50,7 +51,8 @@ export function changeLocationEpic(action$, state$ ) {
           stations[id].longitude
         )) {
           return [
-            loadInkJsonStart(stations[id].storyUrl),
+            jumpToScene(stations[id].sceneId),
+            //loadInkJsonStart(stations[id].storyUrl),
             //TODO: Constants for type?
             setCurrentSite(id, "stations")
           ]
