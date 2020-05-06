@@ -4,7 +4,7 @@ import {SENDER_IS_PLAYER} from '../constants/chat.constants.js'
 
 import '../styles/chat.scss'
 
-export default function ChatMessageView ({ message, sender }) {
+export default function ChatMessageView ({ message, sender, tags={} }) {
   const messageClasses = [
     'chat_message'
   ]
@@ -16,10 +16,20 @@ export default function ChatMessageView ({ message, sender }) {
   } else {
     messageClasses.push('chat_message--others')
   }
+
+
+  const myRef = React.createRef();
+  let audio = ''
+  if('audio' in tags){
+    console.log("has audio")
+    audio = (
+      <audio ref={myRef} src={tags.audio} controls/>
+      )
+  }
   return (
     <div className={messageClasses.join(' ')}>
       <h5 className='chat_message__sender'>{senderName}</h5>
-      <div className='chat_message__message'><p>{message}</p></div>
+      <div className='chat_message__message'><p>{message}</p>{audio}</div>
     </div>
   )
 }
