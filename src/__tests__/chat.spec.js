@@ -29,12 +29,21 @@ const _options = () => {
 
 describe('chats redux', () => {
   describe('actions', () => {
-    it('should create an action to add a new chat message', () => {
+    it('should create an action to add a new chat message without tags', () => {
       const expectedAction = {
         type: types.ADD_CHAT_MESSAGE,
-        ...testMsg
+        ...testMsg,
+        tags: {}
       }
       expect(actions.addChatMessage(testMsg.message, testMsg.sender)).toEqual(expectedAction)
+    })
+    it('should create an action to add a new chat message with tags', () => {
+      const expectedAction = {
+        type: types.ADD_CHAT_MESSAGE,
+        ...testMsg,
+        tags: {test:'tag'}
+      }
+      expect(actions.addChatMessage(testMsg.message, testMsg.sender, {test:'tag'})).toEqual(expectedAction)
     })
     it('should create an action to set Chat Options', () => {
       const expectedAction = {
@@ -66,7 +75,7 @@ describe('chats redux', () => {
       }
       expect(reducer(state, action)).toEqual({
         messageQueue: [
-          { ...testMsg }
+          { ...testMsg, tags: {} }
         ]
       })
     })
@@ -104,7 +113,8 @@ describe('chats redux', () => {
         {
           type: types.ADD_CHAT_MESSAGE,
           message: 'Next Text',
-          sender: types.SENDER_IS_PLAYER
+          sender: types.SENDER_IS_PLAYER,
+          tags: {}
         }
       ]
 
@@ -131,15 +141,22 @@ describe('chats redux', () => {
         }
       }
 
+      // Mock Tag extract
+      function extractTags (story) {
+        return {}
+      }
+
       const expectedOutputAction = [
         {
           type: types.ADD_CHAT_MESSAGE,
           message: 'Start',
-          sender: types.SENDER_IS_SENSI
+          sender: types.SENDER_IS_SENSI,
+          tags: {}
         }
       ]
 
-      const res$ = epics.sendChatMessage(action$, null, { getCurrentStory }).pipe(
+
+      const res$ = epics.sendChatMessage(action$, null, { getCurrentStory, extractTags }).pipe(
         toArray()
       )
       res$.subscribe(actualOutputAction => {
@@ -191,6 +208,10 @@ describe('chats redux', () => {
           currentChoices: []
         }
       }
+      // Mock Tag extract
+      function extractTags (story) {
+        return {}
+      }
 
       const expectedOutputAction = [
         {
@@ -199,7 +220,7 @@ describe('chats redux', () => {
         }
       ]
 
-      const res$ = epics.getNextOptionOrContinue(action$, null, { getCurrentStory }).pipe(
+      const res$ = epics.getNextOptionOrContinue(action$, null, { getCurrentStory, extractTags }).pipe(
         toArray()
       )
       res$.subscribe(actualOutputAction => {
@@ -221,16 +242,21 @@ describe('chats redux', () => {
           currentChoices: []
         }
       }
+      // Mock Tag extract
+      function extractTags (story) {
+        return {}
+      }
 
       const expectedOutputAction = [
         {
           type: types.ADD_CHAT_MESSAGE,
           message: 'Next Message',
-          sender: types.SENDER_IS_SENSI
+          sender: types.SENDER_IS_SENSI,
+          tags: {}
         }
       ]
 
-      const res$ = epics.getNextOptionOrContinue(action$, null, { getCurrentStory }).pipe(
+      const res$ = epics.getNextOptionOrContinue(action$, null, { getCurrentStory, extractTags }).pipe(
         toArray()
       )
       res$.subscribe(actualOutputAction => {

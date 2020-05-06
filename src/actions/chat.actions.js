@@ -10,12 +10,14 @@ import {
 /**
  * @param {string} message - message to display
  * @param {string} sender - sender identification
+ * @param {string} audio - audio src
  */
-export function addChatMessage (message, sender){
+export function addChatMessage (message, sender, tags = {}){
   return {
     type: ADD_CHAT_MESSAGE,
     message,
-    sender
+    sender,
+    tags
   }
 }
 

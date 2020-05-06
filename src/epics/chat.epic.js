@@ -21,7 +21,7 @@ import {
 
 /**
  */
-export function sendChatMessage (action$, state$, { getCurrentStory }) {
+export function sendChatMessage (action$, state$, { getCurrentStory, extractTags }) {
   return action$.pipe(
     ofType(CHOOSE_CHAT_OPTION),
     switchMap(action => {
@@ -29,7 +29,9 @@ export function sendChatMessage (action$, state$, { getCurrentStory }) {
       const story = getCurrentStory()
 
       if(action.option < 0){
-        return of(addChatMessage(story.Continue(), SENDER_IS_SENSI))
+        const message = story.Continue()
+        const tags = extractTags(story.currentTags)
+        return of(addChatMessage(message, SENDER_IS_SENSI, tags))
       }
 
       if (story.currentChoices.length > 0) {
@@ -41,7 +43,7 @@ export function sendChatMessage (action$, state$, { getCurrentStory }) {
   )
 }
 
-export function getNextOptionOrContinue (action$, state$, { getCurrentStory }) {
+export function getNextOptionOrContinue (action$, state$, { getCurrentStory, extractTags }) {
   return action$.pipe(
     ofType(ADD_CHAT_MESSAGE),
     switchMap(action => {
@@ -51,7 +53,10 @@ export function getNextOptionOrContinue (action$, state$, { getCurrentStory }) {
       }
 
       if (story.canContinue) {
-        return of(addChatMessage(story.Continue(), SENDER_IS_SENSI)).pipe(
+
+        const message = story.Continue()
+        const tags = extractTags(story.currentTags)
+        return of(addChatMessage(message, SENDER_IS_SENSI, tags)).pipe(
           delay(1000)
         )
       } else {

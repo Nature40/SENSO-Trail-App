@@ -7,6 +7,7 @@ import resourceEpic from './resources.epics.js'
 /* DEPENDENCIES */
 import { fetchJSON, getResources } from '../utils/api.js'
 import { getCurrentStory, initStory } from '../utils/inkjs/currentStory.js'
+import { extractTags } from '../utils/inkjs/extractTags.js'
 
 const rootEpic = combineEpics(
   messageEpics,
@@ -19,7 +20,8 @@ export const configureEpicMiddleware = () => createEpicMiddleware({
   dependencies: {
     fetchJSON,
     getCurrentStory,
-    initStory
+    initStory,
+    extractTags
   }
 })
 

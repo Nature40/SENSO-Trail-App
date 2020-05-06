@@ -20,7 +20,8 @@ export default function chat (state = initialState, action) {
         ...state,
         messageQueue: state.messageQueue.concat([{
           message: action.message,
-          sender: action.sender
+          sender: action.sender,
+          tags: { ...action.tags}
         }])
       }
     case SET_CHAT_OPTIONS:
