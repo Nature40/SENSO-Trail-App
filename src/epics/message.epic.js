@@ -4,20 +4,18 @@ import { ofType, combineEpics } from 'redux-observable'
 import uuidv1 from 'uuid/v1'
 
 import {
-  LOAD_STATION_FAIL,
-  UNLOCK_STATION_FAIL,
-  UNLOCK_STATION_SUCCESS
-} from '../constants/station.constants.js'
+  LOAD_RESOURCE_FAIL
+} from '../constants/resources.constants.js'
 
 import {
-  LOAD_TRAILS_FAIL
-} from '../constants/trails.constants.js'
+  LOAD_INK_JSON_FAIL
+} from '../constants/chat.constants.js'
 
 import {
   ADD_MESSAGE,
   MESSAGE_TYPE_ERROR,
-  MESSAGE_TYPE_LOG,
-  MESSAGE_TYPE_SUCCESS,
+  //MESSAGE_TYPE_LOG,
+  //MESSAGE_TYPE_SUCCESS,
   MESSAGE_TIME_IN_SECONDS
 } from '../constants/messages.constatns.js'
 
@@ -25,25 +23,15 @@ import { addMessage, hideMessage } from '../actions/messages.actions.js'
 
 const messagesArray = [
   {
-    trigger: LOAD_STATION_FAIL,
+    trigger: LOAD_RESOURCE_FAIL,
     type: MESSAGE_TYPE_ERROR,
-    message: 'Fehler: Die Stadtionen konnten nicht geladen werden'
+    message: 'Fehler: Resourcen konnten nicht gelanden werden'
   },
   {
-    trigger: UNLOCK_STATION_FAIL,
+    trigger: LOAD_INK_JSON_FAIL,
     type: MESSAGE_TYPE_ERROR,
-    message: 'Diese Stadtion kann noch nich freigeschaltet werden'
+    message: 'Fehler: Die Story konnte nicht gelanden werden'
   },
-  {
-    trigger: UNLOCK_STATION_SUCCESS,
-    type: MESSAGE_TYPE_SUCCESS,
-    message: 'Station erfolgreich freigeschaltet'
-  },
-  {
-    trigger: LOAD_TRAILS_FAIL,
-    type: MESSAGE_TYPE_ERROR,
-    message: 'Fehler: Die Trails konnten nicht geladen werden.'
-  }
 ]
 
 export function genEpic (messageSpec, genUuid = uuidv1) {

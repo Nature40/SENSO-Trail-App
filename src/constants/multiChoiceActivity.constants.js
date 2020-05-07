@@ -1,2 +1,0 @@
-export const CHOOSE_ANSWER = 'CHOOSE_ANSWER'
-export const REVEAL_ANSWERS = 'REVEAL_ANSWERS'

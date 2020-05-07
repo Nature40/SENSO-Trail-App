@@ -22,10 +22,12 @@ describe('<MessageDisplay>', () => {
     const props = {
       messages: [
         {
+          uuid: '1',
           messageType: MESSAGE_TYPE_ERROR,
           test: 'Hallo Welt Error1'
         },
         {
+          uuid: '2',
           messageType: MESSAGE_TYPE_LOG,
           test: 'Hallo Welt Log2'
         }
@@ -40,10 +42,12 @@ describe('<MessageDisplay>', () => {
     const props = {
       messages: [
         {
+          uuid: '1',
           messageType: MESSAGE_TYPE_ERROR,
           test: 'Hallo Welt Error1'
         },
         {
+          uuid: '2',
           messageType: MESSAGE_TYPE_LOG,
           test: 'Hallo Welt Log2'
         }
