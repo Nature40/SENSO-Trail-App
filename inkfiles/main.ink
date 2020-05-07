@@ -1,5 +1,10 @@
+# station:Moskau 55.755826 37.6173 asdsadasd
+# station:Berlin 52.520007 13.404954 asas
+# author: Nimo
+# title: Test
 INCLUDE moskau
 INCLUDE berlin
+INCLUDE utils
 
 
 Hallo mein Name ist SENSI. 

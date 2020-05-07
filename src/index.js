@@ -43,8 +43,8 @@ function clearCaches () {
 }
 
 store.dispatch(loadInkJsonStart('stories/main.json'))
-store.dispatch(loadResource('stations/berlin.json'))
-store.dispatch(loadResource('stations/moskau.json'))
+//store.dispatch(loadResource('stations/berlin.json'))
+//store.dispatch(loadResource('stations/moskau.json'))
 
 GeolocationEmitter.init(store.dispatch)
 // If you want your app to work offline and load faster, you can change

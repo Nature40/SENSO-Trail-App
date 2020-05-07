@@ -28,10 +28,11 @@ describe('resources redux', () => {
       }
       const expectedAction = {
         type: types.LOAD_RESOURCE_SUCCESS,
-        transformedResources,
+        resource: {...transformedResources},
+        resourceType: 'res-type'
       }
 
-      expect(actions.loadResourcesSuccess(transformedResources)).toEqual(expectedAction)
+      expect(actions.loadResourcesSuccess(transformedResources, 'res-type')).toEqual(expectedAction)
     })
 
     it('should create an action to fail loading resources', () => {
@@ -40,6 +41,21 @@ describe('resources redux', () => {
       }
 
       expect(actions.loadResourcesFail()).toEqual(expectedAction)
+    })
+
+    it('should create an action to add a resource', () => {
+      const resource = {
+        'uuid1':{
+          uuid: 'uuid1',
+        }
+      }
+      const expectedAction = {
+        type: types.ADD_RESOURCE,
+        resource: {...resource},
+        resourceType: 'res-type'
+      }
+
+      expect(actions.addResource(resource, 'res-type')).toEqual(expectedAction)
     })
   })
 
@@ -86,13 +102,43 @@ describe('resources redux', () => {
       }
       const action = {
         type: types.LOAD_RESOURCE_SUCCESS,
-        transformedResources: {
+        resource: {
           uuid2: {
           }
         },
+        resourceType: types.RESOURCE_TYPE_STATION
+
       }
       expect(reducer(state, action)).toEqual({
         loading: false,
+        stations: {
+          uuid1: {
+          },
+          uuid2: {
+          }   
+        },
+      })
+    })
+
+    it('should handle ADD_RESOURCE', () => {
+      const state = {
+        loading: true,
+        stations: {
+          uuid1: {
+          }
+        }
+      }
+      const action = {
+        type: types.ADD_RESOURCE,
+        resource: {
+          uuid2: {
+          }
+        },
+        resourceType: types.RESOURCE_TYPE_STATION
+
+      }
+      expect(reducer(state, action)).toEqual({
+        loading: true,
         stations: {
           uuid1: {
           },
@@ -116,9 +162,10 @@ describe('resources redux', () => {
       const expectedOutputActions = [
         {
           type: types.LOAD_RESOURCE_SUCCESS,
-          transformedResources: {
+          resource: {
             uuid1: { ...testResources }
           },
+          resourceType: ''
         }
       ]
       const res$ = epics.loadResourcesEpic(action$, null, { fetchJSON }).pipe(

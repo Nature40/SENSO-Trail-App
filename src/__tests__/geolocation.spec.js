@@ -8,7 +8,7 @@ import reducer, { initialState } from '../reducers/geolocation.reducer.js'
 import * as epics from '../epics/geolocation.epic.js'
 
 import {
-  LOAD_INK_JSON_START
+  JUMP_TO_SCENE
 } from '../constants/chat.constants.js'
 
 /* eslint-env jest */
@@ -17,16 +17,14 @@ const longitude = -6.127758
 
 const sites = {
   "uuid1": {
-    "uuid": "uuid1",
-    "name":"Moskau Station",
-    "storyUrl": "stories/moskau-ink-test.json",
+    "id": "uuid1",
+    "station":"Moskau",
     "latitude": 55.755826,
     "longitude": 37.6173
   },
   "uuid2": {
-    "uuid":"uuid2",
-    "name":"Berlin Station",
-    "storyUrl": "stories/ink-test-story.json",
+    "id":"uuid2",
+    "station": "Berlin",
     "latitude": 52.520007,
     "longitude": 13.404954
   }
@@ -92,7 +90,7 @@ describe('geolocation redux', () => {
     })
   })
   describe('epics', () => {
-    it('dispatch LOAD_INK_JSON_START and SET_CURRENT_SITE if location is near a site', (done) => {
+    it('dispatch JUMP_TO_SCENE and SET_CURRENT_SITE if location is near a site', (done) => {
 
       const latitude = 55.755826
       const longitude = 37.6173
@@ -102,8 +100,8 @@ describe('geolocation redux', () => {
 
       const expectedOutputAction = [
         {
-          type: LOAD_INK_JSON_START,
-          filename: "stories/moskau-ink-test.json",
+          type: JUMP_TO_SCENE,
+          sceneId: "Moskau",
         },{
           type: types.SET_CURRENT_SITE,
           uuid: "uuid1",

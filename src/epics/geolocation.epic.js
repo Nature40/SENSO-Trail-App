@@ -51,17 +51,11 @@ export function changeLocationEpic(action$, state$ ) {
           stations[id].longitude
         )) {
           return [
-            jumpToScene(stations[id].sceneId),
-            //loadInkJsonStart(stations[id].storyUrl),
-            //TODO: Constants for type?
+            jumpToScene(stations[id].station),
             setCurrentSite(id, "stations")
           ]
         }
       }
-        /*const message = `New Location: lat: ${action.latitude}, long: ${action.longitude}`
-      let ret = addChatMessage(message, SENDER_IS_SENSI)
-      return of(ret)
-      */
       return EMPTY
     })
   )

@@ -2,6 +2,8 @@ import { ofType, combineEpics } from 'redux-observable'
 import { of, EMPTY } from 'rxjs'
 import { map, switchMap, mergeMap, catchError, delay } from 'rxjs/operators'
 
+import { tagDataToStation } from '../utils/transforms/tagsToStations.js'
+
 import {
   CHOOSE_CHAT_OPTION,
   LOAD_INK_JSON_START,
@@ -20,6 +22,13 @@ import {
   chooseChatOption,
 } from '../actions/chat.actions.js'
 
+import {
+  addResource
+} from '../actions/resources.actions.js'
+
+import {
+  RESOURCE_TYPE_STATION
+} from '../constants/resources.constants.js'
 /**
  */
 export function sendChatMessage (action$, state$, { getCurrentStory, extractTags }) {
@@ -93,14 +102,15 @@ export function getNextOptionOrContinue (action$, state$, { getCurrentStory, ext
   )
 }
 
-export function loadInkJsonEpic (action$, state$, { fetchJSON, initStory }) {
+export function loadInkJsonEpic (action$, state$, { fetchJSON, initStory}) {
   return action$.pipe(
     ofType(LOAD_INK_JSON_START),
     switchMap(async action => {
       const url = process.env.PUBLIC_URL + '/json/' + action.filename
       const result = await fetchJSON(url)
-      initStory(result)
+      const story = initStory(result)
       console.log("story loaded: ", action.filename)
+
       return loadInkJsonSuccess(action.filename, result) 
     }),
     catchError((e) => {
@@ -111,11 +121,17 @@ export function loadInkJsonEpic (action$, state$, { fetchJSON, initStory }) {
   )
 }
 
-export function startStoryEpic (action$, state$, { fetchJSON, initStory }) {
+export function startStoryEpic (action$, state$, { getCurrentStory, getGlobalTags }) {
   return action$.pipe(
     ofType(LOAD_INK_JSON_SUCCESS),
     switchMap(action => {
-      return [chooseChatOption(-1)]
+      const story = getCurrentStory()
+      const globalTags = getGlobalTags(story.globalTags)
+      console.log("globalTags:", globalTags)
+
+      const stations = tagDataToStation(globalTags.stations)
+
+      return [addResource(stations, RESOURCE_TYPE_STATION),chooseChatOption(-1)]
     })
   )
 }
