@@ -438,5 +438,15 @@
             resetLabels([layer_Stationen_5]);
         });
         </script>
+  <script>
+    var myPositionMarker = undefined;
+    function setPositionMarker(lat, lng) {
+      if(myPositionMarker === undefined){
+        myPositionMarker = L.marker([lat, lng]).addTo(map)
+      } else {
+        myPositionMarker.setLatLng(new L.LatLng(lat, lng))
+      }
+    }
+  </script>
     </body>
 </html>
