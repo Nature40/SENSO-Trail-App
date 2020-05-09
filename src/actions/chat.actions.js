@@ -2,10 +2,21 @@ import {
   ADD_CHAT_MESSAGE,
   CHOOSE_CHAT_OPTION,
   SET_CHAT_OPTIONS,
+  JUMP_TO_SCENE,
   LOAD_INK_JSON_START,
   LOAD_INK_JSON_SUCCESS,
   LOAD_INK_JSON_FAIL
 } from '../constants/chat.constants.js'
+
+/**
+ * @param {string} sceneId - scene identification
+ */
+export function jumpToScene (sceneId){
+  return {
+    type: JUMP_TO_SCENE,
+    sceneId
+  }
+}
 
 /**
  * @param {string} message - message to display

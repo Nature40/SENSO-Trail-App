@@ -1,12 +1,10 @@
-import { mergeMap, catchError, switchMap } from 'rxjs/operators'
+import { mergeMap, catchError } from 'rxjs/operators'
 import { ofType, combineEpics } from 'redux-observable'
-import { normalizeEntityArray, getSlugsEntityArray } from '../utils/transforms/entityArray.transforms.js'
+import { normalizeEntityArray } from '../utils/transforms/entityArray.transforms.js'
 
 import {
   LOAD_RESOURCE_START,
 } from '../constants/resources.constants.js'
-
-import { getStationUnlockable } from '../selectors/path.selectors.js'
 
 import {
   loadResourcesSuccess,
@@ -23,8 +21,6 @@ export function loadResourcesEpic (action$, state$, { fetchJSON }) {
       return loadResourcesSuccess(normalizedResult)
     }),
     catchError((e) => {
-      //@TODO add to message
-      console.error(e)
       return [
         loadResourcesFail()
       ]

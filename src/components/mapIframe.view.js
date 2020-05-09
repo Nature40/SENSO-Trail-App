@@ -1,9 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
-export default function Map ({
-
-}) {
+export default function Map (props) {
   return (
     <div>
       <iframe id="inlineFrameExample"
@@ -14,4 +12,8 @@ export default function Map ({
       </iframe>
     </div>
   )
+}
+
+Map.propTypes = {
+  
 }
