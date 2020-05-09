@@ -1,6 +1,6 @@
 import { ofType, combineEpics } from 'redux-observable'
 import { of, EMPTY } from 'rxjs'
-import { map, switchMap, mergeMap, catchError, delay } from 'rxjs/operators'
+import { switchMap, catchError, delay } from 'rxjs/operators'
 
 import { tagDataToStation } from '../utils/transforms/tagsToStations.js'
 
@@ -108,7 +108,7 @@ export function loadInkJsonEpic (action$, state$, { fetchJSON, initStory}) {
     switchMap(async action => {
       const url = process.env.PUBLIC_URL + '/json/' + action.filename
       const result = await fetchJSON(url)
-      const story = initStory(result)
+      initStory(result)
       console.log("story loaded: ", action.filename)
 
       return loadInkJsonSuccess(action.filename, result) 

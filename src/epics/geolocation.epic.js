@@ -1,8 +1,6 @@
 import { ofType, combineEpics } from 'redux-observable'
 import { of, EMPTY } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
-
-import { loadInkJsonStart } from '../actions/chat.actions.js'
+import { switchMap } from 'rxjs/operators'
 
 import isNearLocation from '../utils/geo/nearLocation.js'
 
@@ -18,11 +16,6 @@ import {
 } from '../actions/geolocation.actions.js'
 
 import {
-  SENDER_IS_SENSI
-} from '../constants/chat.constants.js'
-
-import {
-  addChatMessage,
   jumpToScene,
 } from '../actions/chat.actions.js'
 

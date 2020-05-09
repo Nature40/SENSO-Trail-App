@@ -5,7 +5,7 @@ import geolocationEpic from './geolocation.epic.js'
 import resourceEpic from './resources.epics.js'
 
 /* DEPENDENCIES */
-import { fetchJSON, getResources } from '../utils/api.js'
+import { fetchJSON } from '../utils/api.js'
 import { getCurrentStory, initStory } from '../utils/inkjs/currentStory.js'
 import { extractTags, getGlobalTags } from '../utils/inkjs/extractTags.js'
 

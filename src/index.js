@@ -19,7 +19,7 @@ import * as serviceWorker from './serviceWorker'
 
 // For now only. Needs to be some sort of init action later
 import { loadInkJsonStart } from './actions/chat.actions.js'
-import { loadResource } from './actions/resources.actions.js'
+// import { loadResource } from './actions/resources.actions.js'
 
 const { store, persistor } = configureStore()
 
@@ -43,8 +43,6 @@ function clearCaches () {
 }
 
 store.dispatch(loadInkJsonStart('stories/main.json'))
-//store.dispatch(loadResource('stations/berlin.json'))
-//store.dispatch(loadResource('stations/moskau.json'))
 
 GeolocationEmitter.init(store.dispatch)
 // If you want your app to work offline and load faster, you can change
