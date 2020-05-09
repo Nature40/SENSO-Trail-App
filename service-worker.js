@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/SENSO-Trail-App/precache-manifest.0ac0038775fe61e574c3eea97cbc1bbc.js"
+  "/SENSO-Trail-App/precache-manifest.c480ab51ecfa98c973c7fb325f2aafee.js"
 );
 
 self.addEventListener('message', (event) => {
