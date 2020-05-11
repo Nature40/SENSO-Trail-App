@@ -8,7 +8,7 @@ import Chat from '../containers/chat.container.js'
 
 import Messages from '../containers/messages.container.js'
 
-import Map from './mapIframe.view.js'
+import Map from '../containers/map.container.js'
 
 function dummyFrontPage (clearButton) {
   return (
