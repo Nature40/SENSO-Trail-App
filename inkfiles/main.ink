@@ -3,12 +3,11 @@ INCLUDE moskau.ink
 INCLUDE berlin.ink
 
 
-
 Hallo mein Name ist SENSI. 
 -> Main
 
 === Main ===
-Wie kann ich dir behilflich sein?
+Wie kann ich dir behilflich sein? 
 + Wer bist du? 
 -> about
 + Wo bin ich? 
@@ -32,18 +31,16 @@ Hier sind verschiedenen Tests.
 -> testLineOverload
 + Test audio
 -> testAudio
-+ Test Bild
--> testBild
 
 + genug getestet!
 -> Main
 
 === testAudio ===
-Dies ist ein toller Test mit einem Audio File #audio: test.mp3
+Dies ist ein toller Test mit einem Audio File #audio:test.mp3
 -> Test
 
 === testBild ===
-Dies ist ein toller Test mit einem Bild #image: test.jpg
+Dies ist ein toller Test mit einem Audio File #image:test.jpg
 -> Test
 
 === testLineOverload ===
