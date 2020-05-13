@@ -1,23 +1,25 @@
-# station:Moskau 55.755826 37.6173 asdsadasd
-# station:Berlin 52.520007 13.404954 asas
-# author: Nimo
-# title: Test
-INCLUDE moskau
-INCLUDE berlin
+INCLUDE data.ink
+INCLUDE moskau.ink
+INCLUDE berlin.ink
 
 
 Hallo mein Name ist SENSI. 
-bla bla bla
 -> Main
 
 === Main ===
-Wie kann ich dir behilflich sein?
+Wie kann ich dir behilflich sein? 
 + Wer bist du? 
 -> about
 + Wo bin ich? 
 -> Map
 + Mach mal einen Test 
 -> Test
++ Zur station Berlion
+-> PanoramaStationBerlin
+
+=== PanoramaStationBerlin ===
+LINK: https:\/\/panorama.de/asasfaf2
+-> Berlin
 
 === Test ===
 Hier sind verschiedenen Tests.
@@ -34,8 +36,11 @@ Hier sind verschiedenen Tests.
 -> Main
 
 === testAudio ===
-#audio: test.mp3
-Dies ist ein toller Test mit einem Audio File
+Dies ist ein toller Test mit einem Audio File #audio:test.mp3
+-> Test
+
+=== testBild ===
+Dies ist ein toller Test mit einem Audio File #image:test.jpg
 -> Test
 
 === testLineOverload ===
