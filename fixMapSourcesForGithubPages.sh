@@ -10,4 +10,4 @@ fi
 
 SOURCE_URL+="assets\/map"
 echo "$SOURCE_URL"
-sed "s/\/assets\/map/$SOURCE_URL/g" build/assets/map/index.html > build/assets/map/index.html
+sed -i "s/\/assets\/map/$SOURCE_URL/" build/assets/map/index.html 
