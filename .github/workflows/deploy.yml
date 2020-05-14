@@ -28,7 +28,7 @@ jobs:
         if: success()
         env:
           PUBLIC_URL: /SENSO-Trail-App/
-        run: sh fixMapSourcesForGithubPages.sh
+        run: bash fixMapSourcesForGithubPages.sh
       - name: Deploy
         if: success()
         uses: peaceiris/actions-gh-pages@v2.5.0

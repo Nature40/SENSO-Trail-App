@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo "$PUBLIC_URL"
 
 SOURCE_URL=""
