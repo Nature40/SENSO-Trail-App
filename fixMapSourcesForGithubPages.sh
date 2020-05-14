@@ -5,7 +5,7 @@ SOURCE_URL=""
 
 if [ -n "$PUBLIC_URL" ]
   then SOURCE_URL=${PUBLIC_URL//\//\\\/}
-  else SOURCE_URL=\/SENSO-Trail-App\/
+  else SOURCE_URL='\/SENSO-Trail-App\/'
 fi
 
 SOURCE_URL+="assets\/map"
