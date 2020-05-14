@@ -20,10 +20,6 @@ export default function Map (props) {
     } else {
       iFrame.current.addEventListener('load', onLoad)
     }
-
-    return function cleanup() {
-      iFrame.current.removeEventListener('load', onLoad)
-    };
   });
   return (
     <div>
