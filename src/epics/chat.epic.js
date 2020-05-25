@@ -40,8 +40,8 @@ export function sendChatMessage (action$, state$, { getCurrentStory, extractTags
 
       if(action.option < 0){
         const message = story.Continue()
-        const tags = extractTags(story.currentTags)
-        return of(addChatMessage(message, SENDER_IS_SENSI, tags))
+        //const tags = extractTags(story.currentTags)
+        return of(addChatMessage(message, SENDER_IS_SENSI, {}))
       }
 
       if (story.currentChoices.length > 0) {

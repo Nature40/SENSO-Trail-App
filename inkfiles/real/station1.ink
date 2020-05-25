@@ -1,3 +1,4 @@
+
 == station1 ==
 Hallo User, du befindest dich jetzt ganz in der Nähe einer Station.
 Gehe bitte zu dieser Messtation. 
@@ -68,7 +69,7 @@ Die Daten sind jetzt verfügbar.
 -> TTDaten
 
 === TTDaten ===
-#image.Saftfluss.jpg
+#image:Saftfluss.jpg
 
 ERHEBUNG VON FORSCUNGDATEN ERFOLGREICH
 
