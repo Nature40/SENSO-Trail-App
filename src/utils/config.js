@@ -1,4 +1,11 @@
-const config = {}
+const config = {
+  trailname: 'main',
+  sources : {
+    trail: `/`,
+    audio: `/`,
+    image: `/`
+  }
+}
 
 function init() {
   let base = ""
