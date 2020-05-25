@@ -4,6 +4,10 @@
  * @return {Object} - JS Object from JSON files
  */
 export async function fetchJSON (url, params = {}) {
+  /** MOCK LOAD ACTIVITES */
+  if (url === process.env.PUBLIC_URL + '/json/activities.json') {
+    return mockFetchActivities(params)
+  }
   const request = {
     headers: {
       Accept: 'application/json'
@@ -12,6 +16,10 @@ export async function fetchJSON (url, params = {}) {
   }
   const response = await window.fetch(url, request)
   const data = await response.json()
+  /** MOCK only loading trails stations. Needs some kind of api */
+  if ('uuids' in params) {
+    return data.filter(s => params.uuids.includes(s.uuid))
+  }
   return data
 }
 
