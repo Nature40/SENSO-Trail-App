@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {SENDER_IS_PLAYER} from '../constants/chat.constants.js'
 
+import ChatImageView from './ChatImage.view.js'
+
 import '../styles/chat.scss'
 
 export default function ChatMessageView ({ message, sender, tags={} }) {
@@ -26,10 +28,18 @@ export default function ChatMessageView ({ message, sender, tags={} }) {
       <audio ref={myRef} src={tags.audio} controls/>
       )
   }
+  let images = []
+  if( 'images' in tags ){
+    images = tags.images;
+  }
   return (
     <div className={messageClasses.join(' ')}>
       <h5 className='chat_message__sender'>{senderName}</h5>
-      <div className='chat_message__message'><p>{message}</p>{audio}</div>
+      <div className='chat_message__message'>
+        <p>{message}</p>
+        {audio}
+        <ChatImageView images={images} />
+      </div>
     </div>
   )
 }

@@ -17,6 +17,12 @@ export function extractTags (tags) {
       case 'audio': 
         tagObject.audio = config.sources.audio+split[1].trim()
         break;
+      case 'image':
+        if(! ('images' in tagObject)){
+          tagObject.images = []
+        }
+        tagObject.images.push(config.sources.image+split[1].trim())
+        break;
       default:
         other.push(split.join(':'))
     }

@@ -14,6 +14,30 @@ describe('utils extract Story Tags', () => {
       'audio':config.sources.audio + 'test.mp3'
     })
   })
+  it('should extract an image src if tag is image: <src.file>', () => {
+    const tags = [
+      'image: test.jpg'
+    ]
+    const res = extractTags(tags)
+
+    expect(res).toEqual({
+      'images':[config.sources.image+ 'test.jpg']
+    })
+  })
+  it('should extract all image src if multiple image tags are supplied', () => {
+    const tags = [
+      'image: test.jpg',
+      'image: test2.jpg'
+    ]
+    const res = extractTags(tags)
+
+    expect(res).toEqual({
+      'images':[
+        config.sources.image+ 'test.jpg',
+        config.sources.image+ 'test2.jpg',
+      ]
+    })
+  })
   it('should extract unknown tags into other', () => {
     const tags = [
       'blubber bla'
