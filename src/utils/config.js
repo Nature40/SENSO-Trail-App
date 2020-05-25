@@ -11,6 +11,9 @@ function init() {
   let base = ""
   if(process.env && process.env.PUBLIC_URL){
     base = process.env.PUBLIC_URL;
+    if(!base.endsWith('/')){
+      base += '/'
+    }
   } 
   config.sources = {
     trail: `${base}assets/trails/`,
