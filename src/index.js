@@ -24,7 +24,7 @@ import { loadInkJsonStart } from './actions/chat.actions.js'
 
 const { store, persistor } = configureStore()
 
-const config = initConfig();
+const config = initConfig(process.env.PUBLIC_URL);
 
 function clearCaches () {
   console.log('START CLEARING')

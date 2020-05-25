@@ -7,19 +7,22 @@ const config = {
   }
 }
 
-function init() {
-  let base = ""
-  if(process.env && process.env.PUBLIC_URL){
-    base = process.env.PUBLIC_URL;
-    if(!base.endsWith('/')){
-      base += '/'
-    }
-  } 
+function init(base) {
+  if(!base){
+    base = "/"
+  }
+  if(!base.endsWith('/')){
+    base += '/'
+  }
+
+  console.log("base: ", base)
   config.sources = {
     trail: `${base}assets/trails/`,
     audio: `${base}assets/audio/`,
     image: `${base}assets/images/`
   }
+
+  console.log(config)
 
   config.trailname = 'trail';
 
