@@ -1,4 +1,5 @@
 import { extractTags, AUDIO_BASE_PATH } from '../../utils/inkjs/extractTags.js'
+import config from '../../utils/config.js'
 
 /* eslint-env jest */
 
@@ -10,7 +11,7 @@ describe('utils extract Story Tags', () => {
     const res = extractTags(tags)
 
     expect(res).toEqual({
-      'audio':AUDIO_BASE_PATH+'test.mp3'
+      'audio':config.sources.audio + 'test.mp3'
     })
   })
   it('should extract unknown tags into other', () => {
