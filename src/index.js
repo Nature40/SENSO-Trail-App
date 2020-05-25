@@ -4,6 +4,7 @@ import _POLYFILL from './utils/polyfills/index.js'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import { init as initConfig } from './utils/config.js';
 
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
@@ -22,6 +23,8 @@ import { loadInkJsonStart } from './actions/chat.actions.js'
 // import { loadResource } from './actions/resources.actions.js'
 
 const { store, persistor } = configureStore()
+
+const config = initConfig();
 
 function clearCaches () {
   console.log('START CLEARING')
@@ -42,7 +45,7 @@ function clearCaches () {
   })
 }
 
-store.dispatch(loadInkJsonStart('stories/main.json'))
+store.dispatch(loadInkJsonStart(`${config.sources.trail}${config.trailname}.json`))
 
 GeolocationEmitter.init(store.dispatch)
 // If you want your app to work offline and load faster, you can change

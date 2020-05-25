@@ -1,7 +1,5 @@
 //https://github.com/inkle/ink/blob/master/Documentation/RunningYourInk.md#marking-up-your-ink-content-with-tags
-
-export const AUDIO_BASE_PATH = './audio/'
-
+import config from '../config.js'
 
 /**
  * @param {String[]} tags
@@ -17,7 +15,7 @@ export function extractTags (tags) {
     const split = e.split(':')
     switch(split[0]) {
       case 'audio': 
-        tagObject.audio = AUDIO_BASE_PATH+split[1].trim()
+        tagObject.audio = config.sources.audio+split[1].trim()
         break;
       default:
         other.push(split.join(':'))
@@ -34,7 +32,6 @@ export function extractTags (tags) {
  * @return {Object}
 */
 export function getGlobalTags (globalTags) {
-  console.log(globalTags)
   const tagObject = {
   }
 

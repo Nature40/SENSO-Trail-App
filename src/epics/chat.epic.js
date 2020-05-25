@@ -106,7 +106,7 @@ export function loadInkJsonEpic (action$, state$, { fetchJSON, initStory}) {
   return action$.pipe(
     ofType(LOAD_INK_JSON_START),
     switchMap(async action => {
-      const url = process.env.PUBLIC_URL + '/json/' + action.filename
+      const url = action.filename
       const result = await fetchJSON(url)
       initStory(result)
       console.log("story loaded: ", action.filename)
@@ -126,12 +126,18 @@ export function startStoryEpic (action$, state$, { getCurrentStory, getGlobalTag
     ofType(LOAD_INK_JSON_SUCCESS),
     switchMap(action => {
       const story = getCurrentStory()
+      console.log(story)
       const globalTags = getGlobalTags(story.globalTags)
       console.log("globalTags:", globalTags)
+      if(globalTags) {
 
-      const stations = tagDataToStation(globalTags.stations)
+        const stations = tagDataToStation(globalTags.stations)
 
       return [addResource(stations, RESOURCE_TYPE_STATION),chooseChatOption(-1)]
+      } else {
+        console.error('could not load global Tags')
+        return [chooseChatOption(-1)]
+      }
     })
   )
 }
