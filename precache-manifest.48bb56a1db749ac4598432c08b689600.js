@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "94fc11ddccd60ef04e1b0c2cf8a82fc7",
+    "revision": "e229d6ee17e276d83f497780a6b4cd1c",
     "url": "/SENSO-Trail-App/index.html"
   },
   {
-    "revision": "2af15202586be4e53b1b",
+    "revision": "902300507f64c7dd26a5",
     "url": "/SENSO-Trail-App/static/css/main.1357eb58.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/SENSO-Trail-App/static/js/2.6581b132.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2af15202586be4e53b1b",
-    "url": "/SENSO-Trail-App/static/js/main.77eee894.chunk.js"
+    "revision": "902300507f64c7dd26a5",
+    "url": "/SENSO-Trail-App/static/js/main.587a0b3c.chunk.js"
   },
   {
     "revision": "e8446b92f74bafb2bb43",
