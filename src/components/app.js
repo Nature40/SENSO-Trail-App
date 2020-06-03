@@ -11,10 +11,17 @@ import Messages from '../containers/messages.container.js'
 import Map from '../containers/map.container.js'
 
 function dummyFrontPage (clearButton) {
+  function test () {
+    window.navigator.serviceWorker.controller.postMessage({
+      type: 'NATURE40_ADD_ROUTE',
+      route: 'https://localhost:5000/assets/images/Saftfluss.jpg'
+    })
+  }
   return (
     <div className='dummy_front_page'>
       <Link to='/chat'>GOTO Chat</Link>
       <Link to='/map'>GOTO Map</Link>
+      <button onClick={test}> Test: Precache Saftfluss.jpg </button>
       {clearButton || ''}
     </div>
   )
