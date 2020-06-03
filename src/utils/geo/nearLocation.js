@@ -36,7 +36,7 @@ export function geoDistance(lat_1, long_1, lat_2, long_2)
   let helper = Math.cos(lat_mean)*deltaLong
   helper = helper*helper
 
-  return = EARTH_RAD_R * Math.sqrt(
+  return EARTH_RAD_R * Math.sqrt(
     (deltaLat * deltaLat) + helper
   )
 }
