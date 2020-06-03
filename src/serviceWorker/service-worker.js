@@ -15,8 +15,39 @@ self.addEventListener('message', (event) => {
   console.log(event)
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
+  } else if (event.data && event.data.type === 'NATURE40_ADD_ROUTE'){
+    if(event.data.routes){
+      addToTrailCache(event)
+    }
   }
 });
+
+
+
+const CacheFirst = workbox.strategies.CacheFirst
+
+function addToTrailCache(event){
+  const routes = event.data.routes.forEach((cacheUrl) => {
+    workbox.routing.registerRoute(
+      ({url}) => {
+        console.log(`MATCH ${url} <--> ${cacheUrl}`)
+        const match = url.pathname === cacheUrl
+        console.log(`MATCH ${url} <- ${match} -> ${cacheUrl}`)
+        return match
+      },
+      new CacheFirst({
+        cacheName: 'trail-cache',
+      })
+    )
+
+  })
+
+  // precacheController.addToCacheList(routes);
+
+  //event.waitUntil(Promise.all(routes));
+}
+
+
 
 workbox.core.clientsClaim();
 
