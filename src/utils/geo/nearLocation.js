@@ -6,11 +6,8 @@
  * @param {number} range
  */
 
-export default function isNearLocation(xLatitude, xLongitude, locLatitude, locLongitude, range = 1.0){
-  return (
-    Math.abs(xLatitude - locLatitude) < range &&
-    Math.abs(xLongitude - locLongitude ) < range 
-  )
+export default function isNearLocation(xLatitude, xLongitude, locLatitude, locLongitude, range = 10){
+  return geoDistance(xLatitude, xLongitude, locLatitude, locLongitude) < range;
 }
 
 const EARTH_RAD_R = 6371009 //Earth Radius in meter
