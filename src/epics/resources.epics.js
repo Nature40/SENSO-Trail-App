@@ -14,6 +14,10 @@ import {
   preloadCacheDataFail,
 } from '../actions/resources.actions.js'
 
+import {
+  getServiceWorkerStatus
+} from '../selectors/resources.selector.js'
+
 export function loadResourcesEpic (action$, state$, { fetchJSON }) {
   return action$.pipe(
     ofType(LOAD_RESOURCE_START),
@@ -35,19 +39,20 @@ export function preloadCacheData (action$, state$, { fetch }) {
   return action$.pipe(
     ofType(PRELOAD_CACHE_DATA),
     mergeMap(async action => {
-      if('serviceWorker' in window.navigator){
-        //@TODO: als dep übergeben
+      const serviceWorkerActive = getServiceWorkerStatus(state$.value)
+      if(serviceWorkerActive){
         window.navigator.serviceWorker.controller.postMessage({
           type: 'NATURE40_ADD_ROUTE',
           routes: action.urls
         })
         const result = await Promise.all(action.urls.map(u => {
+          console.log("fetching ", u)
           return fetch(u)
         }))
         
         return preloadCacheDataFinished(action.urls)
       }
-      return preloadCacheDataFail("No Service Worker")
+      return preloadCacheDataFail("No Service Worker active")
     }),
     catchError((e) => {
       return [
