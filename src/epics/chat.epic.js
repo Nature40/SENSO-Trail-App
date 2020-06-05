@@ -23,7 +23,8 @@ import {
 } from '../actions/chat.actions.js'
 
 import {
-  addResource
+  addResource,
+  preloadCacheData
 } from '../actions/resources.actions.js'
 
 import {
@@ -132,8 +133,9 @@ export function startStoryEpic (action$, state$, { getCurrentStory, getGlobalTag
       if(globalTags) {
 
         const stations = tagDataToStation(globalTags.stations)
+        const chatData = [...globalTags.audio, ...globalTags.images]
 
-      return [addResource(stations, RESOURCE_TYPE_STATION),chooseChatOption(-1)]
+        return [preloadCacheData(chatData),addResource(stations, RESOURCE_TYPE_STATION),chooseChatOption(-1)]
       } else {
         console.error('could not load global Tags')
         return [chooseChatOption(-1)]

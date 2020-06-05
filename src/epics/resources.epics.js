@@ -4,11 +4,14 @@ import { normalizeEntityArray } from '../utils/transforms/entityArray.transforms
 
 import {
   LOAD_RESOURCE_START,
+  PRELOAD_CACHE_DATA
 } from '../constants/resources.constants.js'
 
 import {
   loadResourcesSuccess,
   loadResourcesFail,
+  preloadCacheDataFinished,
+  preloadCacheDataFail,
 } from '../actions/resources.actions.js'
 
 export function loadResourcesEpic (action$, state$, { fetchJSON }) {
@@ -28,6 +31,34 @@ export function loadResourcesEpic (action$, state$, { fetchJSON }) {
   )
 }
 
+export function preloadCacheData (action$, state$, { fetch }) {
+  return action$.pipe(
+    ofType(PRELOAD_CACHE_DATA),
+    mergeMap(async action => {
+      if('serviceWorker' in window.navigator){
+        //@TODO: als dep übergeben
+        window.navigator.serviceWorker.controller.postMessage({
+          type: 'NATURE40_ADD_ROUTE',
+          routes: action.urls
+        })
+        const result = await Promise.all(action.urls.map(u => {
+          return fetch(u)
+        }))
+        
+        return preloadCacheDataFinished(action.urls)
+      }
+      return preloadCacheDataFail("No Service Worker")
+    }),
+    catchError((e) => {
+      return [
+        preloadCacheDataFail(e)
+      ]
+    })
+  )
+}
+
+
 export default combineEpics(
   loadResourcesEpic,
+  preloadCacheData 
 )

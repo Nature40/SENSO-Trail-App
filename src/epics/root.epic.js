@@ -19,6 +19,7 @@ const rootEpic = combineEpics(
 export const configureEpicMiddleware = () => createEpicMiddleware({
   dependencies: {
     fetchJSON,
+    fetch: window.fetch,
     getCurrentStory,
     initStory,
     extractTags,

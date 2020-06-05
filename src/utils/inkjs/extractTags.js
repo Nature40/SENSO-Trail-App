@@ -51,6 +51,18 @@ export function getGlobalTags (globalTags) {
       case 'station': 
         stations.push(extractStationData(split[1]))
         break;
+      case 'audio': 
+        if(! ('audio' in tagObject)){
+          tagObject.audio= []
+        }
+        tagObject.audio.push(config.sources.audio+split[1].trim())
+        break;
+      case 'image':
+        if(! ('images' in tagObject)){
+          tagObject.images = []
+        }
+        tagObject.images.push(config.sources.image+split[1].trim())
+        break;
       default:
         other.push(split.join(':'))
     }
