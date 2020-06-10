@@ -1,21 +1,56 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.481e858e1162da11746cb05738235172.js"
+  "precache-manifest.21886ae1deb7beb5f9d22f735b14eb09.js"
+);
+importScripts(
+  "map-precache-manifest.js"
 );
 
 if (workbox) {
   console.log(`Yay! Workbox is loaded 🎉`);
-  console.log("precache-manifest.481e858e1162da11746cb05738235172.js")
+  console.log("precache-manifest.21886ae1deb7beb5f9d22f735b14eb09.js")
 } else {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
 self.addEventListener('message', (event) => {
+  console.log(event)
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
+  } else if (event.data && event.data.type === 'NATURE40_ADD_ROUTE'){
+    if(event.data.routes){
+      addToTrailCache(event)
+    }
   }
 });
+
+
+
+const CacheFirst = workbox.strategies.CacheFirst
+
+function addToTrailCache(event){
+  const routes = event.data.routes.forEach((cacheUrl) => {
+    workbox.routing.registerRoute(
+      ({url}) => {
+        console.log(`MATCH ${url} <--> ${cacheUrl}`)
+        const match = url.pathname === cacheUrl
+        console.log(`MATCH ${url} <- ${match} -> ${cacheUrl}`)
+        return match
+      },
+      new CacheFirst({
+        cacheName: 'trail-cache',
+      })
+    )
+
+  })
+
+  // precacheController.addToCacheList(routes);
+
+  //event.waitUntil(Promise.all(routes));
+}
+
+
 
 workbox.core.clientsClaim();
 
