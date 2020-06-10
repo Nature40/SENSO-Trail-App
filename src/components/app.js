@@ -11,10 +11,22 @@ import Messages from '../containers/messages.container.js'
 import Map from '../containers/map.container.js'
 
 function dummyFrontPage (clearButton) {
+  function test () {
+      const routes = [
+        '/assets/images/Saftfluss.jpg',
+        '/assets/images/TreeTalker.jpg'
+      ]
+    window.navigator.serviceWorker.controller.postMessage({
+      type: 'NATURE40_ADD_ROUTE',
+      routes
+    })
+    Promise.all(routes.map(r => fetch(r)))
+  }
   return (
     <div className='dummy_front_page'>
       <Link to='/chat'>GOTO Chat</Link>
       <Link to='/map'>GOTO Map</Link>
+      <button onClick={test}> Test: Precache Saftfluss.jpg </button>
       {clearButton || ''}
     </div>
   )

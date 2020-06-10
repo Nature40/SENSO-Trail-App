@@ -3,11 +3,13 @@ import {
   LOAD_RESOURCE_SUCCESS,
   LOAD_RESOURCE_FAIL,
   ADD_RESOURCE,
+  SET_SW_ACTIVE,
   RESOURCE_TYPE_STATION
 } from '../constants/resources.constants.js'
 
 export const initialState = {
   stations: {},
+  serviceWorkerActive: false,
   loading: false
 }
 
@@ -22,6 +24,11 @@ function resources (state = initialState, action) {
       return {
         ...state,
         loading: false
+      }
+    case SET_SW_ACTIVE:
+      return {
+        ...state,
+        serviceWorkerActive: action.active
       }
     case LOAD_RESOURCE_SUCCESS:
       return addResourceByType({...state, loading:false}, action)

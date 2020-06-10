@@ -20,6 +20,7 @@ import * as serviceWorker from './serviceWorker'
 
 // For now only. Needs to be some sort of init action later
 import { loadInkJsonStart } from './actions/chat.actions.js'
+import { setSwActive } from './actions/resources.actions.js'
 // import { loadResource } from './actions/resources.actions.js'
 
 const { store, persistor } = configureStore()
@@ -45,7 +46,6 @@ function clearCaches () {
   })
 }
 
-store.dispatch(loadInkJsonStart(`${config.sources.trail}${config.trailname}.json`))
 
 GeolocationEmitter.init(store.dispatch)
 // If you want your app to work offline and load faster, you can change
@@ -65,7 +65,11 @@ if (process.env && process.env.NODE_ENV === 'production') {
     </Provider>
     , document.getElementById('root'))
   console.log('prod env')
-  serviceWorker.register()
+  serviceWorker.register({},() => {
+    store.dispatch(setSwActive())
+    store.dispatch(loadInkJsonStart(`${config.sources.trail}${config.trailname}.json`))
+  })
+
 } else {
   ReactDOM.render(
     <Provider store={store}>
@@ -75,4 +79,6 @@ if (process.env && process.env.NODE_ENV === 'production') {
     </Provider>
     , document.getElementById('root'))
   serviceWorker.unregister()
+
+  store.dispatch(loadInkJsonStart(`${config.sources.trail}${config.trailname}.json`))
 }

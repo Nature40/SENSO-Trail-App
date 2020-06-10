@@ -2,6 +2,10 @@ import {
   LOAD_RESOURCE_START,
   LOAD_RESOURCE_SUCCESS,
   LOAD_RESOURCE_FAIL,
+  PRELOAD_CACHE_DATA,
+  PRELOAD_CACHE_DATA_FINISED,
+  PRELOAD_CACHE_DATA_FAIL,
+  SET_SW_ACTIVE,
   ADD_RESOURCE
 } from '../constants/resources.constants.js'
 
@@ -44,5 +48,44 @@ export function addResource(resource, resourceType) {
     type: ADD_RESOURCE,
     resource,
     resourceType
+  }
+}
+
+/**
+ * @param {string[]} urls 
+ */
+export function preloadCacheData(urls){
+  return {
+    type: PRELOAD_CACHE_DATA,
+    urls
+  }
+}
+
+/**
+ * @param {string[]} urls 
+ */
+export function preloadCacheDataFinished(urls){
+  return {
+    type: PRELOAD_CACHE_DATA_FINISED,
+    urls
+  }
+}
+/**
+ * @param {string[]} urls 
+ */
+export function preloadCacheDataFail(msg){
+  return {
+    type: PRELOAD_CACHE_DATA_FAIL,
+    msg
+  }
+}
+
+/**
+ * @param {bool} active - default true 
+ */
+export function setSwActive(active = true){
+  return {
+    type: SET_SW_ACTIVE,
+    active
   }
 }
