@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/SENSO-Trail-App/static/css/main.1357eb58.chunk.css",
-    "main.js": "/SENSO-Trail-App/static/js/main.587a0b3c.chunk.js",
-    "main.js.map": "/SENSO-Trail-App/static/js/main.587a0b3c.chunk.js.map",
+    "main.css": "/SENSO-Trail-App/static/css/main.67a84ea8.chunk.css",
+    "main.js": "/SENSO-Trail-App/static/js/main.59ac1b5c.chunk.js",
+    "main.js.map": "/SENSO-Trail-App/static/js/main.59ac1b5c.chunk.js.map",
     "runtime-main.js": "/SENSO-Trail-App/static/js/runtime-main.b9fdefab.js",
     "runtime-main.js.map": "/SENSO-Trail-App/static/js/runtime-main.b9fdefab.js.map",
-    "static/js/2.6581b132.chunk.js": "/SENSO-Trail-App/static/js/2.6581b132.chunk.js",
-    "static/js/2.6581b132.chunk.js.map": "/SENSO-Trail-App/static/js/2.6581b132.chunk.js.map",
+    "static/js/2.8f5e253a.chunk.js": "/SENSO-Trail-App/static/js/2.8f5e253a.chunk.js",
+    "static/js/2.8f5e253a.chunk.js.map": "/SENSO-Trail-App/static/js/2.8f5e253a.chunk.js.map",
     "index.html": "/SENSO-Trail-App/index.html",
-    "precache-manifest.48bb56a1db749ac4598432c08b689600.js": "/SENSO-Trail-App/precache-manifest.48bb56a1db749ac4598432c08b689600.js",
+    "precache-manifest.481e858e1162da11746cb05738235172.js": "/SENSO-Trail-App/precache-manifest.481e858e1162da11746cb05738235172.js",
     "service-worker.js": "/SENSO-Trail-App/service-worker.js",
-    "static/css/main.1357eb58.chunk.css.map": "/SENSO-Trail-App/static/css/main.1357eb58.chunk.css.map",
-    "static/js/2.6581b132.chunk.js.LICENSE.txt": "/SENSO-Trail-App/static/js/2.6581b132.chunk.js.LICENSE.txt",
+    "static/css/main.67a84ea8.chunk.css.map": "/SENSO-Trail-App/static/css/main.67a84ea8.chunk.css.map",
+    "static/js/2.8f5e253a.chunk.js.LICENSE.txt": "/SENSO-Trail-App/static/js/2.8f5e253a.chunk.js.LICENSE.txt",
     "static/media/app.scss": "/SENSO-Trail-App/static/media/background-test.8fb0645c.png",
     "static/media/simple-forest.4a77c0d8.svg": "/SENSO-Trail-App/static/media/simple-forest.4a77c0d8.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.b9fdefab.js",
-    "static/js/2.6581b132.chunk.js",
-    "static/css/main.1357eb58.chunk.css",
-    "static/js/main.587a0b3c.chunk.js"
+    "static/js/2.8f5e253a.chunk.js",
+    "static/css/main.67a84ea8.chunk.css",
+    "static/js/main.59ac1b5c.chunk.js"
   ]
 }
