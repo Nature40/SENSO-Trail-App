@@ -107,6 +107,13 @@ export function loadInkJsonEpic (action$, state$, { fetchJSON, initStory}) {
   return action$.pipe(
     ofType(LOAD_INK_JSON_START),
     switchMap(async action => {
+      if(
+        state$.value.chat.jsonFile && 
+        state$.value.chat.jsonFile.filename === action.filename
+      ){
+        initStory(state$.value.chat.jsonFile.data)
+        return loadInkJsonSuccess(action.filename, state$.value.chat.jsonFile.data) 
+      }
       const url = action.filename
       const result = await fetchJSON(url)
       initStory(result)

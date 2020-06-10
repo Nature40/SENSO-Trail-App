@@ -38,7 +38,10 @@ export default function chat (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        jsonFile: action.json
+        jsonFile: {
+          filename: action.filename,
+          data: action.json
+        },   
       }
     case LOAD_INK_JSON_FAIL:
       return {
