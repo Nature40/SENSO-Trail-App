@@ -15,13 +15,16 @@ describe('<ChatImageView>', () => {
   it('should render images', () => {
     const props = {
       images: [
-        'test.jpg',
-        'test2.jpg',
+        {src: 'test.jpg', alt: 'test'},
+        {src: 'test2.jpg', alt: 'blub'},
       ]
     }
     const wrapper = shallow(<ChatImageView {...props} />)
 
-    expect(wrapper.find('img')).toHaveLength(props.images.length)
+    expect(wrapper.find('img')).toHaveLength(2)
+    expect(wrapper.find('img').at(0).props()).toHaveProperty('alt')
+    expect(wrapper.find('img').at(0).props().alt).toEqual('test')
+    //expect(wrapper.find('img')[0]).toHaveProperty('alt')
   })
 
 })
