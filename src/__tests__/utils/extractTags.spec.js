@@ -1,4 +1,7 @@
-import { extractTags, AUDIO_BASE_PATH } from '../../utils/inkjs/extractTags.js'
+import {
+  extractTags, 
+  extractImageData
+} from '../../utils/inkjs/extractTags.js'
 import config from '../../utils/config.js'
 
 /* eslint-env jest */
@@ -21,7 +24,7 @@ describe('utils extract Story Tags', () => {
     const res = extractTags(tags)
 
     expect(res).toEqual({
-      'images':[config.sources.image+ 'test.jpg']
+      'images':[extractImageData('test.jpg')]
     })
   })
   it('should extract all image src if multiple image tags are supplied', () => {
@@ -33,8 +36,8 @@ describe('utils extract Story Tags', () => {
 
     expect(res).toEqual({
       'images':[
-        config.sources.image+ 'test.jpg',
-        config.sources.image+ 'test2.jpg',
+        extractImageData('test.jpg'),
+        extractImageData('test2.jpg'),
       ]
     })
   })
@@ -53,5 +56,25 @@ describe('utils extract Story Tags', () => {
     const res = extractTags(tags)
 
     expect(res).toEqual({})
+  })
+  describe('extractImageData', () => {
+    it('should extract source and alt data from a string', () => {
+      const exp = {
+        src: config.sources.image + 'test.jpg',
+        alt: 'test'
+      }
+      const res = extractImageData('test.jpg test')
+
+      expect(res).toEqual(exp)
+    })
+    it('should extract source and default alt data from a string without alt', () => {
+      const exp = {
+        src: config.sources.image + 'test.jpg',
+        alt: 'Bild'
+      }
+      const res = extractImageData('test.jpg')
+
+      expect(res).toEqual(exp)
+    })
   })
 })

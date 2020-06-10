@@ -21,7 +21,7 @@ export function extractTags (tags) {
         if(! ('images' in tagObject)){
           tagObject.images = []
         }
-        tagObject.images.push(config.sources.image+split[1].trim())
+        tagObject.images.push(extractImageData(split[1].trim()))
         break;
       default:
         other.push(split.join(':'))
@@ -31,6 +31,18 @@ export function extractTags (tags) {
     tagObject.other = other
   }
   return tagObject
+}
+
+/**
+ * @param {string} imageDataString
+ * @return {Object}
+ */
+export function extractImageData(imageDataString) {
+  const imageDataArray = imageDataString.split(' ')
+  return {
+    src: config.sources.image + imageDataArray[0],
+    alt: imageDataArray.length > 1 && imageDataArray[1] !== '' ? imageDataArray[1] : 'Bild'
+  }
 }
 
 /**

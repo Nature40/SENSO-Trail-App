@@ -5,9 +5,9 @@ import '../styles/chat_images.scss'
 
 export default function ChatImageView ({ images = [] }) {
 
-  const renderedImages = images.map((src, i) => {
+  const renderedImages = images.map((image, i) => {
     return (
-      <img src={src} key={i} />
+      <img src={image.src} key={i} alt={image.alt} />
     )
   })
 
