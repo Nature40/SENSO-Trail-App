@@ -45,7 +45,7 @@ export function preloadCacheData (action$, state$, { fetch }) {
           type: 'NATURE40_ADD_ROUTE',
           routes: action.urls
         })
-        const result = await Promise.all(action.urls.map(u => {
+        await Promise.all(action.urls.map(u => {
           console.log("fetching ", u)
           return fetch(u)
         }))
