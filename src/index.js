@@ -16,11 +16,14 @@ import App from './components/app.js'
 
 import GeolocationEmitter from './utils/geo/geolocationEmitter.js'
 
+import getNotificationPermission from './utils/notification/getPermission.js'
+
 import * as serviceWorker from './serviceWorker'
 
 // For now only. Needs to be some sort of init action later
 import { loadInkJsonStart } from './actions/chat.actions.js'
 import { setSwActive } from './actions/resources.actions.js'
+import { setNotificationPermission } from './actions/notification.actions.js'
 // import { loadResource } from './actions/resources.actions.js'
 
 const { store, persistor } = configureStore()
@@ -80,5 +83,8 @@ if (process.env && process.env.NODE_ENV === 'production') {
     , document.getElementById('root'))
   serviceWorker.unregister()
 
-  store.dispatch(loadInkJsonStart(`${config.sources.trail}${config.trailname}.json`))
+  getNotificationPermission().then((notificationAllowed) => {
+    store.dispatch(setNotificationPermission(notificationAllowed))
+    store.dispatch(loadInkJsonStart(`${config.sources.trail}${config.trailname}.json`))
+  })
 }
