@@ -1,4 +1,3 @@
-
 == station1 ==
 Hallo User, du befindest dich jetzt ganz in der Nähe einer Station.
 Gehe bitte zu dieser Messtation. 
@@ -82,4 +81,3 @@ Was möchtest du als Nächstes tun?
  -> station1
  + Zurück zur Stationsauswahl
  -> Menu
- 
