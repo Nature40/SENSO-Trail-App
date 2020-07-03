@@ -1,7 +1,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.21886ae1deb7beb5f9d22f735b14eb09.js"
+  "precache-manifest.a4b0b16fd6accc6a2a4ab2e02bdc9c23.js"
 );
 importScripts(
   "map-precache-manifest.js"
@@ -9,7 +9,7 @@ importScripts(
 
 if (workbox) {
   console.log(`Yay! Workbox is loaded 🎉`);
-  console.log("precache-manifest.21886ae1deb7beb5f9d22f735b14eb09.js")
+  console.log("precache-manifest.a4b0b16fd6accc6a2a4ab2e02bdc9c23.js")
 } else {
   console.log(`Boo! Workbox didn't load 😬`);
 }
