@@ -1,0 +1,42 @@
+@import './_variables.scss';
+@import 'base/_card.scss';
+
+.App-header .header__button {
+  @include green_button;
+  @include card_shadow(darken( $color_green, 15% ));
+  margin: 5px 10px;
+
+  width: 50px;
+  height: 50px;
+
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  text-indent: -1000px;
+
+  &_chat, &_chat:hover {
+    background-image: url('/assets/icons/menu-chat.svg');
+    background-size: 50px;
+  }
+
+  &_map, &_map:hover{
+    background-image: url('/assets/icons/menu-map.svg');
+    background-size: 50px;
+  }
+
+  &_chat__count {
+    display: block;
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    width: 22px;
+    height: 22px;
+    text-indent: 0;
+    line-height: 20px;
+    border-radius: 4px;
+    font-size: 20px;
+    background: $color_red;
+
+
+  }
+}

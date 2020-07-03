@@ -4,22 +4,26 @@ import ChatMessageView from './ChatMessage.view.js'
 
 import '../styles/chat.scss'
 
-export default function ChatView ({messages, chatOptions}) {
+export default function ChatView ({messages, chatOptions, lastReadIndex, markMessagesRead}) {
 
   const messagesEndRef = useRef(null)
 
-  const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ block: 'end', behavior: "smooth" })
+  const scrollToLastRead = () => {
+    if(messagesEndRef.current.children.length > 0){
+    messagesEndRef.current.children[lastReadIndex].scrollIntoView({ block: 'end', behavior: "smooth" })
+    }
+    if(lastReadIndex < (messages.length - 1)) {
+      markMessagesRead(messages.length - 1)
+    }
   }
 
-  useEffect(scrollToBottom, [messages, chatOptions]);
+  useEffect(scrollToLastRead, [messages, chatOptions]);
 
   return (
     <div className="chat">
-      <section className="message_board">
+      <section ref={messagesEndRef} className="message_board">
         { messages.map((m, idx) => <ChatMessageView key={idx} {...m} />)}
       </section>
-      <div ref={messagesEndRef} />
     </div>
   )
 }

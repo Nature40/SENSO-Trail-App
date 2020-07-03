@@ -1,14 +1,16 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 import { Link } from 'react-router-dom'
-import '../styles/app.scss'
 import NoMatch from './noMatch.js'
 import ToolbarComponent from '../components/toolbar.component.js'
-import Chat from '../containers/chat.container.js'
+import Chat, { ChatButton } from '../containers/chat.container.js'
 
 import Messages from '../containers/messages.container.js'
 
 import Map from '../containers/map.container.js'
+
+import '../styles/app.scss'
+import '../styles/header.scss'
 
 function dummyFrontPage (clearButton) {
   function test () {
@@ -37,6 +39,10 @@ function App ({ clearButton }) {
     <div className='App'>
       <header className='App-header'>
         <Link to='/'>SENSO-Trail App</Link>
+        <nav className="nav">
+          <Link to='/map' className="header__button header__button_map">Map</Link>
+          <ChatButton />
+        </nav>
         <Messages />
       </header>
       <main>

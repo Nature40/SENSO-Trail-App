@@ -59,6 +59,13 @@ describe('chats redux', () => {
       }
       expect(actions.chooseChatOption(1)).toEqual(expectedAction)
     })
+    it('should create an action to mark messages read', () => {
+      const expectedAction = {
+        type: types.MARK_MESSAGE_READ,
+        index: 1
+      }
+      expect(actions.markMessageRead(1)).toEqual(expectedAction)
+    })
   })
   describe('reducer', () => {
     it('should return initialState on default', () => {
@@ -75,7 +82,47 @@ describe('chats redux', () => {
       }
       expect(reducer(state, action)).toEqual({
         messageQueue: [
-          { ...testMsg, tags: {} }
+          { ...testMsg, read:false, tags: {} }
+        ]
+      })
+    })
+    it('should handle MARK_MESSAGE_READ, by marking all messages below index read', () => {
+      const state = {
+        messageQueue: [
+          {
+            ...testMsg,
+            read: false,
+          },
+          {
+            ...testMsg,
+            read: false,
+          },
+          {
+            ...testMsg,
+            read: false,
+          },
+        ]
+      }
+
+      const action = {
+        type: types.MARK_MESSAGE_READ,
+        index: 1
+      }
+      expect(reducer(state, action)).toEqual({
+        lastRead: 1,
+        messageQueue: [
+          {
+            ...testMsg,
+            read: true,
+          },
+          {
+            ...testMsg,
+            read: true,
+          },
+          {
+            ...testMsg,
+            read: false,
+          },
         ]
       })
     })
