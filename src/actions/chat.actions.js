@@ -5,7 +5,8 @@ import {
   JUMP_TO_SCENE,
   LOAD_INK_JSON_START,
   LOAD_INK_JSON_SUCCESS,
-  LOAD_INK_JSON_FAIL
+  LOAD_INK_JSON_FAIL,
+  MARK_MESSAGE_READ
 } from '../constants/chat.constants.js'
 
 /**
@@ -49,6 +50,16 @@ export function chooseChatOption(option){
   return {
     type: CHOOSE_CHAT_OPTION,
     option
+  }
+}
+
+/**
+ * @param {number} index - index of the message newest read message
+ */
+export function markMessageRead(index){
+  return {
+    type: MARK_MESSAGE_READ,
+    index
   }
 }
 
