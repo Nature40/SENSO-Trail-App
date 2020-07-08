@@ -20,3 +20,17 @@ export const getCurrentLongitude = createSelector(
   [selectCurrentLocation],
   (currentLocation) => currentLocation.longitude )
 
+/**
+ * @param {State} state
+ * @return string[]
+ */
+export const getCurrentPosition = createSelector(
+  [selectCurrentLocation],
+  (currentLocation) => {
+    return {
+      lat: currentLocation.latitude,
+      long: currentLocation.longitude 
+    }
+  }
+)
+

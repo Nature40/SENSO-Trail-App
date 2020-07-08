@@ -1,0 +1,31 @@
+.dev {
+  display: flex;
+  flex-direction: column;
+
+  & div {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+  }
+
+  &__label {
+    font-size: 1.5em;
+  }
+  &__data {
+    
+  }
+
+  &--stations {
+    dev__data {
+      display: flex;
+      flex-direction: column;
+
+    }
+
+  }
+
+}
+
+strong {
+  font-size: 1.1em;
+}
