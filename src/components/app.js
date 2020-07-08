@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import NoMatch from './noMatch.js'
 import ToolbarComponent from '../components/toolbar.component.js'
 import Chat, { ChatButton } from '../containers/chat.container.js'
+import Dev from '../containers/dev.container.js'
 
 import Messages from '../containers/messages.container.js'
 
@@ -28,6 +29,7 @@ function dummyFrontPage (clearButton) {
     <div className='dummy_front_page'>
       <Link to='/chat'>GOTO Chat</Link>
       <Link to='/map'>GOTO Map</Link>
+      <Link to='/dev'>Dev</Link>
       <button onClick={test}> Test: Precache Saftfluss.jpg </button>
       {clearButton || ''}
     </div>
@@ -50,6 +52,7 @@ function App ({ clearButton }) {
           <Route exact path='/' render={() => dummyFrontPage(clearButton)} />
           <Route exact path='/chat' component={Chat} />
           <Route exact path='/map' component={Map} />
+          <Route exact path='/dev' component={Dev} />
           <Route component={NoMatch} />
         </Switch>
       </main>
