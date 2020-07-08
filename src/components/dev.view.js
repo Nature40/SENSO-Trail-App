@@ -1,6 +1,5 @@
 
-import React, {useEffect, useRef} from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 
 import '../styles/dev.scss'
 
@@ -36,5 +35,3 @@ export default function DevView ({position, stations, state}) {
   )
 }
 
-DevView.propTypes = {
-}
